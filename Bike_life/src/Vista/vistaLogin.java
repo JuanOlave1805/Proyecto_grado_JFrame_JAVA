@@ -1,10 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package Vista;
 import Metodo.TextPrompt;
-import Controlador.usuarioValido;
+import Controlador.usuario;
 import java.awt.Image;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -24,10 +20,9 @@ public class vistaLogin extends javax.swing.JFrame {
     public vistaLogin() {
         initComponents();
         
-        //Tamaño de la ventana 
-        setSize(1200, 700);
-        //Centra la ventana en la mitad de la pantalla
-        this.setLocationRelativeTo(this);
+        setSize(1200, 700);//Tamaño de la ventana 
+        
+        this.setLocationRelativeTo(this);//Centra la ventana en la mitad de la pantalla
         this.setResizable(false);// Se deshabilita el Botón Max del Form
         
         //Placeholder de los label de contraseña y usuario
@@ -259,16 +254,38 @@ public class vistaLogin extends javax.swing.JFrame {
     private void SetImageLabel(JLabel labelName, String root){
         //Agregando imagen de logo//
         ImageIcon image = new ImageIcon(root);
+        // Se crea un ImageIcon usando la ruta especificada en 'root'
+
         Icon icon = new ImageIcon(image.getImage().getScaledInstance(labelName.getWidth(), labelName.getHeight(), Image.SCALE_DEFAULT));
+        // Se escala la imagen para que se ajuste al tamaño del contenedor 'labelName'
+        // 'labelName.getWidth()' y 'labelName.getHeight()' obtienen el ancho y alto del JLabel
+        // 'Image.SCALE_DEFAULT' indica el método de escalamiento predeterminado
+
         labelName.setIcon(icon);
+        // Se establece el ícono escalado como el ícono del JLabel 'labelName'
+
         this.repaint();
+        // Se repinta el contenedor para reflejar los cambios visuales
     }
+
     private void metodo_boton_ingresar() {
         contrasena = String.valueOf(password_text.getPassword());
+        // Se obtiene la contraseña ingresada desde un campo de texto protegido ('JPasswordField')
+    
         usuario = usuario_text.getText();
+        // Se obtiene el nombre de usuario ingresado desde un campo de texto ('JTextField')
+
         //Instancio el metodo del controlador validacionLogin
-        usuarioValido validacion=new usuarioValido();
+        usuario validacion=new usuario();
+        // Se crea una instancia del objeto 'usuario' que probablemente contiene lógica de validación de usuario
+
         //Ejecuto la validacion
-        validacion.metodoLogin(usuario, contrasena);
+        validacion.metodoLogin(usuario, contrasena, this);
+        // Se llama al método 'metodoLogin' del objeto 'validacion', pasando el nombre de usuario y la contraseña como parámetros
+        // Este método probablemente realiza la validación del usuario y contraseña
+
+        //Cierra ventana actual
+        this.setVisible(false);
+        // Se hace invisible la ventana actual en la que se está ejecutando este código
     }
 }

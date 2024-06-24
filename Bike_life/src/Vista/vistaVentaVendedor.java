@@ -1,6 +1,5 @@
 package Vista;
 
-
 import java.awt.Image;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -10,23 +9,22 @@ import javax.swing.JLabel;
  *
  * @author JUAN DAVID
  */
-public class vistaVentaAdmin extends javax.swing.JFrame {
+public class vistaVentaVendedor extends javax.swing.JFrame {
 
     /**
      * Creates new form vistaVentaAdmin
      */
-    public vistaVentaAdmin() {
+    public vistaVentaVendedor() {
         initComponents();
         
-        setSize(1300, 700);//Tamaño de la ventana 
-        
-        this.setLocationRelativeTo(this);//Centra la ventana en la mitad de la pantalla
+        //Tamaño de la ventana 
+        setSize(1300, 700);
+        //Centra la ventana en la mitad de la pantalla
+        this.setLocationRelativeTo(this);
         this.setResizable(false);// Se deshabilita el Botón Max del Form
         
-        SetImageLabel(Image_logo, "src/images/logo.png");//Imagen del logo
-
-        
-        
+        //Imagen del logo
+        SetImageLabel(Image_logo, "src/images/logo.png");
     }
 
     /**
@@ -42,7 +40,7 @@ public class vistaVentaAdmin extends javax.swing.JFrame {
         Image_logo = new javax.swing.JLabel();
         Boton_ventas = new javax.swing.JButton();
         Boton_reparaciones = new javax.swing.JButton();
-        Boton_usuarios = new javax.swing.JButton();
+        Boton_inventario = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
@@ -51,7 +49,6 @@ public class vistaVentaAdmin extends javax.swing.JFrame {
         Boton_agregar1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        Boton_inventario = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -87,16 +84,16 @@ public class vistaVentaAdmin extends javax.swing.JFrame {
         fondo.add(Boton_reparaciones);
         Boton_reparaciones.setBounds(30, 200, 130, 45);
 
-        Boton_usuarios.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
-        Boton_usuarios.setText("Usuarios");
-        Boton_usuarios.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        Boton_usuarios.addActionListener(new java.awt.event.ActionListener() {
+        Boton_inventario.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
+        Boton_inventario.setText("Inventario");
+        Boton_inventario.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Boton_inventario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Boton_usuariosActionPerformed(evt);
+                Boton_inventarioActionPerformed(evt);
             }
         });
-        fondo.add(Boton_usuarios);
-        Boton_usuarios.setBounds(30, 320, 130, 45);
+        fondo.add(Boton_inventario);
+        Boton_inventario.setBounds(30, 260, 130, 45);
 
         jButton1.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         jButton1.setText("Perfil");
@@ -117,7 +114,7 @@ public class vistaVentaAdmin extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel3.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 36)); // NOI18N
-        jLabel3.setText("Ventas Admin");
+        jLabel3.setText("Ventas Vendedor");
 
         Boton_eliminar1.setBackground(new java.awt.Color(255, 153, 153));
         Boton_eliminar1.setText("Eliminar");
@@ -152,13 +149,13 @@ public class vistaVentaAdmin extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 544, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 502, Short.MAX_VALUE)
                         .addComponent(Boton_eliminar1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(10, 10, 10)
                         .addComponent(Boton_agregar1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -179,17 +176,6 @@ public class vistaVentaAdmin extends javax.swing.JFrame {
 
         fondo.add(jPanel1);
         jPanel1.setBounds(201, 101, 1050, 540);
-
-        Boton_inventario.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
-        Boton_inventario.setText("Inventario");
-        Boton_inventario.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        Boton_inventario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Boton_inventarioActionPerformed(evt);
-            }
-        });
-        fondo.add(Boton_inventario);
-        Boton_inventario.setBounds(30, 260, 130, 45);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -216,11 +202,11 @@ public class vistaVentaAdmin extends javax.swing.JFrame {
         //this.metodo_boton_reparaciones();
     }//GEN-LAST:event_Boton_reparacionesActionPerformed
 
-    private void Boton_usuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_usuariosActionPerformed
+    private void Boton_inventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_inventarioActionPerformed
         // TODO add your handling code here:
         //Llamando al metodo
-        this.metodo_boton_usuario();
-    }//GEN-LAST:event_Boton_usuariosActionPerformed
+        //this.metodo_boton_inventario();
+    }//GEN-LAST:event_Boton_inventarioActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
@@ -231,10 +217,6 @@ public class vistaVentaAdmin extends javax.swing.JFrame {
         //Llamando al metodo //
         //this.metodo_boton_agregar();
     }//GEN-LAST:event_Boton_agregar1ActionPerformed
-
-    private void Boton_inventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_inventarioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Boton_inventarioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -253,19 +235,20 @@ public class vistaVentaAdmin extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(vistaVentaAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(vistaVentaVendedor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(vistaVentaAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(vistaVentaVendedor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(vistaVentaAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(vistaVentaVendedor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(vistaVentaAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(vistaVentaVendedor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            new vistaVentaAdmin().setVisible(true);
+            new vistaVentaVendedor().setVisible(true);
         });
     }
 
@@ -274,7 +257,6 @@ public class vistaVentaAdmin extends javax.swing.JFrame {
     private javax.swing.JButton Boton_eliminar1;
     private javax.swing.JButton Boton_inventario;
     private javax.swing.JButton Boton_reparaciones;
-    private javax.swing.JButton Boton_usuarios;
     private javax.swing.JButton Boton_ventas;
     private javax.swing.JLabel Image_logo;
     private javax.swing.JPanel fondo;
@@ -303,12 +285,4 @@ public class vistaVentaAdmin extends javax.swing.JFrame {
         this.repaint();
         // Se repinta el contenedor para reflejar los cambios visuales
     }
-
-    private void metodo_boton_usuario() {
-        //Cambio a la vista de inicio
-        vistaUsuariosAdmin usuarios = new vistaUsuariosAdmin();  
-        usuarios.setVisible(true);
-        this.setVisible(false);
-    }
-    
 }

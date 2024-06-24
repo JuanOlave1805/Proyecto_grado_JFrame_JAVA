@@ -1,21 +1,24 @@
 package Vista;
 
-
+import Controlador.usuarioAdmin;
 import java.awt.Image;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.Icon;
 import javax.swing.JLabel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author JUAN DAVID
  */
-public class vistaVentaAdmin extends javax.swing.JFrame {
+public class vistaUsuariosAdmin extends javax.swing.JFrame {
 
     /**
      * Creates new form vistaVentaAdmin
      */
-    public vistaVentaAdmin() {
+    public vistaUsuariosAdmin() {
         initComponents();
         
         setSize(1300, 700);//Tamaño de la ventana 
@@ -24,8 +27,16 @@ public class vistaVentaAdmin extends javax.swing.JFrame {
         this.setResizable(false);// Se deshabilita el Botón Max del Form
         
         SetImageLabel(Image_logo, "src/images/logo.png");//Imagen del logo
-
         
+        // Instancio el método de validación de usuario
+        usuarioAdmin obtener = new usuarioAdmin();
+        
+        // Instancia el controlador de usuarios
+        obtener = new usuarioAdmin();
+
+        // Carga los datos en la tabla
+        String[][] datosMatriz = obtener.obtenerDatos();
+        cargarTabla(datosMatriz);
         
     }
 
@@ -50,7 +61,7 @@ public class vistaVentaAdmin extends javax.swing.JFrame {
         Boton_eliminar1 = new javax.swing.JButton();
         Boton_agregar1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabla_usuarios = new javax.swing.JTable();
         Boton_inventario = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -63,9 +74,7 @@ public class vistaVentaAdmin extends javax.swing.JFrame {
         fondo.add(Image_logo);
         Image_logo.setBounds(42, 14, 110, 110);
 
-        Boton_ventas.setBackground(new java.awt.Color(0, 0, 0));
         Boton_ventas.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
-        Boton_ventas.setForeground(new java.awt.Color(255, 255, 255));
         Boton_ventas.setText("Ventas");
         Boton_ventas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         Boton_ventas.addActionListener(new java.awt.event.ActionListener() {
@@ -87,7 +96,9 @@ public class vistaVentaAdmin extends javax.swing.JFrame {
         fondo.add(Boton_reparaciones);
         Boton_reparaciones.setBounds(30, 200, 130, 45);
 
+        Boton_usuarios.setBackground(new java.awt.Color(0, 0, 0));
         Boton_usuarios.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
+        Boton_usuarios.setForeground(new java.awt.Color(255, 255, 255));
         Boton_usuarios.setText("Usuarios");
         Boton_usuarios.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         Boton_usuarios.addActionListener(new java.awt.event.ActionListener() {
@@ -117,7 +128,7 @@ public class vistaVentaAdmin extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel3.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 36)); // NOI18N
-        jLabel3.setText("Ventas Admin");
+        jLabel3.setText("Usuarios");
 
         Boton_eliminar1.setBackground(new java.awt.Color(255, 153, 153));
         Boton_eliminar1.setText("Eliminar");
@@ -132,10 +143,10 @@ public class vistaVentaAdmin extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setAutoCreateRowSorter(true);
-        jTable1.setBackground(new java.awt.Color(204, 204, 204));
-        jTable1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabla_usuarios.setAutoCreateRowSorter(true);
+        tabla_usuarios.setBackground(new java.awt.Color(204, 204, 204));
+        tabla_usuarios.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        tabla_usuarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -146,7 +157,12 @@ public class vistaVentaAdmin extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        tabla_usuarios.addContainerListener(new java.awt.event.ContainerAdapter() {
+            public void componentAdded(java.awt.event.ContainerEvent evt) {
+                tabla_usuariosComponentAdded(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tabla_usuarios);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -158,7 +174,7 @@ public class vistaVentaAdmin extends javax.swing.JFrame {
                     .addComponent(jScrollPane1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 544, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 614, Short.MAX_VALUE)
                         .addComponent(Boton_eliminar1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(10, 10, 10)
                         .addComponent(Boton_agregar1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -207,7 +223,8 @@ public class vistaVentaAdmin extends javax.swing.JFrame {
 
     private void Boton_ventasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_ventasActionPerformed
         // TODO add your handling code here:
-        //Llamando al metodo//
+        //Llamando al metodo
+        this.metodo_boton_ventas();
     }//GEN-LAST:event_Boton_ventasActionPerformed
 
     private void Boton_reparacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_reparacionesActionPerformed
@@ -219,7 +236,7 @@ public class vistaVentaAdmin extends javax.swing.JFrame {
     private void Boton_usuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_usuariosActionPerformed
         // TODO add your handling code here:
         //Llamando al metodo
-        this.metodo_boton_usuario();
+        //this.metodo_boton_usuario();
     }//GEN-LAST:event_Boton_usuariosActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -235,6 +252,10 @@ public class vistaVentaAdmin extends javax.swing.JFrame {
     private void Boton_inventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_inventarioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_Boton_inventarioActionPerformed
+
+    private void tabla_usuariosComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_tabla_usuariosComponentAdded
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tabla_usuariosComponentAdded
 
     /**
      * @param args the command line arguments
@@ -253,19 +274,20 @@ public class vistaVentaAdmin extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(vistaVentaAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(vistaUsuariosAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(vistaVentaAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(vistaUsuariosAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(vistaVentaAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(vistaUsuariosAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(vistaVentaAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(vistaUsuariosAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            new vistaVentaAdmin().setVisible(true);
+            new vistaUsuariosAdmin().setVisible(true);
         });
     }
 
@@ -283,7 +305,7 @@ public class vistaVentaAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tabla_usuarios;
     // End of variables declaration//GEN-END:variables
 
     //Metodo donde da el tamaño de la imagen dependiendo el contenedor que tenga
@@ -304,11 +326,21 @@ public class vistaVentaAdmin extends javax.swing.JFrame {
         // Se repinta el contenedor para reflejar los cambios visuales
     }
 
-    private void metodo_boton_usuario() {
+    private void metodo_boton_ventas() {
         //Cambio a la vista de inicio
-        vistaUsuariosAdmin usuarios = new vistaUsuariosAdmin();  
-        usuarios.setVisible(true);
+        vistaVentaAdmin ventas = new vistaVentaAdmin();  
+        ventas.setVisible(true);
         this.setVisible(false);
     }
-    
+    private void cargarTabla(String[][] datosMatriz) {
+        // Definir nombres de columnas
+        String[] nombresColumnas = {"Identificación", "Nombre", "Contraseña", "Rol"};
+
+        // Crear el modelo de la tabla
+        DefaultTableModel model = new DefaultTableModel(datosMatriz, nombresColumnas);
+
+        // Establecer el modelo en la tabla
+        tabla_usuarios.setModel(model);
+    }
+
 }
