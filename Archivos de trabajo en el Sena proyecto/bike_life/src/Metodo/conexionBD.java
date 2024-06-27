@@ -16,9 +16,6 @@ public class conexionBD {
     String driver = "com.mysql.cj.jdbc.Driver"; // Driver JDBC para MySQL
     Connection cx; // Objeto de tipo Connection para la conexión
 
-    public conexionBD() {
-        // Constructor vacío por ahora
-    }
 
     // Método para establecer la conexión a la base de datos
     public Connection conectar() {

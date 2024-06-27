@@ -2,6 +2,7 @@ package Controlador;
 
 import Metodo.obtenerUsuarios;
 import Metodo.validacionUsuario;
+import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 
 /**
@@ -22,12 +23,9 @@ public class usuario {
         // Ejecuto la validación del usuario
         validacion.metodo_validacion(usuario, contrasena, frameActual);
     }
-    public void obtenerDatos(){
-        // Instancio el método de validación de usuario
-        obtenerUsuarios obtener = new obtenerUsuarios();
-        
-        // Ejecuto el metodo de obtener datos
-        
+
+    public void metodoUsuario implements ActionListener{
+        private usuario user;
     }
     
 }

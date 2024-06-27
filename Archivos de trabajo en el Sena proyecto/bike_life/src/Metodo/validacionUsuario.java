@@ -30,14 +30,14 @@ public class validacionUsuario {
             throw new SQLException("No se pudo establecer una conexión con la base de datos.");
         }
         
-        String query = "SELECT tb_usuarios.PK_identificacion as identificacion, " +
+        String sql = "SELECT tb_usuarios.PK_identificacion as identificacion, " +
            "tb_usuarios.nombre as nombre, " +
            "tb_rol.nombre_rol as rol " +
            "FROM tb_usuarios " +
            "INNER JOIN tb_rol ON tb_usuarios.FK_rol = tb_rol.PK_rol " +
            "WHERE tb_usuarios.PK_identificacion = ? AND tb_usuarios.contrasena = ?";
         
-        PreparedStatement ps = conexion.prepareStatement(query);
+        PreparedStatement ps = conexion.prepareStatement(sql);
         ps.setString(1, usuario);
         ps.setString(2, contrasena);
 
