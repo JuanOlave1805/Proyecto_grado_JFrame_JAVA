@@ -80,6 +80,11 @@ public class vistaLogin extends javax.swing.JFrame {
                 usuario_textActionPerformed(evt);
             }
         });
+        usuario_text.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                usuario_textKeyTyped(evt);
+            }
+        });
 
         usuario_label1.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
         usuario_label1.setForeground(new java.awt.Color(255, 255, 255));
@@ -197,6 +202,17 @@ public class vistaLogin extends javax.swing.JFrame {
     private void password_textActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_password_textActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_password_textActionPerformed
+
+    private void usuario_textKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_usuario_textKeyTyped
+        // TODO add your handling code here:
+        int key = evt.getKeyChar();
+        
+        boolean numero = key >= 48 && key <= 57;
+        
+        if (!numero){
+            evt.consume();
+        }
+    }//GEN-LAST:event_usuario_textKeyTyped
 
     /**
      * @param args the command line arguments

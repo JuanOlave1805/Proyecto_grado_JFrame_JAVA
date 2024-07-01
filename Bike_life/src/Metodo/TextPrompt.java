@@ -17,6 +17,10 @@ import javax.swing.text.*;
 public class TextPrompt extends JLabel implements FocusListener, DocumentListener {
     private static final long serialVersionUID = 1L;
 
+    public TextPrompt(String ingresa_tu_contraseña_de_usuario, TextPrompt password) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
     public enum Show {
         ALWAYS, FOCUS_GAINED, FOCUS_LOST;
     }

@@ -59,9 +59,10 @@ public class vistaUsuariosAdmin extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         Boton_eliminar1 = new javax.swing.JButton();
-        Boton_agregar1 = new javax.swing.JButton();
+        Boton_editar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla_usuarios = new javax.swing.JTable();
+        Boton_agregar = new javax.swing.JButton();
         Boton_inventario = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -133,19 +134,25 @@ public class vistaUsuariosAdmin extends javax.swing.JFrame {
         Boton_eliminar1.setBackground(new java.awt.Color(255, 153, 153));
         Boton_eliminar1.setText("Eliminar");
         Boton_eliminar1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
-        Boton_agregar1.setBackground(new java.awt.Color(102, 204, 255));
-        Boton_agregar1.setText("Agregar");
-        Boton_agregar1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        Boton_agregar1.addActionListener(new java.awt.event.ActionListener() {
+        Boton_eliminar1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Boton_agregar1ActionPerformed(evt);
+                Boton_eliminar1ActionPerformed(evt);
+            }
+        });
+
+        Boton_editar.setBackground(new java.awt.Color(102, 204, 255));
+        Boton_editar.setText("Editar");
+        Boton_editar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Boton_editar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Boton_editarActionPerformed(evt);
             }
         });
 
         tabla_usuarios.setAutoCreateRowSorter(true);
         tabla_usuarios.setBackground(new java.awt.Color(204, 204, 204));
         tabla_usuarios.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        tabla_usuarios.setFont(new java.awt.Font("Segoe UI Emoji", 0, 14)); // NOI18N
         tabla_usuarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -157,12 +164,22 @@ public class vistaUsuariosAdmin extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tabla_usuarios.setRowHeight(30);
         tabla_usuarios.addContainerListener(new java.awt.event.ContainerAdapter() {
             public void componentAdded(java.awt.event.ContainerEvent evt) {
                 tabla_usuariosComponentAdded(evt);
             }
         });
         jScrollPane1.setViewportView(tabla_usuarios);
+
+        Boton_agregar.setBackground(new java.awt.Color(102, 204, 255));
+        Boton_agregar.setText("Agregar");
+        Boton_agregar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Boton_agregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Boton_agregarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -171,13 +188,15 @@ public class vistaUsuariosAdmin extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1003, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 614, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(Boton_eliminar1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)
-                        .addComponent(Boton_agregar1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addComponent(Boton_agregar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(Boton_editar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(26, 26, 26))
         );
         jPanel1Layout.setVerticalGroup(
@@ -185,9 +204,10 @@ public class vistaUsuariosAdmin extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(Boton_eliminar1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Boton_agregar1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(Boton_editar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Boton_agregar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Boton_eliminar1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 447, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(16, Short.MAX_VALUE))
@@ -243,11 +263,11 @@ public class vistaUsuariosAdmin extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void Boton_agregar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_agregar1ActionPerformed
+    private void Boton_editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_editarActionPerformed
         // TODO add your handling code here:
         //Llamando al metodo //
-        //this.metodo_boton_agregar();
-    }//GEN-LAST:event_Boton_agregar1ActionPerformed
+        this.metodo_boton_editar();
+    }//GEN-LAST:event_Boton_editarActionPerformed
 
     private void Boton_inventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_inventarioActionPerformed
         // TODO add your handling code here:
@@ -256,6 +276,15 @@ public class vistaUsuariosAdmin extends javax.swing.JFrame {
     private void tabla_usuariosComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_tabla_usuariosComponentAdded
         // TODO add your handling code here:
     }//GEN-LAST:event_tabla_usuariosComponentAdded
+
+    private void Boton_agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_agregarActionPerformed
+        // TODO add your handling code here:
+        this.metodoAgregar();
+    }//GEN-LAST:event_Boton_agregarActionPerformed
+
+    private void Boton_eliminar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_eliminar1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Boton_eliminar1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -292,7 +321,8 @@ public class vistaUsuariosAdmin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Boton_agregar1;
+    private javax.swing.JButton Boton_agregar;
+    private javax.swing.JButton Boton_editar;
     private javax.swing.JButton Boton_eliminar1;
     private javax.swing.JButton Boton_inventario;
     private javax.swing.JButton Boton_reparaciones;
@@ -341,6 +371,20 @@ public class vistaUsuariosAdmin extends javax.swing.JFrame {
 
         // Establecer el modelo en la tabla
         tabla_usuarios.setModel(model);
+    }
+
+    private void metodo_boton_editar() {
+        //Cambio a la vista de editar usuario
+        vistaEditarUsuariosAdmin ventas = new vistaEditarUsuariosAdmin();  
+        ventas.setVisible(true);
+        this.setVisible(false);
+    }
+
+    private void metodoAgregar() {
+        //Cambio a la vista de agregar usuarios
+        vistaAgregarUsuariosAdmin ventas = new vistaAgregarUsuariosAdmin();  
+        ventas.setVisible(true);
+        this.setVisible(false);
     }
 
 }
