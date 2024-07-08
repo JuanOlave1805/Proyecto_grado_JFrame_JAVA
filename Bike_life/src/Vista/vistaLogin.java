@@ -299,9 +299,5 @@ public class vistaLogin extends javax.swing.JFrame {
         validacion.metodoLogin(usuario, contrasena, this);
         // Se llama al método 'metodoLogin' del objeto 'validacion', pasando el nombre de usuario y la contraseña como parámetros
         // Este método probablemente realiza la validación del usuario y contraseña
-
-        //Cierra ventana actual
-        this.setVisible(false);
-        // Se hace invisible la ventana actual en la que se está ejecutando este código
     }
 }

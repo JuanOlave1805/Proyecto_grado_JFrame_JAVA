@@ -13,7 +13,7 @@ public class usuarioAdmin {
         List<String[]> datosLista = obtener.obtener_usuarios();
         
         // Crear una matriz bidimensional de Strings para almacenar los datos de usuarios
-        String[][] datosMatriz = new String[datosLista.size()][4];
+        String[][] datosMatriz = new String[datosLista.size()][7];
         
         // Recorrer la lista de datos obtenida
         for (int i = 0; i < datosLista.size(); i++) {

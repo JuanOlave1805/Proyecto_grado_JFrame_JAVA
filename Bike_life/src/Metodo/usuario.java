@@ -12,7 +12,9 @@ public class usuario {
     private int id;
     private String contrasena;
     private String nombre;
-    private int rol;
+    private String apellido;
+    private String correo;
+    private int edad;
 
     public int getId() {
         return id;
@@ -38,6 +40,30 @@ public class usuario {
         this.nombre = nombre;
     }
 
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+
+    public int getEdad() {
+        return edad;
+    }
+
+    public void setEdad(int edad) {
+        this.edad = edad;
+    }
+
     public int getRol() {
         return rol;
     }
@@ -45,4 +71,8 @@ public class usuario {
     public void setRol(int rol) {
         this.rol = rol;
     }
+    private int rol;
+    
+
+    
 }

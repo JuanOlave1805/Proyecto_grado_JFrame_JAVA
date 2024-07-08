@@ -284,6 +284,7 @@ public class vistaUsuariosAdmin extends javax.swing.JFrame {
 
     private void Boton_eliminar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_eliminar1ActionPerformed
         // TODO add your handling code here:
+        this.metodoEliminar();
     }//GEN-LAST:event_Boton_eliminar1ActionPerformed
 
     /**
@@ -364,7 +365,7 @@ public class vistaUsuariosAdmin extends javax.swing.JFrame {
     }
     private void cargarTabla(String[][] datosMatriz) {
         // Definir nombres de columnas
-        String[] nombresColumnas = {"Identificación", "Nombre", "Contraseña", "Rol"};
+        String[] nombresColumnas = {"Identificación", "Nombre", "Apellido", "Edad", "Correo",  "Contraseña", "Rol"};
 
         // Crear el modelo de la tabla
         DefaultTableModel model = new DefaultTableModel(datosMatriz, nombresColumnas);
@@ -381,6 +382,13 @@ public class vistaUsuariosAdmin extends javax.swing.JFrame {
     }
 
     private void metodoAgregar() {
+        //Cambio a la vista de agregar usuarios
+        vistaAgregarUsuariosAdmin ventas = new vistaAgregarUsuariosAdmin();  
+        ventas.setVisible(true);
+        this.setVisible(false);
+    }
+    
+    private void metodoEliminar() {
         //Cambio a la vista de agregar usuarios
         vistaAgregarUsuariosAdmin ventas = new vistaAgregarUsuariosAdmin();  
         ventas.setVisible(true);

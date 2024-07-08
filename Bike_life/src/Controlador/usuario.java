@@ -24,9 +24,6 @@ public class usuario {
         validacion.metodo_validacion(usuario, contrasena, frameActual);
     }
 
-    public void metodoUsuario implements ActionListener{
-        private usuario user;
-    }
     
 }
 //https://www.youtube.com/watch?v=gHXQ9rhM-Q4&t=55s
