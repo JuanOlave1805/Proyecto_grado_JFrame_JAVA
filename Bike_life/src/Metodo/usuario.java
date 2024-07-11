@@ -9,27 +9,20 @@ package Metodo;
  * @author Propietario
  */
 public class usuario {
-    private int id;
-    private String contrasena;
+    private int identificacion;
     private String nombre;
     private String apellido;
     private String correo;
+    private String contrasena;
     private int edad;
+    private int rol;
 
-    public int getId() {
-        return id;
+    public int getIdentificacion() {
+        return identificacion;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getContrasena() {
-        return contrasena;
-    }
-
-    public void setContrasena(String contrasena) {
-        this.contrasena = contrasena;
+    public void setIdentificacion(int identificaion) {
+        this.identificacion = identificaion;
     }
 
     public String getNombre() {
@@ -56,6 +49,14 @@ public class usuario {
         this.correo = correo;
     }
 
+    public String getContrasena() {
+        return contrasena;
+    }
+
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
+    }
+
     public int getEdad() {
         return edad;
     }
@@ -71,8 +72,6 @@ public class usuario {
     public void setRol(int rol) {
         this.rol = rol;
     }
-    private int rol;
-    
 
     
 }

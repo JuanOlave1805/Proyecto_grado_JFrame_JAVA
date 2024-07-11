@@ -1,6 +1,6 @@
 package Controlador;
 
-import Metodo.obtenerUsuarios;
+import Metodo.metodosUsuarios;
 import Metodo.validacionUsuario;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
@@ -8,7 +8,7 @@ import javax.swing.JFrame;
 /**
  * Controlador para la gestión de usuarios.
  */
-public class usuario {
+public class ctrlLogin {
    
     /**
      * Método para realizar el inicio de sesión.
@@ -21,7 +21,7 @@ public class usuario {
         validacionUsuario validacion = new validacionUsuario();
         
         // Ejecuto la validación del usuario
-        validacion.metodo_validacion(usuario, contrasena, frameActual);
+        validacion.metodo_validacion(usuario, contrasena, frameActual); //martes 16 de julio 2:40 
     }
 
     

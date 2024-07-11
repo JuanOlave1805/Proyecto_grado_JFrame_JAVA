@@ -1,6 +1,6 @@
 package Vista;
 import Metodo.TextPrompt;
-import Controlador.usuario;
+import Controlador.ctrlLogin;
 import java.awt.Image;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -290,9 +290,10 @@ public class vistaLogin extends javax.swing.JFrame {
     
         usuario = usuario_text.getText();
         // Se obtiene el nombre de usuario ingresado desde un campo de texto ('JTextField')
+        
 
         //Instancio el metodo del controlador validacionLogin
-        usuario validacion=new usuario();
+        ctrlLogin validacion=new ctrlLogin();
         // Se crea una instancia del objeto 'usuario' que probablemente contiene lógica de validación de usuario
 
         //Ejecuto la validacion

@@ -3,11 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/Propietario/Documents/NetBeansProjects/Bike_life/src/Controlador/ctrlLogin.java</file>
             <file>file:/C:/Users/Propietario/Documents/NetBeansProjects/Bike_life/src/Vista/vistaUsuariosAdmin.java</file>
-            <file>file:/C:/Users/Propietario/Documents/NetBeansProjects/Bike_life/src/Controlador/usuarioAdmin.java</file>
             <file>file:/C:/Users/Propietario/Documents/NetBeansProjects/Bike_life/src/Metodo/usuario.java</file>
-            <file>file:/C:/Users/Propietario/Documents/NetBeansProjects/Bike_life/src/Metodo/obtenerUsuarios.java</file>
+            <file>file:/C:/Users/Propietario/Documents/NetBeansProjects/Bike_life/src/Metodo/validacionUsuario.java</file>
+            <file>file:/C:/Users/Propietario/Documents/NetBeansProjects/Bike_life/src/Vista/vistaAgregarUsuariosAdmin.java</file>
             <file>file:/C:/Users/Propietario/Documents/NetBeansProjects/Bike_life/src/Vista/vistaLogin.java</file>
+            <file>file:/C:/Users/Propietario/Documents/NetBeansProjects/Bike_life/src/Metodo/metodosUsuarios.java</file>
+            <file>file:/C:/Users/Propietario/Documents/NetBeansProjects/Bike_life/src/Vista/vistaEditarUsuariosAdmin.java</file>
+            <file>file:/C:/Users/Propietario/Documents/NetBeansProjects/Bike_life/src/Controlador/ctrlUsuario.java</file>
         </group>
     </open-files>
 </project-private>

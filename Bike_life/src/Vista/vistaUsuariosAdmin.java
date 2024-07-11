@@ -1,6 +1,6 @@
 package Vista;
 
-import Controlador.usuarioAdmin;
+import Controlador.ctrlUsuario;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.Icon;
@@ -29,10 +29,10 @@ public class vistaUsuariosAdmin extends javax.swing.JFrame {
         SetImageLabel(Image_logo, "src/images/logo.png");//Imagen del logo
         
         // Instancio el método de validación de usuario
-        usuarioAdmin obtener = new usuarioAdmin();
+        ctrlUsuario obtener = new ctrlUsuario();
         
         // Instancia el controlador de usuarios
-        obtener = new usuarioAdmin();
+        obtener = new ctrlUsuario();
 
         // Carga los datos en la tabla
         String[][] datosMatriz = obtener.obtenerDatos();

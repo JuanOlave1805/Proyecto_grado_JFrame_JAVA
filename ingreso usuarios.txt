@@ -1,0 +1,62 @@
+ingreso usuarios
+INSERT INTO tb_usuarios(identificacion_PK, nombre, apellido, edad, contrasena, correo, id_rol_FK) VALUES(?,?,?,?,?,?,?)
+
+Actualizar usuarios
+UPDATE tb_usuarios SET nombre = ?, apellido = ?, edad = ?, contrasena = ?, correo = ?, id_rol_FK = ? WHERE identificacion_PK = ?;
+
+Buscar
+SELECT * FROM tb_usuarios WHERE identificacion_PK=12
+
+
+
+
+// Crear una instancia de Usuario y establecer los valores
+        usuario usuario = new usuario();
+        usuario.setIdentificacion(Integer.parseInt(identificacion));
+        usuario.setNombre(nombre);
+        usuario.setApellido(apellido);
+        usuario.setEdad(Integer.parseInt(edad));
+        usuario.setContrasena(contrasena);
+        usuario.setCorreo(correo);
+        usuario.setRol(roll); 
+
+
+
+public boolean agregar_usuario(int identificacion, String nombre, String apellido, int edad, String correo, String contrasena, int id_rol, JFrame frameActual) {
+        // Crear una instancia de conexión a la base de datos
+        conexionBD cx = new conexionBD();
+        // Establecer una conexión a la base de datos
+        Connection conexion = cx.conectar();
+
+        // Consulta SQL para insertar un nuevo usuario
+        String sql = "INSERT INTO tb_usuarios (identificacion_PK, nombre, apellido, edad, correo, contrasena, id_rol_FK) " +
+                        "VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+        try {
+            // Preparar la declaración SQL con parámetros
+            var ps = conexion.prepareStatement(sql);
+            ps.setInt(1, identificacion);
+            ps.setString(2, nombre);
+            ps.setString(3, apellido);
+            ps.setInt(4, edad);
+            ps.setString(5, correo);
+            ps.setString(6, contrasena);
+            ps.setInt(7, id_rol);
+
+            // Ejecutar la inserción
+            int filasAfectadas = ps.executeUpdate();
+
+            JOptionPane.showMessageDialog(frameActual, "Usuario agregado satisfactoriamente");
+            vistaUsuariosAdmin ventanaAdmin = new vistaUsuariosAdmin();
+                ventanaAdmin.setVisible(true);
+            // Verificar si se insertó correctamente (al menos una fila afectada)
+            return filasAfectadas > 0;
+
+        } catch (SQLException e) {
+            // Manejar cualquier excepción SQL imprimiendo el rastreo de la pila
+            e.printStackTrace();
+            return false; // Indicar que no se pudo agregar
+        } finally {
+            cx.desconectar();
+        }
+    }
