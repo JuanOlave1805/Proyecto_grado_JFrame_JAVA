@@ -103,13 +103,16 @@
                                               <Component id="textIdentificacion" min="-2" pref="120" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
-                                      <Component id="jLabel1" alignment="1" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="118" max="-2" attributes="0"/>
                               <Component id="Image_logo" min="-2" pref="80" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
+                              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
@@ -122,8 +125,8 @@
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
                           <Group type="102" attributes="0">
-                              <EmptySpace min="20" pref="20" max="-2" attributes="0"/>
-                              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                              <Component id="jLabel1" min="-2" pref="44" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="Image_logo" min="-2" pref="80" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
@@ -199,7 +202,7 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JTable" name="tb_usuarios">
+                <Component class="javax.swing.JTable" name="tabla_usuarios">
                   <Properties>
                     <Property name="autoCreateRowSorter" type="boolean" value="true"/>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -227,8 +230,8 @@
                     </Property>
                   </Properties>
                   <Events>
-                    <EventHandler event="componentAdded" listener="java.awt.event.ContainerListener" parameters="java.awt.event.ContainerEvent" handler="tb_usuariosComponentAdded"/>
-                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tb_usuariosMouseClicked"/>
+                    <EventHandler event="componentAdded" listener="java.awt.event.ContainerListener" parameters="java.awt.event.ContainerEvent" handler="tabla_usuariosComponentAdded"/>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tabla_usuariosMouseClicked"/>
                   </Events>
                 </Component>
               </SubComponents>
@@ -261,6 +264,9 @@
               </AuxValues>
             </Component>
             <Component class="javax.swing.JTextField" name="textIdentificacion">
+              <Properties>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textIdentificacionActionPerformed"/>
                 <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="textIdentificacionKeyTyped"/>
@@ -271,12 +277,13 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI Historic" size="18" style="0"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="N&#xb0; identificacion"/>
+                <Property name="text" type="java.lang.String" value="N&#xb0; identificaci&#xf3;n"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="textNombre">
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textNombreActionPerformed"/>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="textNombreKeyTyped"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel4">
@@ -290,6 +297,7 @@
             <Component class="javax.swing.JTextField" name="textApellido">
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textApellidoActionPerformed"/>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="textApellidoKeyTyped"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel5">
@@ -320,7 +328,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Times New Roman" size="38" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Editar Usuarios"/>
+                <Property name="text" type="java.lang.String" value="Editar Usuario"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="textEdad">
@@ -348,6 +356,7 @@
             <Component class="javax.swing.JTextField" name="textCorreo">
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textCorreoActionPerformed"/>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="textCorreoKeyTyped"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel9">
@@ -361,6 +370,7 @@
             <Component class="javax.swing.JTextField" name="textContrasena">
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textContrasenaActionPerformed"/>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="textContrasenaKeyTyped"/>
               </Events>
             </Component>
           </SubComponents>

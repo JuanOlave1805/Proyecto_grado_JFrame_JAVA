@@ -6,10 +6,15 @@ package Vista;
 
 import Controlador.ctrlUsuario;
 import java.awt.Image;
+import static java.time.Clock.system;
+import static java.time.InstantSource.system;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -54,7 +59,7 @@ public class vistaEditarUsuariosAdmin extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         botonCancelar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tb_usuarios = new javax.swing.JTable();
+        tabla_usuarios = new javax.swing.JTable();
         botonConfirmar = new javax.swing.JButton();
         comboBoxRol = new javax.swing.JComboBox<>();
         textIdentificacion = new javax.swing.JTextField();
@@ -90,11 +95,11 @@ public class vistaEditarUsuariosAdmin extends javax.swing.JFrame {
             }
         });
 
-        tb_usuarios.setAutoCreateRowSorter(true);
-        tb_usuarios.setBackground(new java.awt.Color(204, 204, 204));
-        tb_usuarios.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        tb_usuarios.setFont(new java.awt.Font("Segoe UI Emoji", 0, 14)); // NOI18N
-        tb_usuarios.setModel(new javax.swing.table.DefaultTableModel(
+        tabla_usuarios.setAutoCreateRowSorter(true);
+        tabla_usuarios.setBackground(new java.awt.Color(204, 204, 204));
+        tabla_usuarios.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        tabla_usuarios.setFont(new java.awt.Font("Segoe UI Emoji", 0, 14)); // NOI18N
+        tabla_usuarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -105,18 +110,18 @@ public class vistaEditarUsuariosAdmin extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tb_usuarios.setRowHeight(30);
-        tb_usuarios.addContainerListener(new java.awt.event.ContainerAdapter() {
+        tabla_usuarios.setRowHeight(30);
+        tabla_usuarios.addContainerListener(new java.awt.event.ContainerAdapter() {
             public void componentAdded(java.awt.event.ContainerEvent evt) {
-                tb_usuariosComponentAdded(evt);
+                tabla_usuariosComponentAdded(evt);
             }
         });
-        tb_usuarios.addMouseListener(new java.awt.event.MouseAdapter() {
+        tabla_usuarios.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tb_usuariosMouseClicked(evt);
+                tabla_usuariosMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(tb_usuarios);
+        jScrollPane1.setViewportView(tabla_usuarios);
 
         botonConfirmar.setBackground(new java.awt.Color(102, 204, 255));
         botonConfirmar.setText("Confirmar ");
@@ -129,6 +134,7 @@ public class vistaEditarUsuariosAdmin extends javax.swing.JFrame {
 
         comboBoxRol.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Vendedor" }));
 
+        textIdentificacion.setEnabled(false);
         textIdentificacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textIdentificacionActionPerformed(evt);
@@ -141,11 +147,16 @@ public class vistaEditarUsuariosAdmin extends javax.swing.JFrame {
         });
 
         jLabel2.setFont(new java.awt.Font("Segoe UI Historic", 0, 18)); // NOI18N
-        jLabel2.setText("N° identificacion");
+        jLabel2.setText("N° identificación");
 
         textNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textNombreActionPerformed(evt);
+            }
+        });
+        textNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                textNombreKeyTyped(evt);
             }
         });
 
@@ -155,6 +166,11 @@ public class vistaEditarUsuariosAdmin extends javax.swing.JFrame {
         textApellido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textApellidoActionPerformed(evt);
+            }
+        });
+        textApellido.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                textApellidoKeyTyped(evt);
             }
         });
 
@@ -167,7 +183,7 @@ public class vistaEditarUsuariosAdmin extends javax.swing.JFrame {
         Image_logo.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 38)); // NOI18N
-        jLabel1.setText("Editar Usuarios");
+        jLabel1.setText("Editar Usuario");
 
         textEdad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -191,6 +207,11 @@ public class vistaEditarUsuariosAdmin extends javax.swing.JFrame {
                 textCorreoActionPerformed(evt);
             }
         });
+        textCorreo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                textCorreoKeyTyped(evt);
+            }
+        });
 
         jLabel9.setFont(new java.awt.Font("Segoe UI Historic", 0, 18)); // NOI18N
         jLabel9.setText("Contraseña");
@@ -198,6 +219,11 @@ public class vistaEditarUsuariosAdmin extends javax.swing.JFrame {
         textContrasena.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textContrasenaActionPerformed(evt);
+            }
+        });
+        textContrasena.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                textContrasenaKeyTyped(evt);
             }
         });
 
@@ -238,11 +264,13 @@ public class vistaEditarUsuariosAdmin extends javax.swing.JFrame {
                                         .addComponent(textEdad, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(textApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(textNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(textIdentificacion, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addComponent(jLabel1))))
+                                        .addComponent(textIdentificacion, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(118, 118, 118)
-                        .addComponent(Image_logo, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(Image_logo, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(45, 45, 45)
+                        .addComponent(jLabel1)))
                 .addGap(43, 43, 43)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 888, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -252,7 +280,7 @@ public class vistaEditarUsuariosAdmin extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(20, 20, 20)
-                        .addComponent(jLabel1)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Image_logo, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(36, 36, 36)
@@ -324,12 +352,12 @@ public class vistaEditarUsuariosAdmin extends javax.swing.JFrame {
 
     private void botonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonConfirmarActionPerformed
         // TODO add your handling code here:
-        //textId.setText(tabla_usuarios.getValueAt(tabla_usuarios.getSelectedRow(), 0));
+        this.metodoConfirmarEdicion();
     }//GEN-LAST:event_botonConfirmarActionPerformed
 
-    private void tb_usuariosComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_tb_usuariosComponentAdded
+    private void tabla_usuariosComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_tabla_usuariosComponentAdded
         // TODO add your handling code here:
-    }//GEN-LAST:event_tb_usuariosComponentAdded
+    }//GEN-LAST:event_tabla_usuariosComponentAdded
 
     private void botonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCancelarActionPerformed
         // TODO add your handling code here:
@@ -357,6 +385,9 @@ public class vistaEditarUsuariosAdmin extends javax.swing.JFrame {
         if (!numero){
             evt.consume();
         }
+        if (textIdentificacion.getText().length() >= 10){
+            evt.consume();
+        }
     }//GEN-LAST:event_textIdentificacionKeyTyped
 
     private void textEdadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textEdadKeyTyped
@@ -368,12 +399,44 @@ public class vistaEditarUsuariosAdmin extends javax.swing.JFrame {
         if (!numero){
             evt.consume();
         }
+        if (textEdad.getText().length() >= 2){
+            evt.consume();
+        }
     }//GEN-LAST:event_textEdadKeyTyped
 
-    private void tb_usuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_usuariosMouseClicked
+    private void tabla_usuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabla_usuariosMouseClicked
         // TODO add your handling code here:
-        
-    }//GEN-LAST:event_tb_usuariosMouseClicked
+        ctrlUsuario controlador = new ctrlUsuario();
+        controlador.seleccionUsuario(tabla_usuarios, textIdentificacion, textNombre, textApellido, textEdad, textCorreo, textContrasena);
+    }//GEN-LAST:event_tabla_usuariosMouseClicked
+
+    private void textNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textNombreKeyTyped
+        // TODO add your handling code here:
+        if (textNombre.getText().length() >= 100){
+            evt.consume();
+        }
+    }//GEN-LAST:event_textNombreKeyTyped
+
+    private void textApellidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textApellidoKeyTyped
+        // TODO add your handling code here:
+        if (textApellido.getText().length() >= 100){
+            evt.consume();
+        }
+    }//GEN-LAST:event_textApellidoKeyTyped
+
+    private void textCorreoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textCorreoKeyTyped
+        // TODO add your handling code here:
+        if (textCorreo.getText().length() >= 100){
+            evt.consume();
+        }
+    }//GEN-LAST:event_textCorreoKeyTyped
+
+    private void textContrasenaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textContrasenaKeyTyped
+        // TODO add your handling code here:
+        if (textContrasena.getText().length() >= 100){
+            evt.consume();
+        }
+    }//GEN-LAST:event_textContrasenaKeyTyped
 
     /**
      * @param args the command line arguments
@@ -426,7 +489,7 @@ public class vistaEditarUsuariosAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tb_usuarios;
+    private javax.swing.JTable tabla_usuarios;
     private javax.swing.JTextField textApellido;
     private javax.swing.JTextField textContrasena;
     private javax.swing.JTextField textCorreo;
@@ -461,12 +524,78 @@ public class vistaEditarUsuariosAdmin extends javax.swing.JFrame {
         DefaultTableModel model = new DefaultTableModel(datosMatriz, nombresColumnas);
 
         // Establecer el modelo en la tabla
-        tb_usuarios.setModel(model);
+        tabla_usuarios.setModel(model);
+        
+        TableRowSorter<TableModel> ordenarTabla = new TableRowSorter<TableModel>(model);
+        tabla_usuarios.setRowSorter(ordenarTabla);
     }
     private void cancelarModificacion() {
         //Cambio a la vista de inicio
         vistaUsuariosAdmin ventas = new vistaUsuariosAdmin();  
         ventas.setVisible(true);
         this.setVisible(false);
+    }
+
+    private void metodoConfirmarEdicion() {
+        ctrlUsuario controlador = new ctrlUsuario();
+    
+        // Obtener valores de los campos
+    String identificacionStr = textIdentificacion.getText();
+    int identificacion;
+    try {
+        identificacion = Integer.parseInt(identificacionStr);
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "La identificación debe ser un número entero válido.");
+        return;
+    }
+    
+    String nombre = textNombre.getText();
+    String apellido = textApellido.getText();
+    String edadStr = textEdad.getText();
+    String correo = textCorreo.getText();
+    String contrasena = textContrasena.getText();
+    String rol = (String) comboBoxRol.getSelectedItem();
+    
+    // Convertir rol a un número según la selección
+    int rolId = ("Administrador".equals(rol)) ? 1 : 2;
+    
+    // Validación de todos los campos
+    if (nombre.isEmpty() || apellido.isEmpty() || correo.isEmpty() || contrasena.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Por favor completa todos los campos.");
+        return;
+    }
+
+    int edad;
+    try {
+        edad = Integer.parseInt(edadStr);
+        // Verificar que la edad sea mayor o igual que cero
+        if (edad < 0) {
+            JOptionPane.showMessageDialog(this, "La edad no puede ser negativa.");
+            return;
+        }
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "La edad debe ser un número entero válido.");
+        return;
+    }
+
+    if (!validarCorreo(correo)) {
+        JOptionPane.showMessageDialog(this, "Por favor ingresa un correo válido.");
+        return;
+    }
+    
+
+    if (controlador.actualizarUsuario(identificacion, nombre, apellido, edad, correo, contrasena, rolId)) {
+        JOptionPane.showMessageDialog(this, "Usuario actualizado exitosamente.");
+        // Cambio a la vista de inicio
+        vistaUsuariosAdmin ventas = new vistaUsuariosAdmin();
+        ventas.setVisible(true);
+        this.setVisible(false);
+    } else {
+        JOptionPane.showMessageDialog(this, "Error al actualizar el usuario.");
+    }
+}
+    private boolean validarCorreo(String correo) {
+        String regex = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$";
+        return correo.matches(regex);
     }
 }

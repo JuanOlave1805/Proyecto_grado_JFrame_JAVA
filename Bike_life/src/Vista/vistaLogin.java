@@ -20,7 +20,7 @@ public class vistaLogin extends javax.swing.JFrame {
     public vistaLogin() {
         initComponents();
         
-        setSize(1200, 700);//Tamaño de la ventana 
+        setSize(1300, 700);//Tamaño de la ventana 
         
         this.setLocationRelativeTo(this);//Centra la ventana en la mitad de la pantalla
         this.setResizable(false);// Se deshabilita el Botón Max del Form
@@ -66,11 +66,11 @@ public class vistaLogin extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Bienvenido a el aplicativo de gestio de compra y repacion de bibicletas");
+        jLabel2.setText("Bienvenido al aplicativo de gestión de compra y reparación de bicicletas");
 
         usuario_label.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
         usuario_label.setForeground(new java.awt.Color(255, 255, 255));
-        usuario_label.setText("Ingresa tu numero de ID en la empresa");
+        usuario_label.setText("Ingresa tu numero de identificación");
 
         usuario_text.setBackground(new java.awt.Color(0, 0, 0));
         usuario_text.setForeground(new java.awt.Color(204, 204, 204));
@@ -117,60 +117,56 @@ public class vistaLogin extends javax.swing.JFrame {
         fondoLayout.setHorizontalGroup(
             fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(fondoLayout.createSequentialGroup()
-                .addGap(152, 152, 152)
+                .addGap(357, 357, 357)
                 .addGroup(fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, fondoLayout.createSequentialGroup()
-                        .addGroup(fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(usuario_label, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(usuario_text, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(separador_usuario, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(usuario_label1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(separador_usuario1, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(password_text, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(fondoLayout.createSequentialGroup()
-                                .addGap(108, 108, 108)
-                                .addComponent(Boton_ingresar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(Image_logo, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(fondoLayout.createSequentialGroup()
-                        .addGroup(fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(fondoLayout.createSequentialGroup()
-                                .addGap(339, 339, 339)
-                                .addComponent(jLabel1))
-                            .addGroup(fondoLayout.createSequentialGroup()
-                                .addGap(163, 163, 163)
-                                .addComponent(jLabel2)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(192, 192, 192))
+                        .addGap(162, 162, 162)
+                        .addComponent(jLabel1))
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(fondoLayout.createSequentialGroup()
+                .addGap(183, 183, 183)
+                .addGroup(fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(usuario_label, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(usuario_text, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(separador_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(usuario_label1, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(password_text, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(separador_usuario1, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(fondoLayout.createSequentialGroup()
+                        .addGap(108, 108, 108)
+                        .addComponent(Boton_ingresar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Image_logo, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(150, 150, 150))
         );
         fondoLayout.setVerticalGroup(
             fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(fondoLayout.createSequentialGroup()
-                .addGap(57, 57, 57)
+                .addGap(52, 52, 52)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
                 .addGroup(fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(fondoLayout.createSequentialGroup()
-                        .addGap(112, 112, 112)
+                        .addGap(118, 118, 118)
                         .addComponent(usuario_label)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(6, 6, 6)
                         .addComponent(usuario_text, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(6, 6, 6)
                         .addComponent(separador_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(60, 60, 60)
                         .addComponent(usuario_label1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(12, 12, 12)
                         .addComponent(password_text, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(6, 6, 6)
                         .addComponent(separador_usuario1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(50, 50, 50)
                         .addComponent(Boton_ingresar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(fondoLayout.createSequentialGroup()
-                        .addGap(49, 49, 49)
-                        .addComponent(Image_logo, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(101, Short.MAX_VALUE))
+                        .addGap(60, 60, 60)
+                        .addComponent(Image_logo, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(120, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

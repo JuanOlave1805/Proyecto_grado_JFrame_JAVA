@@ -20,10 +20,11 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JFrame;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 
 public class metodosUsuarios {
 
-    // Método público para obtener la lista de usuarios desde la base de datos
+    // Listar elementos de la BD
     public List<String[]> obtener_usuarios() {
         // Crear una instancia de conexión a la base de datos
         conexionBD cx = new conexionBD();
@@ -74,7 +75,8 @@ public class metodosUsuarios {
         return datosLista;
     }
     
-    public boolean eliminar_usuario(String identificacion) {
+    //Eliminar elemento de la BD
+    public boolean eliminar_usuario(int identificacion) {
     // Crear una instancia de conexión a la base de datos
     conexionBD cx = new conexionBD();
     // Establecer una conexión a la base de datos
@@ -86,7 +88,7 @@ public class metodosUsuarios {
     try {
         // Preparar la declaración SQL con parámetros
         var ps = conexion.prepareStatement(sql);
-        ps.setString(1, identificacion);
+        ps.setInt(1, identificacion);
 
         // Ejecutar la actualización (eliminar usuario)
         int filasAfectadas = ps.executeUpdate();
@@ -104,62 +106,96 @@ public class metodosUsuarios {
     }
     }
     
-    public boolean modificar_usuario(JTable tb_usuarios, int identificacion, String nombre, String apellido, int edad, String correo, String contrasena, int id_rol) {
-    // Crear una instancia de conexión a la base de datos
-    conexionBD cx = new conexionBD();
-    // Establecer una conexión a la base de datos
-    Connection conexion = cx.conectar();
-
-    // Consulta SQL para modificar un usuario por su identificación primaria
-    String sql = "UPDATE tb_usuarios SET nombre = ?, apellido = ?, edad = ?, correo = ?, contrasena = ?, id_rol_FK = ? WHERE identificacion_PK = ?";
-
-    try {
-        //Obtener el indice de la fila seleccionada
-        int filaseleccionada = tb_usuarios.getSelectedRow();
-           
-        //verificar que se haya seleccionado una fila
-        if (filaseleccionada >= 0) {
-            //obtener los datos de la fila seleccionada
-            //String nombre = tb_usuarios.getValueAt(filaseleccionada, 1).toString();
-            //String apellido = tb_usuarios.getValueAt(filaseleccionada, 2).toString();
-            //String telefono = tb_usuarios.getValueAt(filaseleccionada, 3).toString();
-            //String tipo_usuario = tb_usuarios.getValueAt(filaseleccionada, 4).toString();
-            //String tipo_jornada = tb_usuarios.getValueAt(filaseleccionada, 5).toString();
+    //Metodo seleccionar para obtener los datos de la casilla seleccionada en la tabla
+    public void seleccionUsuario(JTable tabla_usuarios, JTextField textIdentificacion, JTextField textNombre, JTextField textApellido, JTextField textEdad, JTextField textCorreo, JTextField textContrasena) {
+        try {
+            int fila = tabla_usuarios.getSelectedRow();
+        
+            if (fila >= 0) {
+                // Obtener y establecer el valor del identificador
+                Object identificacionObj = tabla_usuarios.getValueAt(fila, 0);
+                if (identificacionObj != null) {
+                    textIdentificacion.setText(identificacionObj.toString());
+                }
             
-            //mostrar los datos en los campos de texto
-            //Txt_nombre.setText(nombre);
-            //Txt_Apellido.setText(apellido);
-            //Txt_Telefono.setText(telefono);
-            //Txt_Tp_Usu.setText(tipo_usuario);
-            //Txt_tp_jor.setText(tipo_jornada);
+                Object nombreObj = tabla_usuarios.getValueAt(fila, 1);
+                if (nombreObj != null) {
+                    textNombre.setText(nombreObj.toString());
+                }
+            
+                Object apellidoObj = tabla_usuarios.getValueAt(fila, 2);
+                if (apellidoObj != null) {
+                textApellido.setText(apellidoObj.toString());
+                }
+            
+                Object edadObj = tabla_usuarios.getValueAt(fila, 3);
+                if (edadObj != null) {
+                    textEdad.setText(edadObj.toString());
+                }
+            
+                Object correoObj = tabla_usuarios.getValueAt(fila, 4);
+                if (correoObj != null) {
+                    textCorreo.setText(correoObj.toString());
+                }
+            
+                Object contrasenaObj = tabla_usuarios.getValueAt(fila, 5);
+                if (contrasenaObj != null) {
+                    textContrasena.setText(contrasenaObj.toString());
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Fila no seleccionada");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error de selección: " + e.toString());
         }
-        // Preparar la declaración SQL con parámetros
-        var ps = conexion.prepareStatement(sql);
-        ps.setInt(1, identificacion);
-        ps.setString(2, nombre);
-        ps.setString(3, apellido);
-        ps.setInt(4, edad);
-        ps.setString(5, correo);
-        ps.setString(6, contrasena);
-        ps.setInt(7, id_rol);
-
-        // Ejecutar la actualización (modificar usuario)
-        int filasAfectadas = ps.executeUpdate();
-
-        // Verificar si se modificó correctamente (al menos una fila afectada)
-        return filasAfectadas > 0;
-
-    } catch (SQLException e) {
-        // Manejar cualquier excepción SQL imprimiendo el rastreo de la pila
-        e.printStackTrace();
-        return false; // Indicar que no se pudo modificar
-    } finally {
-        // Asegurarse de desconectar la conexión a la base de datos en caso de cualquier excepción
-        cx.desconectar();
-    }
     }
     
+    //Modificar dato en la BD
+    public boolean modificar_usuario(int identificacion, String nuevoNombre, String nuevoApellido, int nuevaEdad, String nuevoCorreo, String nuevaContrasena, int nuevoIdRol) {
+        // Crear una instancia de conexión a la base de datos
+        conexionBD cx = new conexionBD();
+        // Establecer una conexión a la base de datos
+        Connection conexion = cx.conectar();
+
+        // Consulta SQL para modificar un usuario por su identificación primaria
+        String sql = "UPDATE tb_usuarios SET nombre = ?, apellido = ?, edad = ?, correo = ?, contrasena = ?, id_rol_FK = ? WHERE identificacion_PK = ?";
+
+        try {
+            // Preparar la declaración SQL con parámetros
+            var ps = conexion.prepareStatement(sql);
+            ps.setString(1, nuevoNombre);
+            ps.setString(2, nuevoApellido);
+            ps.setInt(3, nuevaEdad);
+            ps.setString(4, nuevoCorreo);
+            ps.setString(5, nuevaContrasena);
+            ps.setInt(6, nuevoIdRol);
+            ps.setInt(7, identificacion); 
+
+            // Ejecutar la actualización (modificar usuario)
+            int filasAfectadas = ps.executeUpdate();
+
+            // Verificar si se modificó correctamente (al menos una fila afectada)
+            return filasAfectadas > 0;
+
+        } catch (SQLException e) {
+            // Manejar cualquier excepción SQL imprimiendo el rastreo de la pila
+            e.printStackTrace();
+            return false; // Indicar que no se pudo modificar
+        } finally {
+            // Asegurarse de desconectar la conexión a la base de datos en caso de cualquier excepción
+            try {
+                if (conexion != null) {
+                    conexion.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     
+    
+    //Agregar usuario en la BD
     public boolean agregar_usuario(int identificacion, String nombre, String apellido, int edad, String correo, String contrasena, int id_rol, JFrame frameActual) {
         conexionBD cx = new conexionBD();
         Connection conexion = cx.conectar();

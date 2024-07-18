@@ -13,6 +13,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -142,11 +144,16 @@ public class vistaAgregarUsuariosAdmin extends javax.swing.JFrame {
         });
 
         jLabel2.setFont(new java.awt.Font("Segoe UI Historic", 0, 18)); // NOI18N
-        jLabel2.setText("N° identificacion");
+        jLabel2.setText("N° identificación");
 
         textNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textNombreActionPerformed(evt);
+            }
+        });
+        textNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                textNombreKeyTyped(evt);
             }
         });
 
@@ -156,6 +163,11 @@ public class vistaAgregarUsuariosAdmin extends javax.swing.JFrame {
         textApellido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textApellidoActionPerformed(evt);
+            }
+        });
+        textApellido.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                textApellidoKeyTyped(evt);
             }
         });
 
@@ -192,6 +204,11 @@ public class vistaAgregarUsuariosAdmin extends javax.swing.JFrame {
                 textCorreoActionPerformed(evt);
             }
         });
+        textCorreo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                textCorreoKeyTyped(evt);
+            }
+        });
 
         jLabel9.setFont(new java.awt.Font("Segoe UI Historic", 0, 18)); // NOI18N
         jLabel9.setText("Contraseña");
@@ -199,6 +216,11 @@ public class vistaAgregarUsuariosAdmin extends javax.swing.JFrame {
         textContrasena.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textContrasenaActionPerformed(evt);
+            }
+        });
+        textContrasena.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                textContrasenaKeyTyped(evt);
             }
         });
 
@@ -359,6 +381,9 @@ public class vistaAgregarUsuariosAdmin extends javax.swing.JFrame {
         if (!numero){
             evt.consume();
         }
+        if (textIdentificacion.getText().length() >= 10){
+            evt.consume();
+        }
     }//GEN-LAST:event_textIdentificacionKeyTyped
 
     private void textEdadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textEdadKeyTyped
@@ -370,7 +395,38 @@ public class vistaAgregarUsuariosAdmin extends javax.swing.JFrame {
         if (!numero){
             evt.consume();
         }
+        if (textEdad.getText().length() >= 2){
+            evt.consume();
+        }
     }//GEN-LAST:event_textEdadKeyTyped
+
+    private void textNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textNombreKeyTyped
+        // TODO add your handling code here:
+        if (textNombre.getText().length() >= 100){
+            evt.consume();
+        }
+    }//GEN-LAST:event_textNombreKeyTyped
+
+    private void textApellidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textApellidoKeyTyped
+        // TODO add your handling code here:
+        if (textApellido.getText().length() >= 100){
+            evt.consume();
+        }
+    }//GEN-LAST:event_textApellidoKeyTyped
+
+    private void textCorreoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textCorreoKeyTyped
+        // TODO add your handling code here:
+        if (textCorreo.getText().length() >= 100){
+            evt.consume();
+        }
+    }//GEN-LAST:event_textCorreoKeyTyped
+
+    private void textContrasenaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textContrasenaKeyTyped
+        // TODO add your handling code here:
+        if (textContrasena.getText().length() >= 100){
+            evt.consume();
+        }
+    }//GEN-LAST:event_textContrasenaKeyTyped
 
     /**
      * @param args the command line arguments
@@ -458,6 +514,9 @@ public class vistaAgregarUsuariosAdmin extends javax.swing.JFrame {
 
         // Establecer el modelo en la tabla
         tabla_usuarios.setModel(model);
+        
+        TableRowSorter<TableModel> ordenarTabla = new TableRowSorter<TableModel>(model);
+        tabla_usuarios.setRowSorter(ordenarTabla);
     }
 
     private void cancelarAgregar() {
@@ -468,6 +527,7 @@ public class vistaAgregarUsuariosAdmin extends javax.swing.JFrame {
     }
 
     private void metodoBtnAgregar() {
+        
         // Obtener valores de los campos
         String identificacionStr = textIdentificacion.getText();
         String nombre = textNombre.getText();
@@ -516,10 +576,18 @@ public class vistaAgregarUsuariosAdmin extends javax.swing.JFrame {
         } else {
             roll = 2;
         }
+        if (!validarCorreo(correo)) {
+            JOptionPane.showMessageDialog(this, "Por favor ingresa un correo válido.");
+            return; // Salir del método si el correo no es válido
+        }
 
         // Instanciar el controlador y ejecutar el método para agregar usuario
-        ctrlUsuario usuario = new ctrlUsuario();
-        usuario.AgregarUsuario(identificacion, nombre, apellido, edad, correo, contrasena, roll, this);
-}
+        ctrlUsuario controlador = new ctrlUsuario();
+        controlador.AgregarUsuario(identificacion, nombre, apellido, edad, correo, contrasena, roll, this);
+    }
+    private boolean validarCorreo(String correo) {
+        String regex = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$";
+        return correo.matches(regex);
+    }
 
 }

@@ -3,6 +3,8 @@ package Controlador;
 import Metodo.metodosUsuarios;
 import java.util.List; // Importa java.util.List para usar List correctamente
 import javax.swing.JFrame;
+import javax.swing.JTable;
+import javax.swing.JTextField;
 
 public class ctrlUsuario {
 
@@ -36,12 +38,26 @@ public class ctrlUsuario {
      * @param correo
      * @param rol
      */
+    
     public void AgregarUsuario(int identificacion, String nombre, String apellido, int edad, String correo, String contrasena, int rol, JFrame frameActual){
         // Instancio el método de agregar usuarios
         metodosUsuarios agregar = new metodosUsuarios();
         // Ejecuto el metodo de agregar usuario
         agregar.agregar_usuario(identificacion, nombre, apellido, edad, correo, contrasena, rol, frameActual);
     }
-    //public void ModificarUsuario(JTable tb_usuario, )
+    public void seleccionUsuario(JTable tabla_usuarios, JTextField textIdentificacion, JTextField textNombre, JTextField textApellido, JTextField textEdad, JTextField textCorreo, JTextField textContrasena){
+        metodosUsuarios seleccionar = new metodosUsuarios();
+        seleccionar.seleccionUsuario(tabla_usuarios, textIdentificacion, textNombre, textApellido, textEdad, textCorreo, textContrasena);
+    }
+    
+    public boolean actualizarUsuario(int identificacion, String nombre, String apellido, int edad, String correo, String contrasena, int rol) {
+        metodosUsuarios actualizar = new metodosUsuarios();
+        return actualizar.modificar_usuario(identificacion, nombre, apellido, edad, correo, contrasena, rol);
+    }
+    public boolean eliminarUsuario(int identificacion){
+        metodosUsuarios eliminar = new metodosUsuarios();
+        eliminar.eliminar_usuario(identificacion);
+        return true;
+    }
 }
 //https://www.youtube.com/watch?v=gHXQ9rhM-Q4&t=55s
