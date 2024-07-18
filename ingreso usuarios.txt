@@ -60,3 +60,11 @@ public boolean agregar_usuario(int identificacion, String nombre, String apellid
             cx.desconectar();
         }
     }
+
+
+
+
+
+
+
+INSERT INTO tb_usuarios (identificacion_PK, nombre, apellido,edad,contrasena, correo, telefono, id_rol_FK) VALUES (?, ?, ?, ?, ?, ?, ?, ?);
