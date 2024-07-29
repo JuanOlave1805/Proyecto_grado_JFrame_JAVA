@@ -13,6 +13,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
 
 /**
  *
@@ -57,7 +60,7 @@ public String[][] listar() {
         // Recorrer el conjunto de resultados
         while (res.next()) {
             // Crear un array de Strings para almacenar los datos de cada proveedor
-            String[] datos = new String[7]; // Cambié a 5 porque hay 5 columnas en la consulta SQL
+            String[] datos = new String[7]; // Cambié a 7 porque hay 7 columnas en la consulta SQL
             // Obtener y almacenar cada campo de datos en el array
             datos[0] = res.getString(1); // ID Producto
             datos[1] = res.getString(2); // Nombre del Producto
@@ -153,9 +156,93 @@ public boolean agregar(Producto producto, Categoria categoria, Proveedor proveed
     }
 }
 
+//Metodo de seleccionar la tabla
+public void seleccionar(JTable tabla, JTextField textIdentificacion, JTextField textNombre, JTextField textCompra, JTextField textVenta, JTextField textCantidad ) {
+    try {
+        int fila = tabla.getSelectedRow(); // Obtener la fila seleccionada
 
+        if (fila >= 0) {
+            // Obtener y establecer el valor del identificador
+            Object identificacionObj = tabla.getValueAt(fila, 0);
+            if (identificacionObj != null) {
+                textIdentificacion.setText(identificacionObj.toString());
+            }
 
+            // Obtener y establecer el valor del nombre
+            Object nombreObj = tabla.getValueAt(fila, 1);
+            if (nombreObj != null) {
+                textNombre.setText(nombreObj.toString());
+            }
 
+            // Obtener y establecer el valor del apellido
+            Object compraObj = tabla.getValueAt(fila, 2);
+            if (compraObj != null) {
+                textCompra.setText(compraObj.toString());
+            }
+
+            // Obtener y establecer el valor de la edad
+            Object ventaObj = tabla.getValueAt(fila, 3);
+            if (ventaObj != null) {
+                textVenta.setText(ventaObj.toString());
+            }
+
+            // Obtener y establecer el valor del correo
+            Object cantidadObj = tabla.getValueAt(fila, 4);
+            if (cantidadObj != null) {
+                textCantidad.setText(cantidadObj.toString());
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Fila no seleccionada");
+        }
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(null, "Error de selección: " + e.toString());
+    }
+}
+
+//Actualizar producto
+public boolean actualizarUsuario(Producto objeto) {
+    // Crear una instancia de conexión a la base de datos
+    conexionBD cx = new conexionBD();
+    // Establecer una conexión a la base de datos
+    Connection conexion = cx.conectar();
+
+    // Variables para almacenar los IDs
+    int idCategoria = -1;
+    int idProveedor = -1;
+
+    // Consulta para obtener el ID de la categoría
+    String sqlCategoria = "SELECT id_categoria_PK FROM categorias WHERE nombre = ?";
+    // Consulta para obtener el ID del proveedor
+    String sqlProveedor = "SELECT id_proveedor_PK FROM proveedores WHERE nombre = ?";
+    // Consulta para actualizar el producto
+    String sql = "UPDATE productos SET nombre = \"Hola\", precioCompra = 0, productos.precioVenta = 0, productos.stock = 0 WHERE id_producto_PK = 1";
+
+    try {
+        // Preparar la declaración SQL con parámetros
+        var ps = conexion.prepareStatement(sql);
+        ps.setString(1, objeto.getNombre());
+        ps.setFloat(2, objeto.getPrecio_compra());
+        ps.setFloat(3, objeto.getPrecio_venta());
+        ps.setInt(4, objeto.getStock());
+        ps.setInt(5, objeto.getId());
+
+        // Ejecutar la actualización (modificar usuario)
+        int filasAfectadas = ps.executeUpdate();
+
+        // Verificar si se modificó correctamente (al menos una fila afectada)
+        return filasAfectadas > 0;
+
+    } catch (SQLException e) {
+        // Manejar cualquier excepción SQL imprimiendo el rastreo de la pila
+        e.printStackTrace();
+        return false; // Indicar que no se pudo modificar
+    } finally {
+        // Asegurarse de desconectar la conexión a la base de datos en caso de cualquier excepción
+        if (conexion != null) {
+            cx.desconectar();
+        }
+    }
+}
 
 
 

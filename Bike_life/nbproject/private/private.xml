@@ -3,17 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/JUAN%20DAVID/Documents/NetBeansProjects/Bike_life/src/Metodo/metodoProducto.java</file>
-            <file>file:/C:/Users/JUAN%20DAVID/Documents/NetBeansProjects/Bike_life/src/Metodo/metodoUsuario.java</file>
-            <file>file:/C:/Users/JUAN%20DAVID/Documents/NetBeansProjects/Bike_life/src/Objetos/Producto.java</file>
-            <file>file:/C:/Users/JUAN%20DAVID/Documents/NetBeansProjects/Bike_life/src/Metodo/metodoCategoria.java</file>
-            <file>file:/C:/Users/JUAN%20DAVID/Documents/NetBeansProjects/Bike_life/src/Vista/vistaAgregarProductoAdmin.java</file>
-            <file>file:/C:/Users/JUAN%20DAVID/Documents/NetBeansProjects/Bike_life/src/Vista/vistaEditarProveedorAdmin.java</file>
-            <file>file:/C:/Users/JUAN%20DAVID/Documents/NetBeansProjects/Bike_life/src/Vista/vistaEliminarCategoriaProductoAdmin.java</file>
-            <file>file:/C:/Users/JUAN%20DAVID/Documents/NetBeansProjects/Bike_life/src/Vista/vistaProductosAdmin.java</file>
-            <file>file:/C:/Users/JUAN%20DAVID/Documents/NetBeansProjects/Bike_life/src/Vista/vistaAgregarCategoriaProductoAdmin.java</file>
-            <file>file:/C:/Users/JUAN%20DAVID/Documents/NetBeansProjects/Bike_life/src/Metodo/metodoProveedor.java</file>
-            <file>file:/C:/Users/JUAN%20DAVID/Documents/NetBeansProjects/Bike_life/src/Vista/vistaEliminarProveedorAdmin.java</file>
+            <file>file:/C:/Users/Propietario/Documents/NetBeansProjects/Bike_life/src/Metodo/TextPrompt.java</file>
+            <file>file:/C:/Users/Propietario/Documents/NetBeansProjects/Bike_life/src/Metodo/metodoProducto.java</file>
+            <file>file:/C:/Users/Propietario/Documents/NetBeansProjects/Bike_life/src/Vista/vistaEditarProductoAdmin.java</file>
+            <file>file:/C:/Users/Propietario/Documents/NetBeansProjects/Bike_life/src/Metodo/metodoProveedor.java</file>
+            <file>file:/C:/Users/Propietario/Documents/NetBeansProjects/Bike_life/src/Vista/vistaAgregarUsuariosAdmin.java</file>
+            <file>file:/C:/Users/Propietario/Documents/NetBeansProjects/Bike_life/src/Metodo/conexionBD.java</file>
+            <file>file:/C:/Users/Propietario/Documents/NetBeansProjects/Bike_life/src/Vista/vistaEditarProveedorAdmin.java</file>
         </group>
     </open-files>
 </project-private>

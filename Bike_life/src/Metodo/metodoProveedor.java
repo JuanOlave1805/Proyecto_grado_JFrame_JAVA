@@ -234,7 +234,7 @@ public boolean agregarUsuario(Proveedor objeto, JFrame frameActual) {
     }
 }
 
-// Actualizar dato en la base de datos
+// Actualizar usuario en la base de datos
 public boolean actualizarUsuario(Proveedor objeto) {
     // Crear una instancia de conexión a la base de datos
     conexionBD cx = new conexionBD();
