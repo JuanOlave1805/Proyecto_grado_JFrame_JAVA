@@ -4,10 +4,9 @@
  */
 package Vista;
 
-import Controlador.ctrlUsuario;
+import Metodo.metodoUsuario;
+import Objetos.Usuario;
 import java.awt.Image;
-import static java.time.Clock.system;
-import static java.time.InstantSource.system;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -34,19 +33,9 @@ public class vistaAgregarUsuariosAdmin extends javax.swing.JFrame {
         this.setResizable(false);// Se deshabilita el Botón Max del Form
         this.setTitle("Registrar Usuario");
         
-        SetImageLabel(Image_logo, "src/images/usuario.png");//Imagen del logo
+        //SetImageLabel(Image_logo, "src/images/usuario.png");//Imagen del logo
         
-        // Instancio el método de validación de usuario
-        ctrlUsuario obtener = new ctrlUsuario();
-        
-        // Instancia el controlador de usuarios
-        obtener = new ctrlUsuario();
-
-        // Carga los datos en la tabla
-        String[][] datosMatriz = obtener.obtenerDatos();
-        cargarTabla(datosMatriz);
-        
-        
+        this.cargarTabla();
     }
 
     /**
@@ -72,7 +61,6 @@ public class vistaAgregarUsuariosAdmin extends javax.swing.JFrame {
         textApellido = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        Image_logo = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         textEdad = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
@@ -80,6 +68,8 @@ public class vistaAgregarUsuariosAdmin extends javax.swing.JFrame {
         textCorreo = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         textContrasena = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        textTelefono = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -177,8 +167,6 @@ public class vistaAgregarUsuariosAdmin extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Segoe UI Historic", 0, 18)); // NOI18N
         jLabel6.setText("Rol");
 
-        Image_logo.setBackground(new java.awt.Color(255, 255, 255));
-
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 37)); // NOI18N
         jLabel1.setText("Agregar Usuario");
 
@@ -224,60 +212,73 @@ public class vistaAgregarUsuariosAdmin extends javax.swing.JFrame {
             }
         });
 
+        jLabel10.setFont(new java.awt.Font("Segoe UI Historic", 0, 18)); // NOI18N
+        jLabel10.setText("Telefono");
+
+        textTelefono.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textTelefonoActionPerformed(evt);
+            }
+        });
+        textTelefono.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                textTelefonoKeyTyped(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(botonConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(botonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(comboBoxRol, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel9)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(textContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel8)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(textCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel7))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(textEdad, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(textApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(textNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(textIdentificacion, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(118, 118, 118)
-                        .addComponent(Image_logo, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(botonConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(37, 37, 37)
+                        .addComponent(botonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(jLabel8)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(textCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel2)
+                                .addComponent(jLabel4)
+                                .addComponent(jLabel5)
+                                .addComponent(jLabel7))
+                            .addGap(18, 18, 18)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(textIdentificacion, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+                                .addComponent(textEdad)
+                                .addComponent(textApellido)
+                                .addComponent(textNombre)))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(jLabel10)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(textTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(jLabel9)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
+                            .addComponent(textContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(jLabel6)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(comboBoxRol, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLabel1))
                 .addGap(43, 43, 43)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 888, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 875, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
                         .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Image_logo, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(36, 36, 36)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(textIdentificacion, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -297,7 +298,11 @@ public class vistaAgregarUsuariosAdmin extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(textCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel8))
-                        .addGap(25, 25, 25)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(textTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel10))
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(textContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel9))
@@ -305,18 +310,16 @@ public class vistaAgregarUsuariosAdmin extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(comboBoxRol, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(44, 44, 44)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(botonConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(botonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 570, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 570, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(20, 20, 20))
         );
 
         fondo.add(jPanel1);
-        jPanel1.setBounds(20, 20, 1250, 620);
+        jPanel1.setBounds(20, 20, 1240, 620);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -428,6 +431,24 @@ public class vistaAgregarUsuariosAdmin extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_textContrasenaKeyTyped
 
+    private void textTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textTelefonoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textTelefonoActionPerformed
+
+    private void textTelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textTelefonoKeyTyped
+        // TODO add your handling code here:
+        int key = evt.getKeyChar();
+        
+        boolean numero = key >= 48 && key <= 57;
+        
+        if (!numero){
+            evt.consume();
+        }
+        if (textTelefono.getText().length() >= 10){
+            evt.consume();
+        }
+    }//GEN-LAST:event_textTelefonoKeyTyped
+
     /**
      * @param args the command line arguments
      */
@@ -464,12 +485,12 @@ public class vistaAgregarUsuariosAdmin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel Image_logo;
     private javax.swing.JButton botonCancelar;
     private javax.swing.JButton botonConfirmar;
     private javax.swing.JComboBox<String> comboBoxRol;
     private javax.swing.JPanel fondo;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -486,6 +507,7 @@ public class vistaAgregarUsuariosAdmin extends javax.swing.JFrame {
     private javax.swing.JTextField textEdad;
     private javax.swing.JTextField textIdentificacion;
     private javax.swing.JTextField textNombre;
+    private javax.swing.JTextField textTelefono;
     // End of variables declaration//GEN-END:variables
 
     //Metodo donde da el tamaño de la imagen dependiendo el contenedor que tenga
@@ -505,16 +527,18 @@ public class vistaAgregarUsuariosAdmin extends javax.swing.JFrame {
         this.repaint();
         // Se repinta el contenedor para reflejar los cambios visuales
     }
-    private void cargarTabla(String[][] datosMatriz) {
+    private void cargarTabla() {
+        // Instancio el método de validación de usuario
+         metodoUsuario  metodo= new metodoUsuario();
+
         // Definir nombres de columnas
-        String[] nombresColumnas = {"Identificación", "Nombre", "Apellido", "Edad", "Correo",  "Contraseña", "Rol"};
+        String[] nombresColumnas = {"Identificación", "Nombre", "Apellido", "Edad", "Correo", "Telefono", "Contraseña", "Rol"};
 
         // Crear el modelo de la tabla
-        DefaultTableModel model = new DefaultTableModel(datosMatriz, nombresColumnas);
+        DefaultTableModel model = new DefaultTableModel(metodo.obtenerUsuariosMatriz(), nombresColumnas);
 
         // Establecer el modelo en la tabla
         tabla_usuarios.setModel(model);
-        
         TableRowSorter<TableModel> ordenarTabla = new TableRowSorter<TableModel>(model);
         tabla_usuarios.setRowSorter(ordenarTabla);
     }
@@ -534,6 +558,7 @@ public class vistaAgregarUsuariosAdmin extends javax.swing.JFrame {
         String apellido = textApellido.getText();
         String edadStr = textEdad.getText();
         String correo = textCorreo.getText();
+        String telefonoStr = textTelefono.getText();
         String contrasena = textContrasena.getText();
         String rol = (String) comboBoxRol.getSelectedItem();
     
@@ -545,15 +570,20 @@ public class vistaAgregarUsuariosAdmin extends javax.swing.JFrame {
 
         int identificacion;
         try {
-            identificacion = Integer.parseInt(identificacionStr);
-            // Verificar que la identificación sea mayor que cero
-            if (identificacion <= 0) {
-                JOptionPane.showMessageDialog(this, "La identificación debe ser mayor que cero.");
-                return; // Salir del método si la identificación no es válida
+            
+            //if(identificacionStr.length() != 10){
+                //JOptionPane.showMessageDialog(this, "La identificación debe ser debe ser de 10 caracteres");
+                // Verificar que la identificación sea mayor que cero
+                //return; // Salir del método si la identificación no es de 10 caracteres
+            //}
+            if(telefonoStr.length() != 10) {
+                    JOptionPane.showMessageDialog(this, "El numero de telefono debe ser de 10 numeros");
+                    return; // Salir del método si la identificación no es válida
             }
+            identificacion = Integer.parseInt(identificacionStr);
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "La identificación debe ser un número entero válido.");
-            return; // Salir del método si la conversión falla
+            return;
         }
 
         int edad;
@@ -581,13 +611,21 @@ public class vistaAgregarUsuariosAdmin extends javax.swing.JFrame {
             return; // Salir del método si el correo no es válido
         }
 
+        Usuario objeto = new Usuario();
+        objeto.setIdentificacion_Pk(identificacion);
+        objeto.setNombre(nombre);
+        objeto.setApellido(apellido);
+        objeto.setEdad(edad);
+        objeto.setContrasena(contrasena);
+        objeto.setCorreo(correo);
+        objeto.setTelefono(telefonoStr);
+        objeto.setRol_Fk(roll);
         // Instanciar el controlador y ejecutar el método para agregar usuario
-        ctrlUsuario controlador = new ctrlUsuario();
-        controlador.AgregarUsuario(identificacion, nombre, apellido, edad, correo, contrasena, roll, this);
+        metodoUsuario metodo = new metodoUsuario();
+        metodo.agregarUsuario(objeto, this);
     }
     private boolean validarCorreo(String correo) {
         String regex = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$";
         return correo.matches(regex);
     }
-
 }

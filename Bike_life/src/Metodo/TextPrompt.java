@@ -14,10 +14,10 @@ import javax.swing.text.*;
  * La fuente y el color de primer plano del prompt por defecto son los mismos que los del componente de texto padre.
  * Después de la construcción de la clase, se pueden cambiar estas propiedades.
  */
-public class TextPrompt extends JLabel implements FocusListener, DocumentListener {
+public class textPrompt extends JLabel implements FocusListener, DocumentListener {
     private static final long serialVersionUID = 1L;
 
-    public TextPrompt(String ingresa_tu_contraseña_de_usuario, TextPrompt password) {
+    public textPrompt(String ingresa_tu_contraseña_de_usuario, textPrompt password) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
@@ -38,7 +38,7 @@ public class TextPrompt extends JLabel implements FocusListener, DocumentListene
      * @param text      Texto que se mostrará como prompt.
      * @param component Componente de texto sobre el cual se mostrará el prompt.
      */
-    public TextPrompt(String text, JTextComponent component) {
+    public textPrompt(String text, JTextComponent component) {
         this(text, component, Show.ALWAYS);
     }
 
@@ -49,7 +49,7 @@ public class TextPrompt extends JLabel implements FocusListener, DocumentListene
      * @param component Componente de texto sobre el cual se mostrará el prompt.
      * @param show      Enum Show que especifica cuándo mostrar el prompt.
      */
-    public TextPrompt(String text, JTextComponent component, Show show) {
+    public textPrompt(String text, JTextComponent component, Show show) {
         this.component = component;
         setShow(show);
         document = component.getDocument();

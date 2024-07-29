@@ -1,12 +1,10 @@
 package Vista;
 
-import Controlador.ctrlUsuario;
+import Metodo.metodoUsuario;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.Icon;
 import javax.swing.JLabel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
@@ -30,15 +28,7 @@ public class vistaUsuariosAdmin extends javax.swing.JFrame {
         
         SetImageLabel(Image_logo, "src/images/logo.png");//Imagen del logo
         
-        // Instancio el método de validación de usuario
-        ctrlUsuario controlador = new ctrlUsuario();
-        
-        // Instancia el controlador de usuarios
-        controlador = new ctrlUsuario();
-
-        // Carga los datos en la tabla
-        String[][] datosMatriz = controlador.obtenerDatos();
-        cargarTabla(datosMatriz);
+        this.cargarTabla();
         
     }
 
@@ -65,8 +55,9 @@ public class vistaUsuariosAdmin extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla_usuarios = new javax.swing.JTable();
         Boton_agregar = new javax.swing.JButton();
-        Boton_clientes = new javax.swing.JButton();
+        Boton_productos = new javax.swing.JButton();
         Boton_inventario = new javax.swing.JButton();
+        Boton_proveedores = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -127,7 +118,7 @@ public class vistaUsuariosAdmin extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("BIKE LIFE");
         fondo.add(jLabel1);
-        jLabel1.setBounds(560, 20, 317, 72);
+        jLabel1.setBounds(560, 10, 317, 72);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -219,16 +210,16 @@ public class vistaUsuariosAdmin extends javax.swing.JFrame {
         fondo.add(jPanel1);
         jPanel1.setBounds(201, 101, 1050, 540);
 
-        Boton_clientes.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
-        Boton_clientes.setText("Clientes");
-        Boton_clientes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        Boton_clientes.addActionListener(new java.awt.event.ActionListener() {
+        Boton_productos.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
+        Boton_productos.setText("Productos");
+        Boton_productos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Boton_productos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Boton_clientesActionPerformed(evt);
+                Boton_productosActionPerformed(evt);
             }
         });
-        fondo.add(Boton_clientes);
-        Boton_clientes.setBounds(30, 380, 130, 45);
+        fondo.add(Boton_productos);
+        Boton_productos.setBounds(30, 380, 130, 45);
 
         Boton_inventario.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         Boton_inventario.setText("Inventario");
@@ -240,6 +231,17 @@ public class vistaUsuariosAdmin extends javax.swing.JFrame {
         });
         fondo.add(Boton_inventario);
         Boton_inventario.setBounds(30, 260, 130, 45);
+
+        Boton_proveedores.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
+        Boton_proveedores.setText("Proveedores");
+        Boton_proveedores.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Boton_proveedores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Boton_proveedoresActionPerformed(evt);
+            }
+        });
+        fondo.add(Boton_proveedores);
+        Boton_proveedores.setBounds(30, 440, 130, 45);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -279,14 +281,14 @@ public class vistaUsuariosAdmin extends javax.swing.JFrame {
 
     private void Boton_editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_editarActionPerformed
         // TODO add your handling code here:
-        //Llamando al metodo //
+        //Llamando al metodo 
         this.metodo_boton_editar();
     }//GEN-LAST:event_Boton_editarActionPerformed
 
-    private void Boton_clientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_clientesActionPerformed
+    private void Boton_productosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_productosActionPerformed
         // TODO add your handling code here:
         this.metodo_boton_clientes();
-    }//GEN-LAST:event_Boton_clientesActionPerformed
+    }//GEN-LAST:event_Boton_productosActionPerformed
 
     private void tabla_usuariosComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_tabla_usuariosComponentAdded
         // TODO add your handling code here:
@@ -305,6 +307,11 @@ public class vistaUsuariosAdmin extends javax.swing.JFrame {
     private void Boton_inventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_inventarioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_Boton_inventarioActionPerformed
+
+    private void Boton_proveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_proveedoresActionPerformed
+        // TODO add your handling code here:
+        this.metodoBotonProveedores();
+    }//GEN-LAST:event_Boton_proveedoresActionPerformed
 
     /**
      * @param args the command line arguments
@@ -342,10 +349,11 @@ public class vistaUsuariosAdmin extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Boton_agregar;
-    private javax.swing.JButton Boton_clientes;
     private javax.swing.JButton Boton_editar;
     private javax.swing.JButton Boton_eliminar1;
     private javax.swing.JButton Boton_inventario;
+    private javax.swing.JButton Boton_productos;
+    private javax.swing.JButton Boton_proveedores;
     private javax.swing.JButton Boton_reparaciones;
     private javax.swing.JButton Boton_usuarios;
     private javax.swing.JButton Boton_ventas;
@@ -383,19 +391,7 @@ public class vistaUsuariosAdmin extends javax.swing.JFrame {
         ventas.setVisible(true);
         this.setVisible(false);
     }
-    private void cargarTabla(String[][] datosMatriz) {
-        // Definir nombres de columnas
-        String[] nombresColumnas = {"Identificación", "Nombre", "Apellido", "Edad", "Correo",  "Contraseña", "Rol"};
-
-        // Crear el modelo de la tabla
-        DefaultTableModel model = new DefaultTableModel(datosMatriz, nombresColumnas);
-
-        // Establecer el modelo en la tabla
-        tabla_usuarios.setModel(model);
-        
-        TableRowSorter<TableModel> ordenarTabla = new TableRowSorter<TableModel>(model);
-        tabla_usuarios.setRowSorter(ordenarTabla);
-    }
+    
 
     private void metodo_boton_editar() {
         //Cambio a la vista de editar usuario
@@ -413,14 +409,36 @@ public class vistaUsuariosAdmin extends javax.swing.JFrame {
     
     private void metodoEliminar() {
         //Cambio a la vista de agregar usuarios
-        vistaEliminarUsuarios eliminar = new vistaEliminarUsuarios();  
+        vistaEliminarUsuariosAdmin eliminar = new vistaEliminarUsuariosAdmin();  
         eliminar.setVisible(true);
         this.setVisible(false);
     }
 
     private void metodo_boton_clientes() {
-        vistaClientesAdmin clientes = new vistaClientesAdmin();  
+        vistaProductosAdmin clientes = new vistaProductosAdmin();  
         clientes.setVisible(true);
+        this.setVisible(false);
+    }
+
+    private void cargarTabla() {
+        // Instancio el método de validación de usuario
+         metodoUsuario  metodo= new metodoUsuario();
+
+        // Definir nombres de columnas
+        String[] nombresColumnas = {"Identificación", "Nombre", "Apellido", "Edad", "Correo", "Telefono", "Contraseña", "Rol"};
+
+        // Crear el modelo de la tabla
+        DefaultTableModel model = new DefaultTableModel(metodo.obtenerUsuariosMatriz(), nombresColumnas);
+
+        // Establecer el modelo en la tabla
+        tabla_usuarios.setModel(model);
+        TableRowSorter<TableModel> ordenarTabla = new TableRowSorter<TableModel>(model);
+        tabla_usuarios.setRowSorter(ordenarTabla);
+    }
+
+    private void metodoBotonProveedores() {
+        vistaProveedorAdmin proveedor = new vistaProveedorAdmin();
+        proveedor.setVisible(true);
         this.setVisible(false);
     }
 

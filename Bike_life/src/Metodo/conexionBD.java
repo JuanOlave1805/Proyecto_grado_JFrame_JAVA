@@ -9,7 +9,7 @@ import java.sql.SQLException; // Importa la clase SQLException del paquete java.
  * author JUAN DAVID
  */
 public class conexionBD {
-    String bd = "bike_life"; // Nombre de la base de datos
+    String bd = "db_bike_life"; // Nombre de la base de datos
     String url = "jdbc:mysql://localhost:3306/"; // URL de conexión a MySQL
     String user = "root"; // Usuario de la base de datos
     String password = ""; // Contraseña del usuario de la base de datos

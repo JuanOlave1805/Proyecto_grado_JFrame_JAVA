@@ -1,10 +1,13 @@
 package Vista;
-import Metodo.TextPrompt;
-import Controlador.ctrlLogin;
+
+import Metodo.textPrompt;
+import Metodo.validacionUsuario;
+import Objetos.Usuario;
 import java.awt.Image;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -26,8 +29,8 @@ public class vistaLogin extends javax.swing.JFrame {
         this.setResizable(false);// Se deshabilita el Botón Max del Form
         
         //Placeholder de los label de contraseña y usuario
-        TextPrompt usuario = new TextPrompt("Ingresa tu numero de usuario", usuario_text);
-        TextPrompt password = new TextPrompt("Ingresa tu contraseña de usuario", password_text);
+        textPrompt usuario = new textPrompt("Ingresa tu numero de usuario", usuario_text);
+        textPrompt password = new textPrompt("Ingresa tu contraseña de usuario", password_text);
         
         //Imagen del logo
         SetImageLabel(Image_logo, "src/images/logo.png");
@@ -281,19 +284,25 @@ public class vistaLogin extends javax.swing.JFrame {
     }
 
     private void metodo_boton_ingresar() {
-        contrasena = String.valueOf(password_text.getPassword());
-        // Se obtiene la contraseña ingresada desde un campo de texto protegido ('JPasswordField')
-    
-        usuario = usuario_text.getText();
-        // Se obtiene el nombre de usuario ingresado desde un campo de texto ('JTextField')
+        String usuario = usuario_text.getText();
+        String contrasena = password_text.getText();
+        if (usuario.isEmpty() || contrasena.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Por favor ingresa tu usuario y contraseña.");
+            return; // Salir del método si falta usuario o contraseña
+        }
+        Usuario usuarioObj = new Usuario();
         
+        // Se obtiene la contraseña ingresada desde un campo de texto protegido ('JPasswordField')
+        usuarioObj.setContrasena(String.valueOf(password_text.getPassword()));
+        // Se obtiene el nombre de usuario ingresado desde un campo de texto ('JTextField')
+        usuarioObj.setIdentificacion_Pk(Integer.parseInt(usuario_text.getText()));
 
         //Instancio el metodo del controlador validacionLogin
-        ctrlLogin validacion=new ctrlLogin();
+        validacionUsuario validacion=new validacionUsuario();
         // Se crea una instancia del objeto 'usuario' que probablemente contiene lógica de validación de usuario
 
         //Ejecuto la validacion
-        validacion.metodoLogin(usuario, contrasena, this);
+        validacion.metodoValidacion(usuarioObj, this);
         // Se llama al método 'metodoLogin' del objeto 'validacion', pasando el nombre de usuario y la contraseña como parámetros
         // Este método probablemente realiza la validación del usuario y contraseña
     }

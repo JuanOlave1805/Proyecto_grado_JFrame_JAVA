@@ -1,5 +1,6 @@
 package Metodo;
 
+import Objetos.Usuario;
 import Vista.vistaVentaAdmin;
 import Vista.vistaVentaVendedor;
 import java.sql.Connection;
@@ -13,12 +14,7 @@ public class validacionUsuario {
 
     private conexionBD cx;
 
-    public void metodo_validacion(String usuario, String contrasena, JFrame frameActual) {
-        if (usuario.isEmpty() || contrasena.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Por favor ingresa tu usuario y contraseña.");
-            return; // Salir del método si falta usuario o contraseña
-        }
-
+    public void metodoValidacion(Usuario objeto, JFrame frameActual) {
         try {
             cx = new conexionBD();
             Connection conexion = cx.conectar();
@@ -27,17 +23,11 @@ public class validacionUsuario {
                 throw new SQLException("No se pudo establecer una conexión con la base de datos.");
             }
 
-            String sql = "SELECT tb_usuarios.identificacion_PK AS identificacion, " +
-                         "tb_usuarios.nombre AS nombre, " +
-                         "tb_rol.nombre AS rol " +
-                         "FROM tb_usuarios " +
-                         "INNER JOIN tb_rol ON tb_usuarios.id_rol_FK = tb_rol.id_PK " +
-                         "WHERE tb_usuarios.identificacion_PK = ? " +
-                         "AND tb_usuarios.contrasena = ?";
+            String sql = "SELECT usuarios.identificacion_PK AS identificacion, usuarios.nombre AS nombre, rol.nombre AS rol FROM usuarios INNER JOIN rol ON usuarios.id_rol_FK = rol.id_PK WHERE usuarios.identificacion_PK = ? AND usuarios.contrasena = ?";
 
             PreparedStatement ps = conexion.prepareStatement(sql);
-            ps.setString(1, usuario);
-            ps.setString(2, contrasena);
+            ps.setInt(1, objeto.getIdentificacion_Pk());
+            ps.setString(2, objeto.getContrasena());
 
             ResultSet rs = ps.executeQuery();
 
