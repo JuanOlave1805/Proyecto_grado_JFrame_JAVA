@@ -200,12 +200,12 @@ public void seleccionar(JTable tabla, JTextField textIdentificacion, JTextField 
 }
 
 //Actualizar producto
-public boolean actualizarUsuario(Producto objeto) {
+public boolean actualizarProducto(Producto producto, Categoria categoria, Proveedor proveedor) {
     // Crear una instancia de conexión a la base de datos
     conexionBD cx = new conexionBD();
     // Establecer una conexión a la base de datos
     Connection conexion = cx.conectar();
-
+    
     // Variables para almacenar los IDs
     int idCategoria = -1;
     int idProveedor = -1;
@@ -214,36 +214,87 @@ public boolean actualizarUsuario(Producto objeto) {
     String sqlCategoria = "SELECT id_categoria_PK FROM categorias WHERE nombre = ?";
     // Consulta para obtener el ID del proveedor
     String sqlProveedor = "SELECT id_proveedor_PK FROM proveedores WHERE nombre = ?";
-    // Consulta para actualizar el producto
-    String sql = "UPDATE productos SET nombre = \"Hola\", precioCompra = 0, productos.precioVenta = 0, productos.stock = 0 WHERE id_producto_PK = 1";
-
+    
     try {
-        // Preparar la declaración SQL con parámetros
-        var ps = conexion.prepareStatement(sql);
-        ps.setString(1, objeto.getNombre());
-        ps.setFloat(2, objeto.getPrecio_compra());
-        ps.setFloat(3, objeto.getPrecio_venta());
-        ps.setInt(4, objeto.getStock());
-        ps.setInt(5, objeto.getId());
+        // Preparar la consulta para obtener el ID de la categoría
+        var psCategoria = conexion.prepareStatement(sqlCategoria);
+        psCategoria.setString(1, categoria.getnombre()); // Nombre Categoria desde el objeto categoria
+        var rsCategoria = psCategoria.executeQuery();
+        if (rsCategoria.next()) {
+            idCategoria = rsCategoria.getInt("id_categoria_PK");
+        }
 
-        // Ejecutar la actualización (modificar usuario)
-        int filasAfectadas = ps.executeUpdate();
+        // Preparar la consulta para obtener el ID del proveedor
+        var psProveedor = conexion.prepareStatement(sqlProveedor);
+        psProveedor.setString(1, proveedor.getNombre()); // Nombre Proveedor desde el objeto proveedor
+        var rsProveedor = psProveedor.executeQuery();
+        if (rsProveedor.next()) {
+            idProveedor = rsProveedor.getInt("id_proveedor_PK");
+        }
 
-        // Verificar si se modificó correctamente (al menos una fila afectada)
-        return filasAfectadas > 0;
+        // Consulta SQL para actualizar datos en la tabla productos
+        String sqlProducto = "UPDATE productos SET nombre = ?, precioCompra = ?, precioVenta = ?, stock = ?, Categoria_FK = ?, Proveedor_FK = ? " +
+                             "WHERE id_producto_PK = ?";
 
+        // Crear un objeto PreparedStatement para ejecutar la consulta SQL
+        var psProducto = conexion.prepareStatement(sqlProducto);
+
+        // Establecer los valores para la actualización
+        psProducto.setString(1, producto.getNombre()); // Nombre del Producto desde el objeto producto
+        psProducto.setFloat(2, producto.getPrecio_compra()); // Precio Compra desde el objeto producto
+        psProducto.setFloat(3, producto.getPrecio_venta()); // Precio Venta desde el objeto producto
+        psProducto.setInt(4, producto.getStock()); // Cantidad Stock desde el objeto producto
+        psProducto.setInt(5, idCategoria); // ID Categoria desde la consulta
+        psProducto.setInt(6, idProveedor); // ID Proveedor desde la consulta
+        psProducto.setInt(7, producto.getId()); // ID Producto desde el objeto producto para la cláusula WHERE
+
+        // Ejecutar la actualización
+        psProducto.executeUpdate();
+        return true; // Actualización exitosa
     } catch (SQLException e) {
         // Manejar cualquier excepción SQL imprimiendo el rastreo de la pila
         e.printStackTrace();
-        return false; // Indicar que no se pudo modificar
+        return false; // Error en la actualización
     } finally {
         // Asegurarse de desconectar la conexión a la base de datos en caso de cualquier excepción
-        if (conexion != null) {
-            cx.desconectar();
-        }
+        cx.desconectar();
     }
 }
 
+public boolean eliminarProducto(Producto objeto) {
+    // Crear una instancia de conexión a la base de datos
+    conexionBD cx = new conexionBD();
+    // Establecer una conexión a la base de datos
+    Connection conexion = cx.conectar();
+
+    try {
+        // Consulta SQL para eliminar un producto por su ID
+        String sqlProducto = "DELETE FROM productos WHERE id_producto_PK = ?";
+
+        // Crear un objeto PreparedStatement para ejecutar la consulta SQL
+        var psProducto = conexion.prepareStatement(sqlProducto);
+
+        // Establecer el ID del producto a eliminar
+        psProducto.setInt(1, objeto.getId());
+
+        // Ejecutar la eliminación
+        int rowsAffected = psProducto.executeUpdate();
+        
+        // Verificar si se eliminó alguna fila
+        if (rowsAffected > 0) {
+            return true; // Eliminación exitosa
+        } else {
+            return false; // No se encontró el producto con el ID especificado
+        }
+    } catch (SQLException e) {
+        // Manejar cualquier excepción SQL imprimiendo el rastreo de la pila
+        e.printStackTrace();
+        return false; // Error en la eliminación
+    } finally {
+        // Asegurarse de desconectar la conexión a la base de datos en caso de cualquier excepción
+        cx.desconectar();
+    }
+}
 
 
 }

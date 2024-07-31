@@ -5,7 +5,7 @@
 package Metodo;
 
 import Objetos.Usuario;
-import Vista.vistaUsuariosAdmin;
+import Vista.UsuariosAdmin;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -253,7 +253,7 @@ public boolean agregarUsuario(Usuario objeto, JFrame frameActual) {
         if (filasAfectadas > 0) {
             // Mostrar mensaje de éxito si la inserción es exitosa
             JOptionPane.showMessageDialog(frameActual, "Usuario agregado satisfactoriamente");
-            vistaUsuariosAdmin ventanaAdmin = new vistaUsuariosAdmin();
+            UsuariosAdmin ventanaAdmin = new UsuariosAdmin();
             ventanaAdmin.setVisible(true);
             frameActual.dispose(); // Cerrar la ventana actual
         } else {

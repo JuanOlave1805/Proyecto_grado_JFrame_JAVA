@@ -5,7 +5,7 @@
 package Metodo;
 
 import Objetos.Proveedor;
-import Vista.vistaProveedorAdmin;
+import Vista.ProveedorAdmin;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -22,6 +22,7 @@ import javax.swing.JTextField;
  * @author JUAN DAVID
  */
 public class metodoProveedor {
+    
 // Listar elementos de la base de datos
 public String[][] listar() {
     // Crear una instancia de conexión a la base de datos
@@ -45,7 +46,7 @@ public String[][] listar() {
         // Recorrer el conjunto de resultados
         while (res.next()) {
             // Crear un array de Strings para almacenar los datos de cada proveedor
-            String[] datos = new String[5]; // Cambié a 5 porque hay 5 columnas en la consulta SQL
+            String[] datos = new String[5];
             // Obtener y almacenar cada campo de datos en el array
             datos[0] = res.getString(1); // Identificador
             datos[1] = res.getString(2); // Nombre del Proveedor
@@ -65,7 +66,7 @@ public String[][] listar() {
     }
 
     // Crear una matriz bidimensional de Strings para almacenar los datos de los proveedores
-    String[][] datosMatriz = new String[datosLista.size()][5]; // Cambié a 5 porque hay 5 columnas en la consulta SQL
+    String[][] datosMatriz = new String[datosLista.size()][5];
 
     // Recorrer la lista de datos obtenida
     for (int i = 0; i < datosLista.size(); i++) {
@@ -76,12 +77,14 @@ public String[][] listar() {
     // Devolver la matriz de datos que contiene la información de los proveedores
     return datosMatriz;
 }
-    
-// Método seleccionar para obtener los datos de la casilla seleccionada en la tabla
-public void seleccionar(JTable tabla, JTextField textIdentificacion, JTextField textNombreProveedor, JTextField textNombreEncargado, JTextField textTelefono, JTextField textCorreo ) {
-    try {
-        int fila = tabla.getSelectedRow(); // Obtener la fila seleccionada
 
+// Método seleccionar para obtener los datos de la casilla seleccionada en la tabla
+public void seleccionar(JTable tabla, JTextField textIdentificacion, JTextField textNombreProveedor, JTextField textNombreEncargado, JTextField textTelefono, JTextField textCorreo) {
+    try {
+        // Obtener la fila seleccionada en la tabla
+        int fila = tabla.getSelectedRow();
+
+        // Verificar que una fila haya sido seleccionada
         if (fila >= 0) {
             // Obtener y establecer el valor del identificador
             Object identificacionObj = tabla.getValueAt(fila, 0);
@@ -95,16 +98,16 @@ public void seleccionar(JTable tabla, JTextField textIdentificacion, JTextField 
                 textNombreProveedor.setText(nombreObj.toString());
             }
 
-            // Obtener y establecer el valor del apellido
+            // Obtener y establecer el valor del nombre del encargado
             Object apellidoObj = tabla.getValueAt(fila, 2);
             if (apellidoObj != null) {
                 textNombreEncargado.setText(apellidoObj.toString());
             }
 
-            // Obtener y establecer el valor de la edad
-            Object edadObj = tabla.getValueAt(fila, 3);
-            if (edadObj != null) {
-                textTelefono.setText(edadObj.toString());
+            // Obtener y establecer el valor del teléfono
+            Object telefonoObj = tabla.getValueAt(fila, 3);
+            if (telefonoObj != null) {
+                textTelefono.setText(telefonoObj.toString());
             }
 
             // Obtener y establecer el valor del correo
@@ -113,16 +116,19 @@ public void seleccionar(JTable tabla, JTextField textIdentificacion, JTextField 
                 textCorreo.setText(correoObj.toString());
             }
         } else {
+            // Mostrar un mensaje si no se seleccionó ninguna fila
             JOptionPane.showMessageDialog(null, "Fila no seleccionada");
         }
     } catch (Exception e) {
+        // Mostrar un mensaje si ocurre un error durante la selección
         JOptionPane.showMessageDialog(null, "Error de selección: " + e.toString());
     }
 }
 
 // Eliminar proveedor de la base de datos
 public boolean eliminar(Proveedor objeto) {
-    int identificacion = objeto.getIdentificador_PK(); // Obtener la identificación del objeto Proveedor
+    // Obtener la identificación del objeto Proveedor
+    int identificacion = objeto.getIdentificador_PK();
 
     // Crear una instancia de conexión a la base de datos
     conexionBD cx = new conexionBD();
@@ -158,7 +164,7 @@ public boolean eliminar(Proveedor objeto) {
                 conexion.rollback();
                 return false; // No se pudo eliminar
             }
-        } 
+        }
     } catch (SQLException e) {
         // Manejar cualquier excepción SQL imprimiendo el rastreo de la pila
         e.printStackTrace();
@@ -183,8 +189,9 @@ public boolean eliminar(Proveedor objeto) {
         }
     }
 }
-// Agregar usuario en la base de datos
-public boolean agregarUsuario(Proveedor objeto, JFrame frameActual) {
+
+// Agregar proveedor en la base de datos
+public boolean agregarProveedor(Proveedor objeto, JFrame frameActual) {
     // Crear una instancia de conexión a la base de datos
     conexionBD cx = new conexionBD();
     // Establecer una conexión a la base de datos
@@ -196,11 +203,10 @@ public boolean agregarUsuario(Proveedor objeto, JFrame frameActual) {
         return false;
     }
 
-    // Consultas SQL para insertar proveedor
-    String sqlInsertar = "INSERT INTO proveedores  (nombre, contacto_nombre, telefono, email) VALUES ( ?, ?, ?, ?)";
+    // Consulta SQL para insertar proveedor
+    String sqlInsertar = "INSERT INTO proveedores (nombre, contacto_nombre, telefono, email) VALUES (?, ?, ?, ?)";
 
     try {
-
         // Preparar la declaración SQL para insertar un nuevo usuario
         var psInsertar = conexion.prepareStatement(sqlInsertar);
         psInsertar.setString(1, objeto.getNombre());
@@ -213,7 +219,7 @@ public boolean agregarUsuario(Proveedor objeto, JFrame frameActual) {
         if (filasAfectadas > 0) {
             // Mostrar mensaje de éxito si la inserción es exitosa
             JOptionPane.showMessageDialog(frameActual, "Proveedor agregado satisfactoriamente");
-            vistaProveedorAdmin ventana = new vistaProveedorAdmin();
+            ProveedorAdmin ventana = new ProveedorAdmin();
             ventana.setVisible(true);
             frameActual.dispose(); // Cerrar la ventana actual
         } else {
@@ -234,8 +240,8 @@ public boolean agregarUsuario(Proveedor objeto, JFrame frameActual) {
     }
 }
 
-// Actualizar usuario en la base de datos
-public boolean actualizarUsuario(Proveedor objeto) {
+// Actualizar proveedor en la base de datos
+public boolean actualizarProveedor(Proveedor objeto) {
     // Crear una instancia de conexión a la base de datos
     conexionBD cx = new conexionBD();
     // Establecer una conexión a la base de datos

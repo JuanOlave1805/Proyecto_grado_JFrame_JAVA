@@ -5,7 +5,7 @@
 package Metodo;
 
 import Objetos.Categoria;
-import Vista.vistaCategoriaProductosAdmin;
+import Vista.CategoriaProductosAdmin;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -105,7 +105,7 @@ public boolean agregarCategoria(Categoria objeto, JFrame frameActual) {
         if (filasAfectadas > 0) {
             // Mostrar mensaje de éxito si la inserción es exitosa
             JOptionPane.showMessageDialog(frameActual, "Categoría agregada satisfactoriamente");
-            vistaCategoriaProductosAdmin ventana = new vistaCategoriaProductosAdmin();
+            CategoriaProductosAdmin ventana = new CategoriaProductosAdmin();
             ventana.setVisible(true);
             frameActual.dispose(); // Cerrar la ventana actual
         } else {
