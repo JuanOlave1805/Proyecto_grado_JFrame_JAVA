@@ -3,13 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/JUAN%20DAVID/Documents/NetBeansProjects/Bike_life/src/Metodo/metodoCliente.java</file>
-            <file>file:/C:/Users/JUAN%20DAVID/Documents/NetBeansProjects/Bike_life/src/Vista/ClientesAdmin.java</file>
-            <file>file:/C:/Users/JUAN%20DAVID/Documents/NetBeansProjects/Bike_life/src/Vista/ClientesAgregarAdmin.java</file>
-            <file>file:/C:/Users/JUAN%20DAVID/Documents/NetBeansProjects/Bike_life/src/Vista/ClientesActualizarAdmin.java</file>
-            <file>file:/C:/Users/JUAN%20DAVID/Documents/NetBeansProjects/Bike_life/src/Objetos/Cliente.java</file>
-            <file>file:/C:/Users/JUAN%20DAVID/Documents/NetBeansProjects/Bike_life/src/Vista/UsuariosAdmin.java</file>
-            <file>file:/C:/Users/JUAN%20DAVID/Documents/NetBeansProjects/Bike_life/src/Vista/ClientesEliminarAdmin.java</file>
+            <file>file:/C:/Users/Propietario/Documents/NetBeansProjects/Bike_life/src/Vista/VentaAgregarAdmin.java</file>
+            <file>file:/C:/Users/Propietario/Documents/NetBeansProjects/Bike_life/src/Vista/UsuariosAgregarAdmin.java</file>
+            <file>file:/C:/Users/Propietario/Documents/NetBeansProjects/Bike_life/src/Metodo/metodoVenta.java</file>
         </group>
     </open-files>
 </project-private>
