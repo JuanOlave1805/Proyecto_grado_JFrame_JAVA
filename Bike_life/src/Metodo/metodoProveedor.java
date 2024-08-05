@@ -5,7 +5,7 @@
 package Metodo;
 
 import Objetos.Proveedor;
-import Vista.ProveedorAdmin;
+import VistaProveedor.ProveedorAdmin;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;

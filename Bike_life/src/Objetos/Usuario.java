@@ -17,6 +17,15 @@ public class Usuario {
     String correo;
     String Telefono;
     int rol_Fk;
+    String estado;
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
 
     public int getIdentificacion_Pk() {
         return identificacion_Pk;

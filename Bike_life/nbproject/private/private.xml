@@ -3,9 +3,23 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Propietario/Documents/NetBeansProjects/Bike_life/src/Vista/VentaAgregarAdmin.java</file>
-            <file>file:/C:/Users/Propietario/Documents/NetBeansProjects/Bike_life/src/Vista/UsuariosAgregarAdmin.java</file>
-            <file>file:/C:/Users/Propietario/Documents/NetBeansProjects/Bike_life/src/Metodo/metodoVenta.java</file>
+            <file>file:/C:/Users/JUAN%20DAVID/Documents/NetBeansProjects/Bike_life/src/VistaCategoria/CategoriaProductoEliminarAdmin.java</file>
+            <file>file:/C:/Users/JUAN%20DAVID/Documents/NetBeansProjects/Bike_life/src/VistaProductos/ProductoEliminarAdmin.java</file>
+            <file>file:/C:/Users/JUAN%20DAVID/Documents/NetBeansProjects/Bike_life/src/VistaVenta/VentaAdmin.java</file>
+            <file>file:/C:/Users/JUAN%20DAVID/Documents/NetBeansProjects/Bike_life/src/VistaIngreso/Ingreso.java</file>
+            <file>file:/C:/Users/JUAN%20DAVID/Documents/NetBeansProjects/Bike_life/src/VistaVenta/VentaAgregarAdmin.java</file>
+            <file>file:/C:/Users/JUAN%20DAVID/Documents/NetBeansProjects/Bike_life/src/VistaProveedor/ProveedorAdmin.java</file>
+            <file>file:/C:/Users/JUAN%20DAVID/Documents/NetBeansProjects/Bike_life/src/VistaVenta/VentaVendedor.java</file>
+            <file>file:/C:/Users/JUAN%20DAVID/Documents/NetBeansProjects/Bike_life/src/Metodo/metodoUsuario.java</file>
+            <file>file:/C:/Users/JUAN%20DAVID/Documents/NetBeansProjects/Bike_life/src/VistaIngreso/PerfilAdmin.java</file>
+            <file>file:/C:/Users/JUAN%20DAVID/Documents/NetBeansProjects/Bike_life/src/VistaIngreso/PerfilActualizarAdmin.java</file>
+            <file>file:/C:/Users/JUAN%20DAVID/Documents/NetBeansProjects/Bike_life/src/VistaReparaciones/ReparacionAgregarAdmin.java</file>
+            <file>file:/C:/Users/JUAN%20DAVID/Documents/NetBeansProjects/Bike_life/src/VistaCategoria/CategoriaProductosAdmin.java</file>
+            <file>file:/C:/Users/JUAN%20DAVID/Documents/NetBeansProjects/Bike_life/src/VistaProductos/ProductosAdmin.java</file>
+            <file>file:/C:/Users/JUAN%20DAVID/Documents/NetBeansProjects/Bike_life/src/VistaUsuarios/UsuariosActualizarAdmin.java</file>
+            <file>file:/C:/Users/JUAN%20DAVID/Documents/NetBeansProjects/Bike_life/src/VistaUsuarios/UsuariosAdmin.java</file>
+            <file>file:/C:/Users/JUAN%20DAVID/Documents/NetBeansProjects/Bike_life/src/VistaProveedor/ProveedorAgregarAdmin.java</file>
+            <file>file:/C:/Users/JUAN%20DAVID/Documents/NetBeansProjects/Bike_life/src/VistaReparaciones/ReparacionAdmin.java</file>
         </group>
     </open-files>
 </project-private>

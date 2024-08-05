@@ -6,8 +6,8 @@ package Metodo;
 
 import Objetos.Cliente;
 import Objetos.Usuario;
-import Vista.ClientesAdmin;
-import Vista.UsuariosAdmin;
+import VistaIngreso.ClientesAdmin;
+import VistaUsuarios.UsuariosAdmin;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
