@@ -6,7 +6,6 @@ package VistaReparaciones;
 
 import VistaIngreso.*;
 import VistaUsuarios.UsuariosAdmin;
-import Metodo.metodoCliente;
 import Metodo.metodoReparacion;
 import Objetos.Cliente;
 import VistaVenta.VentaAdmin;

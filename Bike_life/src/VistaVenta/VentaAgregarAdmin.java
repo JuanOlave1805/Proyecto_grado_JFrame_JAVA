@@ -843,29 +843,27 @@ public class VentaAgregarAdmin extends javax.swing.JFrame {
         metodoVenta metodo = new metodoVenta();
 
         // Llamar al método para agregar los productos al pedido, pasando el ID del cliente y el array de IDs de productos
-        metodo.finalizarVenta(tablaPedido, idCliente, idUsuario);
-       
-        // Imprimir el total
-        //System.out.println("El total es: " + total);
         
-        
-        
-        Facturacion facturaPDF = new Facturacion();
-        String rutaArchivo = "C:/Users/JUAN DAVID/Documents/PDF facturas/Facturas Ventas";
-        float totalCompra = total; 
-        
-        facturaPDF.generarFacturaPDFVenta(tablaPedido, rutaArchivo, totalCompra, idCliente, idUsuario);
+        if(metodo.finalizarVenta(tablaPedido, idCliente, idUsuario)){
+            Facturacion facturaPDF = new Facturacion();
+            String rutaArchivo = "C:/Users/JUAN DAVID/Documents/PDF facturas/Facturas Ventas";
+            float totalCompra = total; 
 
-        String mensaje = "Factura Generada Correctamente\nTotal a pagar: " + totalCompra;
-        JOptionPane.showMessageDialog(null, mensaje);
+            facturaPDF.generarFacturaPDFVenta(tablaPedido, rutaArchivo, totalCompra, idCliente, idUsuario);
+            String mensaje = "Factura Generada Correctamente\nTotal a pagar: " + totalCompra;
+            JOptionPane.showMessageDialog(null, mensaje);
 
-        // Abrir la ventana de Ventas
-        VentaAdmin ventana = new VentaAdmin();
-        ventana.setVisible(true);
-        // Rellenar el campo textIdUsuario con la identificación del usuario
-        ventana.rellenarIdUsuario(idUsuario);
-        this.setVisible(false);
-        
+            // Abrir la ventana de Ventas
+            VentaAdmin ventana = new VentaAdmin();
+            ventana.setVisible(true);
+            // Rellenar el campo textIdUsuario con la identificación del usuario
+            ventana.rellenarIdUsuario(idUsuario);
+            this.setVisible(false);
+        }
+        else{
+            String mensaje = "Factura No generada, revisa el pedido ";
+            JOptionPane.showMessageDialog(null, mensaje);
+        }
     }
     
     private void removerProductoTabla() {

@@ -48,8 +48,6 @@ public class CategoriaProductoAgregarAdmin extends javax.swing.JFrame {
         botonConfirmar = new javax.swing.JButton();
         textNombre = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        textRin = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         textIdUsuario = new javax.swing.JTextField();
@@ -117,20 +115,6 @@ public class CategoriaProductoAgregarAdmin extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Segoe UI Historic", 0, 18)); // NOI18N
         jLabel4.setText("Nombre");
 
-        textRin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textRinActionPerformed(evt);
-            }
-        });
-        textRin.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                textRinKeyTyped(evt);
-            }
-        });
-
-        jLabel5.setFont(new java.awt.Font("Segoe UI Historic", 0, 18)); // NOI18N
-        jLabel5.setText("Rin");
-
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 37)); // NOI18N
         jLabel1.setText("Agregar Categoria");
 
@@ -158,11 +142,6 @@ public class CategoriaProductoAgregarAdmin extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel5)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addGap(84, 84, 84)
-                                    .addComponent(textRin, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addGap(18, 18, 18)
@@ -193,16 +172,13 @@ public class CategoriaProductoAgregarAdmin extends javax.swing.JFrame {
                     .addComponent(jLabel6)
                     .addComponent(botonConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(textNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(textRin, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(textNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel4))
                     .addComponent(botonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(23, 23, 23)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(15, Short.MAX_VALUE))
         );
 
@@ -248,27 +224,14 @@ public class CategoriaProductoAgregarAdmin extends javax.swing.JFrame {
 
     private void textNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textNombreKeyTyped
         // TODO add your handling code here:
-        if (textNombre.getText().length() >= 100){
-            evt.consume();
+        // Obtener el carácter que se ha escrito
+        char c = evt.getKeyChar();
+
+        // Verificar si el carácter es una letra o un espacio y si el texto tiene menos de 100 caracteres
+        if (!Character.isLetter(c) && c != ' ' || textNombre.getText().length() >= 100) {
+            evt.consume();  // Consumir el evento para evitar que el carácter se agregue al campo de texto
         }
     }//GEN-LAST:event_textNombreKeyTyped
-
-    private void textRinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textRinActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textRinActionPerformed
-
-    private void textRinKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textRinKeyTyped
-        int key = evt.getKeyChar();
-        
-        boolean numero = key >= 48 && key <= 57;
-        
-        if (!numero){
-            evt.consume();
-        }
-        if (textRin.getText().length() >= 2){
-            evt.consume();
-        }
-    }//GEN-LAST:event_textRinKeyTyped
 
     private void textIdUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textIdUsuarioActionPerformed
         // TODO add your handling code here:
@@ -322,14 +285,12 @@ public class CategoriaProductoAgregarAdmin extends javax.swing.JFrame {
     private javax.swing.JPanel fondo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tabla_categoria;
     private javax.swing.JTextField textIdUsuario;
     private javax.swing.JTextField textNombre;
-    private javax.swing.JTextField textRin;
     // End of variables declaration//GEN-END:variables
     
     private void cargarTabla() {
@@ -340,7 +301,7 @@ public class CategoriaProductoAgregarAdmin extends javax.swing.JFrame {
         String[][] datosMatriz = metodo.obtenerCategorias();
         
         // Definir nombres de columnas
-        String[] nombresColumnas = {"Id", "Nombre", "Rin"};
+        String[] nombresColumnas = {"Id", "Nombre"};
 
         // Crear el modelo de la tabla
         DefaultTableModel model = new DefaultTableModel(datosMatriz, nombresColumnas);
@@ -358,25 +319,24 @@ public class CategoriaProductoAgregarAdmin extends javax.swing.JFrame {
     private void metodoBtnAgregar() {
         Categoria categoriaObj = new Categoria();
         
-        // Obtener valores de los campos
-        String rinStr = textRin.getText();
-        int rin = Integer.parseInt(rinStr);
-        //Aseignamos a los set en el objeto categoria
+        // Obtener valores de los campos y asignamos a los set en el objeto categoria
         categoriaObj.setnombre(textNombre.getText().toUpperCase());
-        categoriaObj.setrin(rin);
         
         // Instanciar el metodo y ejecutar el método para agregar usuario
         metodoCategoria metodo = new metodoCategoria();
-        metodo.agregarCategoria(categoriaObj, this);
         
-        String idUsuarioString = textIdUsuario.getText();
-        int idUsuario = parseInt(idUsuarioString);
-        // Abrir la ventana de Reparaciones
-        CategoriaProductosAdmin ventana = new CategoriaProductosAdmin();
-        // Rellenar el campo textIdUsuario con la identificación del usuario
-        ventana.rellenarIdUsuario(idUsuario);
-        this.setVisible(false);
         
+        boolean booleano = metodo.agregarCategoria(categoriaObj);
+        if (booleano){
+            String idUsuarioString = textIdUsuario.getText();
+            int idUsuario = parseInt(idUsuarioString);
+            // Abrir la ventana de Reparaciones
+            CategoriaProductosAdmin ventana = new CategoriaProductosAdmin();
+            ventana.setVisible(true);
+            // Rellenar el campo textIdUsuario con la identificación del usuario
+            ventana.rellenarIdUsuario(idUsuario);
+            this.setVisible(false);
+        }
     }
 
     private void cancelarAgregar() {
@@ -386,6 +346,7 @@ public class CategoriaProductoAgregarAdmin extends javax.swing.JFrame {
         CategoriaProductosAdmin ventana = new CategoriaProductosAdmin();
         // Rellenar el campo textIdUsuario con la identificación del usuario
         ventana.rellenarIdUsuario(idUsuario);
+        ventana.setVisible(true);
         this.setVisible(false);
     }
 }

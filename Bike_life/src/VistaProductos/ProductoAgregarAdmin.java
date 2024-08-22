@@ -361,15 +361,19 @@ public class ProductoAgregarAdmin extends javax.swing.JFrame {
         if (!numero){
             evt.consume();
         }
-        if (textVenta.getText().length() >=20 ){
+        if (textVenta.getText().length() >=8 ){
             evt.consume();
         }
     }//GEN-LAST:event_textVentaKeyTyped
 
     private void textNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textNombreKeyTyped
         // TODO add your handling code here:
-        if (textNombre.getText().length() >= 100){
-            evt.consume();
+        // Obtener el carácter que se ha escrito
+        char c = evt.getKeyChar();
+
+        // Verificar si el carácter es una letra o un espacio y si el texto tiene menos de 100 caracteres
+        if (!Character.isLetter(c) && c != ' ' || textNombre.getText().length() >= 100) {
+            evt.consume();  // Consumir el evento para evitar que el carácter se agregue al campo de texto
         }
     }//GEN-LAST:event_textNombreKeyTyped
 
@@ -382,7 +386,7 @@ public class ProductoAgregarAdmin extends javax.swing.JFrame {
         if (!numero){
             evt.consume();
         }
-        if (textCompra.getText().length() >= 20){
+        if (textCompra.getText().length() >= 8){
             evt.consume();
         }
     }//GEN-LAST:event_textCompraKeyTyped

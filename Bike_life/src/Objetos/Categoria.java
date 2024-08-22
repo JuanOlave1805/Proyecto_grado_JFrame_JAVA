@@ -11,8 +11,7 @@ package Objetos;
 public class Categoria {
     int identificador_Pk;
     String nombre;
-    int rin;
-
+    
     public int getIdentificador_Pk() {
         return identificador_Pk;
     }
@@ -28,14 +27,4 @@ public class Categoria {
     public void setnombre(String nombre) {
         this.nombre = nombre;
     }
-
-    public int getrin() {
-        return rin;
-    }
-
-    public void setrin(int rin) {
-        this.rin = rin;
-    }
-
-   
 }

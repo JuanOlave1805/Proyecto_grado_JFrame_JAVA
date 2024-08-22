@@ -129,7 +129,7 @@ public class ProductosAdmin extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel3.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 36)); // NOI18N
-        jLabel3.setText("Productos");
+        jLabel3.setText("Productos Admin");
 
         Boton_editar.setBackground(new java.awt.Color(102, 204, 255));
         Boton_editar.setText("Actualizar Producto");

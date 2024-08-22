@@ -221,7 +221,7 @@ public boolean agregarProveedor(Proveedor objeto, JFrame frameActual) {
             JOptionPane.showMessageDialog(frameActual, "Proveedor agregado satisfactoriamente");
             ProveedorAdmin ventana = new ProveedorAdmin();
             ventana.setVisible(true);
-            frameActual.dispose(); // Cerrar la ventana actual
+            this.setVisible(false);
         } else {
             // Mostrar mensaje de error si la inserción falla
             JOptionPane.showMessageDialog(frameActual, "No se pudo agregar al proveedor.");
@@ -313,5 +313,9 @@ public List<String> obtenerNombresProveedores() {
     // Devolver la lista de nombres de proveedores
     return nombresLista;
 }
+
+    private void setVisible(boolean b) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 
 }

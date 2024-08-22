@@ -430,16 +430,18 @@ public class UsuariosAgregarAdmin extends javax.swing.JFrame {
 
     private void textNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textNombreKeyTyped
         // TODO add your handling code here:
-        if (textNombre.getText().length() >= 100){
-            evt.consume();
-        }
+        String texto = textNombre.getText();
+if (texto.length() >= 100 || !texto.matches("[a-zA-Z ]+")) {
+    evt.consume();
+}
     }//GEN-LAST:event_textNombreKeyTyped
 
     private void textApellidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textApellidoKeyTyped
         // TODO add your handling code here:
-        if (textApellido.getText().length() >= 100){
-            evt.consume();
-        }
+        String texto = textApellido.getText();
+if (texto.length() >= 100 || !texto.matches("[a-zA-Z ]+")) {
+    evt.consume();
+}
     }//GEN-LAST:event_textApellidoKeyTyped
 
     private void textCorreoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textCorreoKeyTyped
@@ -560,7 +562,7 @@ public class UsuariosAgregarAdmin extends javax.swing.JFrame {
          metodoUsuario  metodo= new metodoUsuario();
 
         // Definir nombres de columnas
-        String[] nombresColumnas = {"Identificación", "Nombre", "Apellido", "Edad", "Correo", "Telefono", "Contraseña", "Rol", "Estado"};
+        String[] nombresColumnas = {"Identificación", "Nombre", "Apellido", "Edad", "Correo", "Telefono", "Rol", "Estado"};
 
         // Crear el modelo de la tabla
         DefaultTableModel model = new DefaultTableModel(metodo.obtenerUsuariosMatriz(), nombresColumnas);
@@ -612,11 +614,11 @@ public class UsuariosAgregarAdmin extends javax.swing.JFrame {
         int identificacion;
         try {
             
-            //if(identificacionStr.length() != 10){
-                //JOptionPane.showMessageDialog(this, "La identificación debe ser debe ser de 10 caracteres");
+            if(identificacionStr.length() >= 7 && identificacionStr.length() <= 10){
+                JOptionPane.showMessageDialog(this, "La identificación debe ser debe ser de 10 caracteres");
                 // Verificar que la identificación sea mayor que cero
-                //return; // Salir del método si la identificación no es de 10 caracteres
-            //}
+                return; // Salir del método si la identificación no es de 10 caracteres
+            }
             if(telefonoStr.length() != 10) {
                     JOptionPane.showMessageDialog(this, "El numero de telefono debe ser de 10 numeros");
                     return; // Salir del método si la identificación no es válida
@@ -663,17 +665,11 @@ public class UsuariosAgregarAdmin extends javax.swing.JFrame {
         objeto.setTelefono(telefonoStr);
         objeto.setRol_Fk(roll);
         
-        // Instanciar el controlador y ejecutar el método para agregar usuario
-        metodoUsuario metodo = new metodoUsuario();
-        metodo.agregarUsuario(objeto, this);
-        
         String idUsuarioString = textIdUsuario.getText();
         int idUsuario = parseInt(idUsuarioString);
-        // Abrir la ventana de Usuario
-        UsuariosAdmin ventana = new UsuariosAdmin();
-        ventana.setVisible(true);
-        // Rellenar el campo textIdUsuario con la identificación del usuario
-        ventana.rellenarIdUsuario(idUsuario);
-        this.setVisible(false);
+        
+        // Instanciar el controlador y ejecutar el método para agregar usuario
+        metodoUsuario metodo = new metodoUsuario();
+        metodo.agregarUsuario(objeto, this, idUsuario);
     }
 }

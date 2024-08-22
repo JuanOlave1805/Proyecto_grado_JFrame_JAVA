@@ -532,6 +532,13 @@ public class ReparacionAgregarAdmin extends javax.swing.JFrame {
 
     private void textCategoriaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textCategoriaKeyTyped
         // TODO add your handling code here:
+        // Obtener el carácter que se ha escrito
+        char c = evt.getKeyChar();
+
+        // Verificar si el carácter es una letra o un espacio y si el texto tiene menos de 100 caracteres
+        if (!Character.isLetter(c) && c != ' ' || textCategoria.getText().length() >= 100) {
+            evt.consume();  // Consumir el evento para evitar que el carácter se agregue al campo de texto
+        }
     }//GEN-LAST:event_textCategoriaKeyTyped
 
     private void textProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textProductoActionPerformed
@@ -571,6 +578,20 @@ public class ReparacionAgregarAdmin extends javax.swing.JFrame {
 
     private void cantidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cantidadKeyTyped
         // TODO add your handling code here:
+        int key = evt.getKeyChar();
+
+        // Verificar si el carácter es un número
+        boolean esNumero = key >= 48 && key <= 57;
+
+        // Verificar la longitud actual del texto en el campo de texto
+        JTextField campoTexto = (JTextField) evt.getSource();
+        String textoActual = campoTexto.getText();
+        int longitudActual = textoActual.length();
+
+        // Validar que solo se permitan números y que no se excedan los 10 dígitos
+        if (!esNumero || longitudActual >= 3) {
+            evt.consume();
+        }
     }//GEN-LAST:event_cantidadKeyTyped
 
     private void textCategoriaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textCategoriaKeyReleased
@@ -615,6 +636,20 @@ public class ReparacionAgregarAdmin extends javax.swing.JFrame {
 
     private void textClienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textClienteKeyTyped
         // TODO add your handling code here:
+        int key = evt.getKeyChar();
+
+        // Verificar si el carácter es un número
+        boolean esNumero = key >= 48 && key <= 57;
+
+        // Verificar la longitud actual del texto en el campo de texto
+        JTextField campoTexto = (JTextField) evt.getSource();
+        String textoActual = campoTexto.getText();
+        int longitudActual = textoActual.length();
+
+        // Validar que solo se permitan números y que no se excedan los 10 dígitos
+        if (!esNumero || longitudActual >= 10) {
+            evt.consume();
+        }
     }//GEN-LAST:event_textClienteKeyTyped
 
     private void Boton_removerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_removerActionPerformed
@@ -957,25 +992,31 @@ public class ReparacionAgregarAdmin extends javax.swing.JFrame {
     metodoReparacion metodo = new metodoReparacion();
 
     // Llamamos al método para finalizar la venta y agregar los productos al pedido
-    metodo.finalizarVenta(tablaPedido, idCliente, idUsuario, valorManoObra, descripcion);
+    if(metodo.finalizarVenta(tablaPedido, idCliente, idUsuario, valorManoObra, descripcion)){
+        // Calculamos el total final y generamos la factura en PDF
+        Facturacion facturaPDF = new Facturacion();
+        String rutaArchivo = "C:/Users/JUAN DAVID/Documents/PDF facturas/Facturas Reparaciones";
+        float totalCompra = total;
+        float totalFin = totalCompra + valorManoObra;
 
-    // Calculamos el total final y generamos la factura en PDF
-    Facturacion facturaPDF = new Facturacion();
-    String rutaArchivo = "C:/Users/JUAN DAVID/Documents/PDF facturas/Facturas Reparaciones";
-    float totalCompra = total;
-    float totalFin = totalCompra + valorManoObra;
+        facturaPDF.generarFacturaPDFReparacion(tablaPedido, rutaArchivo, totalCompra, idCliente, idUsuario, descripcion, valorManoObra);
 
-    facturaPDF.generarFacturaPDFReparacion(tablaPedido, rutaArchivo, totalCompra, idCliente, idUsuario, descripcion, valorManoObra);
+        // Mostramos un mensaje de éxito al usuario con el total a pagar
+        String mensaje = "Factura Generada Correctamente\nTotal a pagar: " + totalFin;
+        JOptionPane.showMessageDialog(null, mensaje);
 
-    // Mostramos un mensaje de éxito al usuario con el total a pagar
-    String mensaje = "Factura Generada Correctamente\nTotal a pagar: " + totalFin;
-    JOptionPane.showMessageDialog(null, mensaje);
+        // Abrimos la ventana de administración de reparaciones y pasamos el ID del usuario
+        ReparacionAdmin ventana = new ReparacionAdmin();
+        ventana.setVisible(true);
+        ventana.rellenarIdUsuario(idUsuario);
+        this.setVisible(false);
+    }
+    else{
+            String mensaje = "Factura No generada, revisa el pedido ";
+            JOptionPane.showMessageDialog(null, mensaje);
+        }
 
-    // Abrimos la ventana de administración de reparaciones y pasamos el ID del usuario
-    ReparacionAdmin ventana = new ReparacionAdmin();
-    ventana.setVisible(true);
-    ventana.rellenarIdUsuario(idUsuario);
-    this.setVisible(false);
+    
 }
 
     private void removerProductoTabla() {

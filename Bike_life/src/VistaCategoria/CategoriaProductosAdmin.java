@@ -406,7 +406,7 @@ public class CategoriaProductosAdmin extends javax.swing.JFrame {
         String[][] datosMatriz = metodo.obtenerCategorias();
         
         // Definir nombres de columnas
-        String[] nombresColumnas = {"Id", "Nombre", "Rin"};
+        String[] nombresColumnas = {"Id", "Nombre"};
 
         // Crear el modelo de la tabla
         DefaultTableModel model = new DefaultTableModel(datosMatriz, nombresColumnas);
@@ -429,6 +429,7 @@ public class CategoriaProductosAdmin extends javax.swing.JFrame {
         ventana.setVisible(true);
         // Rellenar el campo textIdUsuario con la identificación del usuario
         ventana.rellenarIdUsuario(idUsuario);
+        this.setVisible(false);
     }
 
     private void metodoAgregar() {
@@ -439,6 +440,7 @@ public class CategoriaProductosAdmin extends javax.swing.JFrame {
         ventana.setVisible(true);
         // Rellenar el campo textIdUsuario con la identificación del usuario
         ventana.rellenarIdUsuario(idUsuario);
+        this.setVisible(false);
     }
     
     private void BtnPerfil() throws SQLException {
@@ -460,6 +462,7 @@ public class CategoriaProductosAdmin extends javax.swing.JFrame {
         ventana.setVisible(true);
         // Rellenar el campo textIdUsuario con la identificación del usuario
         ventana.rellenarIdUsuario(idUsuario);
+        this.setVisible(false);
     }
 
     public void metodo_boton_reparaciones() {

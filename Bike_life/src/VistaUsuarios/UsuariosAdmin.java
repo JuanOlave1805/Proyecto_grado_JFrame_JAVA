@@ -1,7 +1,6 @@
 package VistaUsuarios;
 
 import VistaUsuarios.UsuariosAgregarAdmin;
-import VistaUsuarios.UsuariosEliminarAdmin;
 import VistaVenta.VentaAdmin;
 import Metodo.metodoUsuario;
 import VistaIngreso.PerfilAdmin;
@@ -398,7 +397,7 @@ public class UsuariosAdmin extends javax.swing.JFrame {
          metodoUsuario  metodo= new metodoUsuario();
 
         // Definir nombres de columnas
-        String[] nombresColumnas = {"Identificación", "Nombre", "Apellido", "Edad", "Correo", "Telefono", "Contraseña", "Rol", "Estado"};
+        String[] nombresColumnas = {"Identificación", "Nombre", "Apellido", "Edad", "Correo", "Telefono", "Rol", "Estado"};
 
         // Crear el modelo de la tabla
         DefaultTableModel model = new DefaultTableModel(metodo.obtenerUsuariosMatriz(), nombresColumnas);

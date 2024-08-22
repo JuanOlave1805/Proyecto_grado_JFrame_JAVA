@@ -348,8 +348,12 @@ public class ProveedorEliminarAdmin extends javax.swing.JFrame {
 
     private void textNombreEncargadoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textNombreEncargadoKeyTyped
         // TODO add your handling code here:
-        if (textNombreEncargado.getText().length() >= 100){
-            evt.consume();
+        // Obtener el carácter que se ha escrito
+        char c = evt.getKeyChar();
+
+        // Verificar si el carácter es una letra o un espacio y si el texto tiene menos de 100 caracteres
+        if (!Character.isLetter(c) && c != ' ' || textNombreEncargado.getText().length() >= 100) {
+            evt.consume();  // Consumir el evento para evitar que el carácter se agregue al campo de texto
         }
     }//GEN-LAST:event_textNombreEncargadoKeyTyped
 

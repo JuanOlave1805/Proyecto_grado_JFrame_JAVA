@@ -2,15 +2,13 @@ package Metodo;
 import Objetos.Usuario;
 import VistaVenta.VentaAdmin;
 import VistaVenta.VentaVendedor;
-import java.awt.Image;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import org.mindrot.jbcrypt.BCrypt;
 
 public class validacionUsuario {
 
@@ -31,17 +29,15 @@ public class validacionUsuario {
             }
 
             // Consulta SQL para validar las credenciales del usuario y obtener el rol y el estado asociado
-            String sql = "SELECT usuarios.identificacion_PK AS identificacion, usuarios.nombre AS nombre, rol.nombre AS rol, usuarios.estado AS estado " +
+            String sql = "SELECT usuarios.identificacion_PK AS identificacion, usuarios.nombre AS nombre, rol.nombre AS rol, usuarios.contrasena AS contrasena, usuarios.estado AS estado " +
                          "FROM usuarios " +
                          "INNER JOIN rol ON usuarios.id_rol_FK = rol.id_PK " +
-                         "WHERE usuarios.identificacion_PK = ? AND usuarios.contrasena = ? AND usuarios.estado = 'ACTIVO'";
+                         "WHERE usuarios.identificacion_PK = ? AND usuarios.estado = 'ACTIVO'";
 
             // Preparar la declaración SQL con parámetros
             PreparedStatement ps = conexion.prepareStatement(sql);
             // Establecer el identificador del usuario en el primer parámetro
             ps.setInt(1, objeto.getIdentificacion_Pk());
-            // Establecer la contraseña del usuario en el segundo parámetro
-            ps.setString(2, objeto.getContrasena());
 
             // Ejecutar la consulta y obtener el conjunto de resultados
             ResultSet rs = ps.executeQuery();
@@ -54,32 +50,36 @@ public class validacionUsuario {
                 String rolUsuario = rs.getString("rol");
                 // Obtener la identificación del usuario desde el conjunto de resultados
                 int idUsuario = rs.getInt("identificacion");
+                // Obtener la contraseña encriptada desde el conjunto de resultados
+                String hashedPassword = rs.getString("contrasena");
 
-                // Imprimir y mostrar un mensaje indicando que las credenciales son válidas y dar la bienvenida al usuario
-                System.out.println("Credenciales válidas. Bienvenido " + nombreUsuario);
+                // Verificar si la contraseña proporcionada coincide con la contraseña encriptada en la base de datos
+                if (hashedPassword != null && BCrypt.checkpw(objeto.getContrasena(), hashedPassword)) {
+                    // Imprimir y mostrar un mensaje indicando que las credenciales son válidas y dar la bienvenida al usuario
+                    System.out.println("Credenciales válidas. Bienvenido " + nombreUsuario);
+                    JOptionPane.showMessageDialog(null, "Bienvenido: " + nombreUsuario, "Bienvenido", JOptionPane.INFORMATION_MESSAGE);
 
-                // JOption mensaje
-                JOptionPane.showMessageDialog(null, "Bienvenido: "+ nombreUsuario, "Bienvenido", JOptionPane.INFORMATION_MESSAGE);
+                    // Cerrar la ventana actual
+                    frameActual.dispose();
 
-
-    
-
-                // Cerrar la ventana actual
-                frameActual.dispose();
-
-                // Abrir la ventana correspondiente según el rol del usuario
-                if (rolUsuario.equals("ADMIN")) {
-                    // Abrir la ventana de administración para el rol de administrador
-                    VentaAdmin ventanaAdmin = new VentaAdmin();
-                    ventanaAdmin.setVisible(true);
-                    // Rellenar el campo textIdUsuario con la identificación del usuario
-                    ventanaAdmin.rellenarIdUsuario(idUsuario);
-                } else if (rolUsuario.equals("VENDEDOR")) {
-                    // Abrir la ventana de ventas para el rol de vendedor
-                    VentaVendedor ventanaVendedor = new VentaVendedor();
-                    ventanaVendedor.setVisible(true);
-                    // Rellenar el campo textIdUsuario con la identificación del usuario
-                    ventanaVendedor.rellenarIdUsuario(idUsuario);
+                    // Abrir la ventana correspondiente según el rol del usuario
+                    if (rolUsuario.equals("ADMIN")) {
+                        // Abrir la ventana de administración para el rol de administrador
+                        VentaAdmin ventanaAdmin = new VentaAdmin();
+                        ventanaAdmin.setVisible(true);
+                        // Rellenar el campo textIdUsuario con la identificación del usuario
+                        ventanaAdmin.rellenarIdUsuario(idUsuario);
+                    } else if (rolUsuario.equals("VENDEDOR")) {
+                        // Abrir la ventana de ventas para el rol de vendedor
+                        VentaVendedor ventanaVendedor = new VentaVendedor();
+                        ventanaVendedor.setVisible(true);
+                        // Rellenar el campo textIdUsuario con la identificación del usuario
+                        ventanaVendedor.rellenarIdUsuario(idUsuario);
+                    }
+                } else {
+                    // Imprimir y mostrar un mensaje indicando que las credenciales son inválidas
+                    System.out.println("Credenciales inválidas");
+                    JOptionPane.showMessageDialog(null, "La identificación o la contraseña son incorrectas");
                 }
             } else {
                 // Imprimir y mostrar un mensaje indicando que las credenciales son inválidas

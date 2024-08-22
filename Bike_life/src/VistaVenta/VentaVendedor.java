@@ -1,11 +1,19 @@
 package VistaVenta;
 
 import Metodo.metodoVenta;
+import VistaIngreso.PerfilAdmin;
+import VistaIngreso.PerfilVendedor;
 import VistaProductos.ProductosAdmin;
+import VistaProductos.ProductosVendedor;
+import VistaProveedor.ProveedorAdmin;
 import VistaReparaciones.ReparacionAdmin;
+import VistaReparaciones.ReparacionVendedor;
 import VistaUsuarios.UsuariosAdmin;
 import java.awt.Image;
 import static java.lang.Integer.parseInt;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -50,7 +58,6 @@ public class VentaVendedor extends javax.swing.JFrame {
         Image_logo = new javax.swing.JLabel();
         Boton_ventas = new javax.swing.JButton();
         Boton_reparaciones = new javax.swing.JButton();
-        Boton_usuarios = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
@@ -95,17 +102,6 @@ public class VentaVendedor extends javax.swing.JFrame {
         });
         fondo.add(Boton_reparaciones);
         Boton_reparaciones.setBounds(30, 200, 130, 45);
-
-        Boton_usuarios.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
-        Boton_usuarios.setText("Usuarios");
-        Boton_usuarios.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        Boton_usuarios.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Boton_usuariosActionPerformed(evt);
-            }
-        });
-        fondo.add(Boton_usuarios);
-        Boton_usuarios.setBounds(30, 320, 130, 45);
 
         jButton1.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         jButton1.setText("Perfil");
@@ -234,7 +230,12 @@ public class VentaVendedor extends javax.swing.JFrame {
     }//GEN-LAST:event_Boton_ventasActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        try {
+            // TODO add your handling code here:
+            this.BtnPerfil();
+        } catch (SQLException ex) {
+            Logger.getLogger(VentaVendedor.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void Boton_agregar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_agregar1ActionPerformed
@@ -246,12 +247,6 @@ public class VentaVendedor extends javax.swing.JFrame {
     private void textIdUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textIdUsuarioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_textIdUsuarioActionPerformed
-
-    private void Boton_usuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_usuariosActionPerformed
-        // TODO add your handling code here:
-        //Llamando al metodo
-        this.metodo_boton_usuario();
-    }//GEN-LAST:event_Boton_usuariosActionPerformed
 
     private void Boton_inventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_inventarioActionPerformed
         // TODO add your handling code here:
@@ -309,7 +304,6 @@ public class VentaVendedor extends javax.swing.JFrame {
     private javax.swing.JButton Boton_agregar1;
     private javax.swing.JButton Boton_inventario;
     private javax.swing.JButton Boton_reparaciones;
-    private javax.swing.JButton Boton_usuarios;
     private javax.swing.JButton Boton_ventas;
     private javax.swing.JLabel Image_logo;
     private javax.swing.JPanel fondo;
@@ -365,7 +359,7 @@ public class VentaVendedor extends javax.swing.JFrame {
         String idUsuarioString = textIdUsuario.getText();
         int idUsuario = parseInt(idUsuarioString);
         // Abrir la ventana de Agregar venta
-        VentaAgregarAdmin ventana = new VentaAgregarAdmin();
+        VentaAgregarVendedor ventana = new VentaAgregarVendedor();
         ventana.setVisible(true);
         // Rellenar el campo textIdUsuario con la identificación del usuario
         ventana.rellenarIdUsuario(idUsuario);
@@ -376,7 +370,7 @@ public class VentaVendedor extends javax.swing.JFrame {
         String idUsuarioString = textIdUsuario.getText();
         int idUsuario = parseInt(idUsuarioString);
         // Abrir la ventana de Reparaciones
-        ReparacionAdmin ventana = new ReparacionAdmin();
+        ReparacionVendedor ventana = new ReparacionVendedor();
         ventana.setVisible(true);
         // Rellenar el campo textIdUsuario con la identificación del usuario
         ventana.rellenarIdUsuario(idUsuario);
@@ -387,18 +381,18 @@ public class VentaVendedor extends javax.swing.JFrame {
         String idUsuarioString = textIdUsuario.getText();
         int idUsuario = parseInt(idUsuarioString);
         // Abrir la ventana de Productos
-        ProductosAdmin ventana = new ProductosAdmin();
+        ProductosVendedor ventana = new ProductosVendedor();
         ventana.setVisible(true);
         // Rellenar el campo textIdUsuario con la identificación del usuario
         ventana.rellenarIdUsuario(idUsuario);
         this.setVisible(false);
     }
-    
-    private void metodo_boton_usuario() {
+
+    private void BtnPerfil() throws SQLException {
         String idUsuarioString = textIdUsuario.getText();
         int idUsuario = parseInt(idUsuarioString);
         // Abrir la ventana de Usuario
-        UsuariosAdmin ventana = new UsuariosAdmin();
+        PerfilVendedor ventana = new PerfilVendedor();
         ventana.setVisible(true);
         // Rellenar el campo textIdUsuario con la identificación del usuario
         ventana.rellenarIdUsuario(idUsuario);

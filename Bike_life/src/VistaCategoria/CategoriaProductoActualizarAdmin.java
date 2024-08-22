@@ -49,8 +49,6 @@ public class CategoriaProductoActualizarAdmin extends javax.swing.JFrame {
         botonConfirmar = new javax.swing.JButton();
         textNombre = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        textRin = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         textid = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
@@ -130,20 +128,6 @@ public class CategoriaProductoActualizarAdmin extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Segoe UI Historic", 0, 18)); // NOI18N
         jLabel4.setText("Nombre");
 
-        textRin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textRinActionPerformed(evt);
-            }
-        });
-        textRin.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                textRinKeyTyped(evt);
-            }
-        });
-
-        jLabel5.setFont(new java.awt.Font("Segoe UI Historic", 0, 18)); // NOI18N
-        jLabel5.setText("Rin");
-
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 37)); // NOI18N
         jLabel1.setText("Actualizar Categoria");
 
@@ -183,7 +167,10 @@ public class CategoriaProductoActualizarAdmin extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(21, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 470, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(19, 19, 19))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -191,26 +178,19 @@ public class CategoriaProductoActualizarAdmin extends javax.swing.JFrame {
                                 .addGap(26, 26, 26)
                                 .addComponent(textIdUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel5)
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                            .addGap(84, 84, 84)
-                                            .addComponent(textRin, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel4)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(textNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jLabel4)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(textNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                     .addComponent(jLabel6)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(textid, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(82, 82, 82)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(botonConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(botonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 470, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(19, 19, 19))
+                            .addComponent(botonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(49, 49, 49))))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(80, 80, 80)
                 .addComponent(jLabel1)
@@ -234,20 +214,15 @@ public class CategoriaProductoActualizarAdmin extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(textNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(textRin, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jLabel4)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 65, Short.MAX_VALUE)
+                        .addGap(51, 51, 51)
                         .addComponent(botonConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(49, 49, 49)
-                        .addComponent(botonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(39, 39, 39)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(14, 14, 14))))
+                        .addGap(18, 18, 18)
+                        .addComponent(botonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 213, Short.MAX_VALUE)
+                .addGap(14, 14, 14))
         );
 
         fondo.add(jPanel1);
@@ -284,7 +259,12 @@ public class CategoriaProductoActualizarAdmin extends javax.swing.JFrame {
     private void tabla_categoriaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabla_categoriaMouseClicked
         // TODO add your handling code here:
         metodoCategoria metodo = new metodoCategoria();
-        metodo.seleccionCategoria(tabla_categoria, textNombre, textRin, textid);
+        Categoria objeto = new Categoria();
+        metodo.seleccionCategoria(tabla_categoria, objeto);
+        textid.setText(String.valueOf(objeto.getIdentificador_Pk()));
+        textNombre.setText(objeto.getnombre());
+        
+        
     }//GEN-LAST:event_tabla_categoriaMouseClicked
 
     private void tabla_categoriaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tabla_categoriaKeyTyped
@@ -302,27 +282,14 @@ public class CategoriaProductoActualizarAdmin extends javax.swing.JFrame {
 
     private void textNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textNombreKeyTyped
         // TODO add your handling code here:
-        if (textNombre.getText().length() >= 100){
-            evt.consume();
+        // Obtener el carácter que se ha escrito
+        char c = evt.getKeyChar();
+
+        // Verificar si el carácter es una letra o un espacio y si el texto tiene menos de 100 caracteres
+        if (!Character.isLetter(c) && c != ' ' || textNombre.getText().length() >= 100) {
+            evt.consume();  // Consumir el evento para evitar que el carácter se agregue al campo de texto
         }
     }//GEN-LAST:event_textNombreKeyTyped
-
-    private void textRinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textRinActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textRinActionPerformed
-
-    private void textRinKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textRinKeyTyped
-        int key = evt.getKeyChar();
-
-        boolean numero = key >= 48 && key <= 57;
-
-        if (!numero){
-            evt.consume();
-        }
-        if (textRin.getText().length() >= 2){
-            evt.consume();
-        }
-    }//GEN-LAST:event_textRinKeyTyped
 
     private void textidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textidActionPerformed
         // TODO add your handling code here:
@@ -384,7 +351,6 @@ public class CategoriaProductoActualizarAdmin extends javax.swing.JFrame {
     private javax.swing.JPanel fondo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
@@ -392,7 +358,6 @@ public class CategoriaProductoActualizarAdmin extends javax.swing.JFrame {
     private javax.swing.JTable tabla_categoria;
     private javax.swing.JTextField textIdUsuario;
     private javax.swing.JTextField textNombre;
-    private javax.swing.JTextField textRin;
     private javax.swing.JTextField textid;
     // End of variables declaration//GEN-END:variables
 
@@ -404,7 +369,7 @@ public class CategoriaProductoActualizarAdmin extends javax.swing.JFrame {
         String[][] datosMatriz = metodo.obtenerCategorias();
         
         // Definir nombres de columnas
-        String[] nombresColumnas = {"Id", "Nombre", "Rin"};
+        String[] nombresColumnas = {"Id", "Nombre"};
 
         // Crear el modelo de la tabla
         DefaultTableModel model = new DefaultTableModel(datosMatriz, nombresColumnas);
@@ -424,21 +389,18 @@ public class CategoriaProductoActualizarAdmin extends javax.swing.JFrame {
     
     // Obtener valores de los campos
     String idStr = textid.getText();
-    String rinStr = textRin.getText();
     
     // Verifica si los campos no están vacíos
-    if (idStr.isEmpty() || rinStr.isEmpty()) {
+    if (idStr.isEmpty()) {
         JOptionPane.showMessageDialog(this, "Los campos de identificación y RIN no pueden estar vacíos.");
         return;
     }
 
     int id;
-    int rin;
     
     try {
         // Convierte las cadenas a enteros
         id = Integer.parseInt(idStr);
-        rin = Integer.parseInt(rinStr);
     } catch (NumberFormatException e) {
         JOptionPane.showMessageDialog(this, "Formato incorrecto para identificación o RIN: " + e.getMessage());
         return;
@@ -447,21 +409,23 @@ public class CategoriaProductoActualizarAdmin extends javax.swing.JFrame {
     // Asigna valores a los atributos del objeto categoria
     categoriaObj.setIdentificador_Pk(id);
     categoriaObj.setnombre(textNombre.getText().toUpperCase());
-    categoriaObj.setrin(rin);
 
     // Instanciar el método y ejecutar el método para modificar el usuario
     metodoCategoria metodo = new metodoCategoria();
     boolean exito = metodo.actualizarCategoria(categoriaObj);
 
-    if (exito) {
+    if (exito = true) {
         JOptionPane.showMessageDialog(this, "Categoría modificada satisfactoriamente");
         String idUsuarioString = textIdUsuario.getText();
         int idUsuario = parseInt(idUsuarioString);
         // Abrir la ventana de Reparaciones
-        CategoriaProductoAgregarAdmin ventana = new CategoriaProductoAgregarAdmin();
+        CategoriaProductosAdmin ventana = new CategoriaProductosAdmin();
         // Rellenar el campo textIdUsuario con la identificación del usuario
+        ventana.setVisible(true);
+
         ventana.rellenarIdUsuario(idUsuario);
         this.setVisible(false);
+        
     } else {
         JOptionPane.showMessageDialog(this, "Error al modificar la categoría.");
     }
@@ -474,6 +438,7 @@ public class CategoriaProductoActualizarAdmin extends javax.swing.JFrame {
         CategoriaProductosAdmin ventana = new CategoriaProductosAdmin();
         // Rellenar el campo textIdUsuario con la identificación del usuario
         ventana.rellenarIdUsuario(idUsuario);
+        ventana.setVisible(true);
         this.setVisible(false);
     }
 }

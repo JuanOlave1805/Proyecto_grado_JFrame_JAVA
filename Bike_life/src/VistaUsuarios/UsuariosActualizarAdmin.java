@@ -74,7 +74,7 @@ public class UsuariosActualizarAdmin extends javax.swing.JFrame {
         botonCancelar = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        comboBoxRol1 = new javax.swing.JComboBox<>();
+        estadoCheckbox = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -246,7 +246,7 @@ public class UsuariosActualizarAdmin extends javax.swing.JFrame {
         jLabel12.setFont(new java.awt.Font("Segoe UI Historic", 0, 18)); // NOI18N
         jLabel12.setText("Estado");
 
-        comboBoxRol1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ACTIVO", "INACTIVO" }));
+        estadoCheckbox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ACTIVO", "INACTIVO" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -260,7 +260,7 @@ public class UsuariosActualizarAdmin extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel12)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(comboBoxRol1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(estadoCheckbox, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(botonConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(37, 37, 37)
@@ -349,7 +349,7 @@ public class UsuariosActualizarAdmin extends javax.swing.JFrame {
                             .addComponent(jLabel6))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(comboBoxRol1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(estadoCheckbox, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel12))
                         .addGap(34, 34, 34)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -383,7 +383,7 @@ public class UsuariosActualizarAdmin extends javax.swing.JFrame {
     private void tabla_usuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabla_usuariosMouseClicked
         // TODO add your handling code here:
         metodoUsuario metodo = new metodoUsuario();
-        metodo.seleccionUsuario(tabla_usuarios, textIdentificacion, textNombre, textApellido, textEdad, textCorreo, textTelefono, textContrasena);
+        metodo.seleccionUsuario(tabla_usuarios, textIdentificacion, textNombre, textApellido, textEdad, textCorreo, textTelefono);
     }//GEN-LAST:event_tabla_usuariosMouseClicked
 
     private void textIdentificacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textIdentificacionActionPerformed
@@ -410,9 +410,10 @@ public class UsuariosActualizarAdmin extends javax.swing.JFrame {
 
     private void textNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textNombreKeyTyped
         // TODO add your handling code here:
-        if (textNombre.getText().length() >= 100){
-            evt.consume();
-        }
+        String texto = textNombre.getText();
+if (texto.length() >= 100 || !texto.matches("[a-zA-Z ]+")) {
+    evt.consume();
+}
     }//GEN-LAST:event_textNombreKeyTyped
 
     private void textApellidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textApellidoActionPerformed
@@ -421,9 +422,10 @@ public class UsuariosActualizarAdmin extends javax.swing.JFrame {
 
     private void textApellidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textApellidoKeyTyped
         // TODO add your handling code here:
-        if (textApellido.getText().length() >= 100){
-            evt.consume();
-        }
+        String texto = textApellido.getText();
+if (texto.length() >= 100 || !texto.matches("[a-zA-Z ]+")) {
+    evt.consume();
+}
     }//GEN-LAST:event_textApellidoKeyTyped
 
     private void textEdadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textEdadActionPerformed
@@ -536,7 +538,7 @@ public class UsuariosActualizarAdmin extends javax.swing.JFrame {
     private javax.swing.JButton botonCancelar;
     private javax.swing.JButton botonConfirmar;
     private javax.swing.JComboBox<String> comboBoxRol;
-    private javax.swing.JComboBox<String> comboBoxRol1;
+    private javax.swing.JComboBox<String> estadoCheckbox;
     private javax.swing.JPanel fondo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -585,7 +587,7 @@ public class UsuariosActualizarAdmin extends javax.swing.JFrame {
          metodoUsuario  metodo= new metodoUsuario();
 
         // Definir nombres de columnas
-        String[] nombresColumnas = {"Identificación", "Nombre", "Apellido", "Edad", "Correo", "Telefono", "Contraseña", "Rol", "Estado"};
+        String[] nombresColumnas = {"Identificación", "Nombre", "Apellido", "Edad", "Correo", "Telefono", "Rol", "Estado"};
 
         // Crear el modelo de la tabla
         DefaultTableModel model = new DefaultTableModel(metodo.obtenerUsuariosMatriz(), nombresColumnas);
@@ -624,12 +626,6 @@ public class UsuariosActualizarAdmin extends javax.swing.JFrame {
     try {
         identificacion = Integer.parseInt(identificacionStr);
 
-        // Verificar que la identificación tenga 10 caracteres
-        if (identificacionStr.length() != 10) {
-            JOptionPane.showMessageDialog(this, "La identificación debe ser de 10 caracteres.");
-            return; // Salir del método si la identificación no es válida
-        }
-
         // Verificar que el teléfono tenga 10 caracteres
         if (telefonoStr.length() != 10) {
             JOptionPane.showMessageDialog(this, "El número de teléfono debe ser de 10 números.");
@@ -647,13 +643,13 @@ public class UsuariosActualizarAdmin extends javax.swing.JFrame {
     String correo = textCorreo.getText();
     String contrasena = textContrasena.getText();
     String rol = (String) comboBoxRol.getSelectedItem();
+    String estado = (String) estadoCheckbox.getSelectedItem(); 
 
     // Convertir rol a un número según la selección
     int roll = ("Administrador".equals(rol)) ? 1 : 2;
-    String estado = ("ACTIVO".equals(rol)) ? "ACTIVO" : "INACTIVO";
 
     // Validación de todos los campos
-    if (nombre.isEmpty() || apellido.isEmpty() || correo.isEmpty() || contrasena.isEmpty()) {
+    if (nombre.isEmpty() || apellido.isEmpty() || correo.isEmpty()) {
         JOptionPane.showMessageDialog(this, "Por favor completa todos los campos.");
         return;
     }

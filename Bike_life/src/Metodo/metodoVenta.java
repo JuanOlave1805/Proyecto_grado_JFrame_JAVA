@@ -107,85 +107,113 @@ public void busqueda(String query, JTable tablaProducto) {
 
 
 
+    public void agregarProductoPedido(JTable tabla, Producto objeto, int cantidad) {
+        // Crear una instancia de conexión a la base de datos
+        conexionBD cx = new conexionBD();
+        // Establecer una conexión a la base de datos
+        Connection conexion = cx.conectar();
 
-public void agregarProductoPedido(JTable tabla, Producto objeto, int cantidad) {
-    // Crear una instancia de conexión a la base de datos
-    conexionBD cx = new conexionBD();
-    // Establecer una conexión a la base de datos
-    Connection conexion = cx.conectar();
+        // Consulta SQL para obtener los datos de los productos según el ID del producto
+        String sql = "SELECT " +
+                "p.id_producto_PK AS `id Producto`, " +
+                "p.nombre AS `Nombre`, " +
+                "c.nombre AS `categoria_nombre`, " +
+                "p.precioVenta AS `Precio Venta`, " +
+                "p.stock AS `Cantidad Disponible` " +
+                "FROM " +
+                "productos p " +
+                "LEFT JOIN " +
+                "categorias c ON p.Categoria_FK = c.id_categoria_PK " +
+                "LEFT JOIN " +
+                "proveedores pr ON p.Proveedor_FK = pr.id_proveedor_PK " +
+                "WHERE p.id_producto_PK = ?";
 
-    // Consulta SQL para obtener los datos de los productos según el ID del producto
-    String sql = "SELECT " +
-        "p.id_producto_PK AS `id Producto`, " +
-        "p.nombre AS `Nombre`, " +
-        "c.nombre AS `categoria_nombre`, " +
-        "p.precioVenta AS `Precio Venta`, " +
-        "p.stock AS `Cantidad Disponible` " +
-        "FROM " +
-        "productos p " +
-        "LEFT JOIN " +
-        "categorias c ON p.Categoria_FK = c.id_categoria_PK " +
-        "LEFT JOIN " +
-        "proveedores pr ON p.Proveedor_FK = pr.id_proveedor_PK " +
-        "WHERE p.id_producto_PK = ?";
+        // Lista para almacenar los datos de los productos
+        List<String[]> datosLista = new ArrayList<>();
 
-    // Lista para almacenar los datos de los productos
-    List<String[]> datosLista = new ArrayList<>();
+        try (var st = conexion.prepareStatement(sql)) {
+            // Asignar el valor del ID del producto al parámetro de la consulta
+            st.setInt(1, objeto.getId());
+            // Ejecutar la consulta y obtener el conjunto de resultados
+            ResultSet res = st.executeQuery();
 
-    try (var st = conexion.prepareStatement(sql)) {
-        // Asignar el valor del ID del producto al parámetro de la consulta
-        st.setInt(1, objeto.getId());
-        // Ejecutar la consulta y obtener el conjunto de resultados
-        ResultSet res = st.executeQuery();
+            // Recorrer el conjunto de resultados
+            while (res.next()) {
+                int stockDisponible = res.getInt("Cantidad Disponible"); // Obtener la cantidad disponible en stock
 
-        // Recorrer el conjunto de resultados
-        while (res.next()) {
-            int stockDisponible = res.getInt("Cantidad Disponible"); // Obtener la cantidad disponible en stock
+                if (cantidad > stockDisponible) {
+                    // Si la cantidad solicitada es mayor que la cantidad disponible, mostrar un mensaje de error
+                    JOptionPane.showMessageDialog(null, "Cantidad no disponible");
+                    return; // Salir del método sin agregar el producto
+                }
 
-            if (cantidad > stockDisponible) {
-                // Si la cantidad solicitada es mayor que la cantidad disponible, mostrar un mensaje de error
-                JOptionPane.showMessageDialog(null, "Cantidad no disponible");
-                return; // Salir del método sin agregar el producto
+                int iva = 5; // Definir el valor del IVA
+                float precioVenta = res.getFloat("Precio Venta"); // Obtener el precio de venta como float
+                float totalPrecio = cantidad * precioVenta; // Calcular el precio total sin IVA
+                float operacionIva = (totalPrecio * iva) / 100; // Calcular el IVA
+                float totalPrecioConIva = totalPrecio + operacionIva; // Calcular el precio total con IVA
+
+                // Crear un array de Strings para almacenar los datos de cada producto
+                String[] datos = new String[9];
+                // Obtener y almacenar cada campo de datos en el array
+                datos[0] = res.getString("id Producto"); // ID Producto
+                datos[1] = res.getString("Nombre"); // Nombre del Producto
+                datos[2] = res.getString("categoria_nombre"); // Nombre categoría
+                datos[3] = String.valueOf(cantidad); // Cantidad pedido
+                datos[4] = res.getString("Precio Venta"); // Precio Venta
+                datos[5] = String.valueOf(iva); // % IVA
+                datos[6] = String.valueOf(totalPrecio); // Precio total del producto sin IVA
+                datos[7] = String.valueOf(operacionIva); // Precio del IVA
+                datos[8] = String.valueOf(totalPrecioConIva); // Precio total con IVA
+
+                // Agregar el array de datos a la lista
+                datosLista.add(datos);
             }
-
-            int iva = 5; // Definir el valor del IVA
-            float precioVenta = res.getFloat("Precio Venta"); // Obtener el precio de venta como float
-            float totalPrecio = cantidad * precioVenta; // Calcular el precio total sin IVA
-            float operacionIva = (totalPrecio * iva) / 100; // Calcular el IVA
-            float totalPrecioConIva = totalPrecio + operacionIva; // Calcular el precio total con IVA
-
-            // Crear un array de Strings para almacenar los datos de cada producto
-            String[] datos = new String[9];
-            // Obtener y almacenar cada campo de datos en el array
-            datos[0] = res.getString("id Producto"); // ID Producto
-            datos[1] = res.getString("Nombre"); // Nombre del Producto
-            datos[2] = res.getString("categoria_nombre"); // Nombre categoría
-            datos[3] = String.valueOf(cantidad); // Cantidad pedido
-            datos[4] = res.getString("Precio Venta"); // Precio Venta
-            datos[5] = String.valueOf(iva); // % IVA
-            datos[6] = String.valueOf(totalPrecio); // Precio total del producto sin IVA
-            datos[7] = String.valueOf(operacionIva); // Precio del IVA
-            datos[8] = String.valueOf(totalPrecioConIva); // Precio total con IVA
-
-            // Agregar el array de datos a la lista
-            datosLista.add(datos);
+        } catch (SQLException e) {
+            // Manejar cualquier excepción SQL imprimiendo el rastreo de la pila
+            e.printStackTrace();
+        } finally {
+            // Asegurarse de desconectar la conexión a la base de datos en caso de cualquier excepción
+            cx.desconectar();
         }
-    } catch (SQLException e) {
-        // Manejar cualquier excepción SQL imprimiendo el rastreo de la pila
-        e.printStackTrace();
-    } finally {
-        // Asegurarse de desconectar la conexión a la base de datos en caso de cualquier excepción
-        cx.desconectar();
-    }
 
-    // Obtener el modelo de la tabla
-    DefaultTableModel model = (DefaultTableModel) tabla.getModel();
+        // Obtener el modelo de la tabla
+        DefaultTableModel model = (DefaultTableModel) tabla.getModel();
+        
+        // Verificar si el producto ya existe en la tabla
+        boolean productoExistente = false;
+        int rowIndex = -1;
+        for (int i = 0; i < model.getRowCount(); i++) {
+            if (model.getValueAt(i, 0).equals(datosLista.get(0)[0])) {
+                productoExistente = true;
+                rowIndex = i;
+                break;
+            }
+        }
 
-    // Agregar los datos obtenidos a la tabla sin limpiar las filas existentes
-    for (String[] datos : datosLista) {
-        model.addRow(datos);
+        if (productoExistente) {
+            // Si el producto ya existe, sumar la cantidad
+            int cantidadExistente = Integer.parseInt((String) model.getValueAt(rowIndex, 3));
+            int nuevaCantidad = cantidadExistente + cantidad;
+            model.setValueAt(String.valueOf(nuevaCantidad), rowIndex, 3);
+
+            // Calcular los nuevos valores
+            float precioVenta = Float.parseFloat((String) model.getValueAt(rowIndex, 4));
+            float totalPrecio = nuevaCantidad * precioVenta;
+            int iva = Integer.parseInt((String) model.getValueAt(rowIndex, 5));
+            float operacionIva = (totalPrecio * iva) / 100;
+            float totalPrecioConIva = totalPrecio + operacionIva;
+
+            model.setValueAt(String.valueOf(totalPrecio), rowIndex, 6);
+            model.setValueAt(String.valueOf(operacionIva), rowIndex, 7);
+            model.setValueAt(String.valueOf(totalPrecioConIva), rowIndex, 8);
+        } else {
+            // Si el producto no existe, agregar una nueva fila
+            for (String[] datos : datosLista) {
+                model.addRow(datos);
+            }
+        }
     }
-}
 
 
 public void eliminarProductoPedido(JTable tabla) {

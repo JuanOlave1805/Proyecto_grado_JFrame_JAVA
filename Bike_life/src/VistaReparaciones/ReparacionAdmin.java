@@ -58,6 +58,7 @@ public class ReparacionAdmin extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
         Boton_agregar2 = new javax.swing.JButton();
+        Boton_reporte = new javax.swing.JButton();
         Boton_inventario = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         textIdUsuario = new javax.swing.JTextField();
@@ -166,6 +167,15 @@ public class ReparacionAdmin extends javax.swing.JFrame {
             }
         });
 
+        Boton_reporte.setBackground(new java.awt.Color(153, 153, 255));
+        Boton_reporte.setText("Reportes");
+        Boton_reporte.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Boton_reporte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Boton_reporteActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -177,6 +187,8 @@ public class ReparacionAdmin extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Boton_reporte, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(Boton_agregar2)
                         .addGap(18, 18, 18)
                         .addComponent(Boton_agregar1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -188,8 +200,9 @@ public class ReparacionAdmin extends javax.swing.JFrame {
                 .addGap(19, 19, 19)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Boton_agregar2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Boton_agregar1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(Boton_agregar1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Boton_reporte, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Boton_agregar2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 447, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(16, Short.MAX_VALUE))
@@ -305,6 +318,11 @@ public class ReparacionAdmin extends javax.swing.JFrame {
         this.metodoProveedor();
     }//GEN-LAST:event_Boton_proveedoresActionPerformed
 
+    private void Boton_reporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_reporteActionPerformed
+        // TODO add your handling code here:
+        this.reportes();
+    }//GEN-LAST:event_Boton_reporteActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -351,6 +369,7 @@ public class ReparacionAdmin extends javax.swing.JFrame {
     private javax.swing.JButton Boton_inventario;
     private javax.swing.JButton Boton_proveedores;
     private javax.swing.JButton Boton_reparaciones;
+    private javax.swing.JButton Boton_reporte;
     private javax.swing.JButton Boton_usuarios;
     private javax.swing.JButton Boton_ventas;
     private javax.swing.JLabel Image_logo;
@@ -475,6 +494,17 @@ public class ReparacionAdmin extends javax.swing.JFrame {
         int idUsuario = parseInt(idUsuarioString);
         // Abrir la ventana de Usuario
         ProveedorAdmin ventana = new ProveedorAdmin();
+        ventana.setVisible(true);
+        // Rellenar el campo textIdUsuario con la identificación del usuario
+        ventana.rellenarIdUsuario(idUsuario);
+        this.setVisible(false);
+    }
+
+    private void reportes() {
+        String idUsuarioString = textIdUsuario.getText();
+        int idUsuario = parseInt(idUsuarioString);
+        // Abrir la ventana de Usuario
+        ReparacionReporteAdmin ventana = new ReparacionReporteAdmin();
         ventana.setVisible(true);
         // Rellenar el campo textIdUsuario con la identificación del usuario
         ventana.rellenarIdUsuario(idUsuario);

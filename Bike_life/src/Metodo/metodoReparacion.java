@@ -349,7 +349,7 @@ public String[][] listarReparaciones() {
     Connection conexion = cx.conectar();
 
     // Consulta SQL para obtener los datos de ventas
-    String sql = "SELECT p.fecha_pedido, p.id_cliente, p.id_usuario_FK, p.total, p.fecha_entrega_pedido FROM pedidos as p WHERE p.tipo_pedido = \"reparacion\"";
+    String sql = "SELECT p.fecha_pedido, p.id_cliente, p.id_usuario_FK, (p.total + p.mano_obra) AS total, p.fecha_entrega_pedido FROM pedidos as p WHERE p.tipo_pedido = \"reparacion\"";
 
     Statement st;
     // Lista para almacenar los datos de las ventas

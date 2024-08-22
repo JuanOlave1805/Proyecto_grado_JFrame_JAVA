@@ -146,7 +146,7 @@ public class Ingreso extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addGroup(fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(fondoLayout.createSequentialGroup()
-                        .addGap(118, 118, 118)
+                        .addGap(148, 148, 148)
                         .addComponent(usuario_label)
                         .addGap(6, 6, 6)
                         .addComponent(usuario_text, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -219,7 +219,7 @@ public class Ingreso extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
+        /* Set the Nimbus look and feel */  
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
