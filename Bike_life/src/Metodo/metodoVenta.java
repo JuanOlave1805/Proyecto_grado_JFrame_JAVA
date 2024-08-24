@@ -4,6 +4,7 @@
  */
 package Metodo;
 import Objetos.Producto;
+import static java.lang.Float.parseFloat;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -166,8 +167,11 @@ public void busqueda(String query, JTable tablaProducto) {
                 datos[7] = String.valueOf(operacionIva); // Precio del IVA
                 datos[8] = String.valueOf(totalPrecioConIva); // Precio total con IVA
 
-                // Agregar el array de datos a la lista
                 datosLista.add(datos);
+//                String totalText = total.getText();
+//                float totalFloat = parseFloat(totalText); 
+//                totalFloat=+ totalPrecioConIva;
+//                System.out.println(totalFloat);
             }
         } catch (SQLException e) {
             // Manejar cualquier excepción SQL imprimiendo el rastreo de la pila

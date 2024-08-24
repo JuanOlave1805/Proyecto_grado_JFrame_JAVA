@@ -73,6 +73,8 @@ public class VentaAgregarAdmin extends javax.swing.JFrame {
         textCliente = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         Boton_remover = new javax.swing.JButton();
+        textTotal = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         textIdUsuario = new javax.swing.JTextField();
         Boton_reparaciones = new javax.swing.JButton();
@@ -284,6 +286,21 @@ public class VentaAgregarAdmin extends javax.swing.JFrame {
             }
         });
 
+        textTotal.setEnabled(false);
+        textTotal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textTotalActionPerformed(evt);
+            }
+        });
+        textTotal.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                textTotalKeyTyped(evt);
+            }
+        });
+
+        jLabel10.setFont(new java.awt.Font("Segoe UI Historic", 0, 18)); // NOI18N
+        jLabel10.setText("Total:");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -292,7 +309,10 @@ public class VentaAgregarAdmin extends javax.swing.JFrame {
                 .addGap(15, 15, 15)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel10)
+                        .addGap(26, 26, 26)
+                        .addComponent(textTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(Boton_agregar3, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(52, 52, 52)
                         .addComponent(Boton_agregar4, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -362,7 +382,10 @@ public class VentaAgregarAdmin extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Boton_agregar3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Boton_agregar4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Boton_agregar4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(textTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel10)))
                 .addContainerGap())
         );
 
@@ -581,6 +604,14 @@ public class VentaAgregarAdmin extends javax.swing.JFrame {
         this.metodoProveedor();
     }//GEN-LAST:event_Boton_proveedoresActionPerformed
 
+    private void textTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textTotalActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textTotalActionPerformed
+
+    private void textTotalKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textTotalKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textTotalKeyTyped
+
     /**
      * @param args the command line arguments
      */
@@ -644,6 +675,7 @@ public class VentaAgregarAdmin extends javax.swing.JFrame {
     private javax.swing.JPanel fondo;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -661,6 +693,7 @@ public class VentaAgregarAdmin extends javax.swing.JFrame {
     private javax.swing.JTextField textIdProducto;
     private javax.swing.JTextField textIdUsuario;
     private javax.swing.JTextField textProducto;
+    private javax.swing.JTextField textTotal;
     // End of variables declaration//GEN-END:variables
 
     //Metodo donde da el tamaño de la imagen dependiendo el contenedor que tenga
