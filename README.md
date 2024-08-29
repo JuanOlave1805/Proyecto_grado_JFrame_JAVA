@@ -19,7 +19,7 @@ Para ejecutar este proyecto en tu máquina local, sigue estos pasos:
 1. Clona este repositorio:
 
    ```bash
-   git clone https://github.com/tuusuario/tu-repositorio.git
+   git clone https://github.com/JuanOlave1805/Proyecto_grado_JFrame_JAVA
 
    ```
 
