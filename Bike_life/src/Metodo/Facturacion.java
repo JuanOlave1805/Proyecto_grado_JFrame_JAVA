@@ -7,17 +7,23 @@ import com.itextpdf.text.Font;
 import com.itextpdf.text.FontFactory;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
+import java.awt.Desktop;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Facturacion {
 
-public void generarFacturaPDFVenta(JTable tabla, String directorio, float totalCompra, int idCliente, int idUsuario) {
+public void generarFacturaPDFVenta(JTable tabla, String directorio, float totalCompra, int idCliente, int idUsuario) throws SQLException {
     // Crear una instancia del documento PDF
     Document documento = new Document();
     
@@ -59,13 +65,23 @@ public void generarFacturaPDFVenta(JTable tabla, String directorio, float totalC
         // Crear una fuente para el documento del usuario en tamaño 12
         Font fuenteUsuario = FontFactory.getFont(FontFactory.HELVETICA, 12);
         // Crear un párrafo con el ID del cliente y la fuente especificada
-        Paragraph usuarioParrafo = new Paragraph("Documento del Usuario que realizo la venta: " + idUsuario, fuenteUsuario);
+        Paragraph usuarioParrafo = new Paragraph("Documento del Usuario que realizó la venta: " + idUsuario, fuenteUsuario);
         // Alinear el párrafo del cliente a la derecha
         usuarioParrafo.setAlignment(Element.ALIGN_LEFT);
         // Agregar el párrafo del cliente al documento
         documento.add(usuarioParrafo);
         // Agregar un salto de línea para espaciar el contenido
-        documento.add(new Paragraph("\n")); 
+        //documento.add(new Paragraph("\n"));
+
+        String nombreUsuario = this.obtenerNombreUsuario(idUsuario);
+        // Crear un párrafo con el ID del cliente y la fuente especificada
+        Paragraph usuarioNomParrafo = new Paragraph("Nombre del Usuario que realizó la venta: " + nombreUsuario, fuenteUsuario);
+        // Alinear el párrafo del cliente a la derecha
+        usuarioNomParrafo.setAlignment(Element.ALIGN_LEFT);
+        // Agregar el párrafo del cliente al documento
+        documento.add(usuarioNomParrafo);
+        // Agregar un salto de línea para espaciar el contenido
+        documento.add(new Paragraph("\n"));
         
         // Crear una fuente para el documento del cliente en tamaño 12
         Font fuenteCliente = FontFactory.getFont(FontFactory.HELVETICA, 12);
@@ -75,6 +91,16 @@ public void generarFacturaPDFVenta(JTable tabla, String directorio, float totalC
         clienteParrafo.setAlignment(Element.ALIGN_LEFT);
         // Agregar el párrafo del cliente al documento
         documento.add(clienteParrafo);
+        // Agregar un salto de línea para espaciar el contenido
+        //documento.add(new Paragraph("\n"));
+        
+        String nombreCliente = this.obtenerNombreCliente(idCliente);
+        // Crear un párrafo con el ID del cliente y la fuente especificada
+        Paragraph clienteNombreParrafo = new Paragraph("Nombre del Cliente: " + nombreCliente, fuenteCliente);
+        // Alinear el párrafo del cliente a la derecha
+        clienteNombreParrafo.setAlignment(Element.ALIGN_LEFT);
+        // Agregar el párrafo del cliente al documento
+        documento.add(clienteNombreParrafo);
         // Agregar un salto de línea para espaciar el contenido
         documento.add(new Paragraph("\n")); 
 
@@ -110,6 +136,7 @@ public void generarFacturaPDFVenta(JTable tabla, String directorio, float totalC
         total.setAlignment(Element.ALIGN_LEFT);
         // Agregar el total al documento
         documento.add(total);
+        
 
     } catch (FileNotFoundException | DocumentException e) {
         // Capturar y mostrar cualquier error ocurrido al crear el archivo PDF
@@ -118,11 +145,12 @@ public void generarFacturaPDFVenta(JTable tabla, String directorio, float totalC
     } finally {
         // Cerrar el documento para finalizar la escritura
         documento.close();
+        abrirFactura(rutaArchivo);
     }
 }
 
 
-public void generarFacturaPDFReparacion(JTable tabla, String directorio, float totalCompra, int idCliente, int idUsuario, String descripcion, float manoObra) {
+public void generarFacturaPDFReparacion(JTable tabla, String directorio, float totalCompra, int idCliente, int idUsuario, String descripcion, float manoObra) throws SQLException {
     // Crear una instancia del documento PDF
     Document documento = new Document();
 
@@ -170,14 +198,24 @@ public void generarFacturaPDFReparacion(JTable tabla, String directorio, float t
         // Crear una fuente para el documento del usuario en tamaño 12
         Font fuenteUsuario = FontFactory.getFont(FontFactory.HELVETICA, 12);
         // Crear un párrafo con el ID del cliente y la fuente especificada
-        Paragraph usuarioParrafo = new Paragraph("Documento del Usuario que realizó la venta: " + idUsuario, fuenteUsuario);
+        Paragraph usuarioParrafo = new Paragraph("Documento del Vendedor: " + idUsuario, fuenteUsuario);
         // Alinear el párrafo del cliente a la derecha
         usuarioParrafo.setAlignment(Element.ALIGN_LEFT);
         // Agregar el párrafo del cliente al documento
         documento.add(usuarioParrafo);
         // Agregar un salto de línea para espaciar el contenido
-        documento.add(new Paragraph("\n"));
+        //documento.add(new Paragraph("\n"));
 
+        String nombreUsuario = this.obtenerNombreUsuario(idUsuario);
+        // Crear un párrafo con el ID del cliente y la fuente especificada
+        Paragraph usuarioNomParrafo = new Paragraph("Nombre del Vendedor" + nombreUsuario, fuenteUsuario);
+        // Alinear el párrafo del cliente a la derecha
+        usuarioNomParrafo.setAlignment(Element.ALIGN_LEFT);
+        // Agregar el párrafo del cliente al documento
+        documento.add(usuarioNomParrafo);
+        // Agregar un salto de línea para espaciar el contenido
+        documento.add(new Paragraph("\n"));
+        
         // Crear una fuente para el documento del cliente en tamaño 12
         Font fuenteCliente = FontFactory.getFont(FontFactory.HELVETICA, 12);
         // Crear un párrafo con el ID del cliente y la fuente especificada
@@ -186,6 +224,16 @@ public void generarFacturaPDFReparacion(JTable tabla, String directorio, float t
         clienteParrafo.setAlignment(Element.ALIGN_LEFT);
         // Agregar el párrafo del cliente al documento
         documento.add(clienteParrafo);
+        // Agregar un salto de línea para espaciar el contenido
+        //documento.add(new Paragraph("\n"));
+        
+        String nombreCliente = this.obtenerNombreCliente(idCliente);
+        // Crear un párrafo con el ID del cliente y la fuente especificada
+        Paragraph clienteNombreParrafo = new Paragraph("Nombre del Cliente: " + nombreCliente, fuenteCliente);
+        // Alinear el párrafo del cliente a la derecha
+        clienteNombreParrafo.setAlignment(Element.ALIGN_LEFT);
+        // Agregar el párrafo del cliente al documento
+        documento.add(clienteNombreParrafo);
         // Agregar un salto de línea para espaciar el contenido
         documento.add(new Paragraph("\n"));
 
@@ -275,7 +323,86 @@ public void generarFacturaPDFReparacion(JTable tabla, String directorio, float t
     } finally {
         // Cerrar el documento para finalizar la escritura
         documento.close();
+        abrirFactura(rutaArchivo);
     }
 }
 
+    public String obtenerNombreUsuario(int usuarioID) throws SQLException {
+        String nombre = null;
+        String sql = "SELECT CONCAT(nombre, ' ', apellido ) as nombreCompleto FROM usuarios WHERE identificacion_PK = ?";
+
+        try (Connection conexion = new conexionBD().conectar(); 
+             PreparedStatement ps = conexion.prepareStatement(sql)) {
+
+            ps.setInt(1, usuarioID);
+
+            try (ResultSet res = ps.executeQuery()) {
+                if (res.next()) {
+                    nombre = res.getString("nombreCompleto");
+                } else {
+                    System.out.println("No se encontró un usuario con el id proporcionado.");
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Dependiendo del uso, puede ser útil relanzar la excepción
+            throw e;
+        }
+
+        return nombre;
+    }
+    
+    public String obtenerNombreCliente(int clienteID) throws SQLException {
+        String nombre = null;
+        String sql = "SELECT CONCAT(nombre, ' ', apellido ) as nombreCompleto FROM clientes WHERE documento = ?";
+
+        try (Connection conexion = new conexionBD().conectar(); 
+             PreparedStatement ps = conexion.prepareStatement(sql)) {
+
+            ps.setInt(1, clienteID);
+
+            try (ResultSet res = ps.executeQuery()) {
+                if (res.next()) {
+                    nombre = res.getString("nombreCompleto");
+                } else {
+                    System.out.println("No se encontró un usuario con el id proporcionado.");
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Dependiendo del uso, puede ser útil relanzar la excepción
+            throw e;
+        }
+
+        return nombre;
+    }
+
+    public void abrirFactura(String rutaArchivo) {
+    try { 
+        // Crear un objeto File con la ruta del archivo PDF
+        File archivo = new File(rutaArchivo);
+        
+        // Verificar si el archivo existe
+        if (archivo.exists()) {
+            // Obtener la instancia del objeto Desktop
+            Desktop desktop = Desktop.getDesktop();
+            
+            // Verificar si el escritorio soporta la acción de abrir archivos
+            if (desktop.isSupported(Desktop.Action.OPEN)) {
+                // Abrir el archivo con la aplicación predeterminada (navegador o visor de PDF)
+                desktop.open(archivo);
+            } else {
+                System.err.println("La acción de abrir archivos no está soportada en este sistema.");
+            }
+        } else {
+            System.err.println("El archivo especificado no existe: " + rutaArchivo);
+        }
+    } catch (IOException e) {
+        // Capturar y mostrar cualquier error al intentar abrir el archivo
+        e.printStackTrace();
+        System.err.println("Error al abrir el archivo PDF: " + e.getMessage());
+    }
+    }
 }

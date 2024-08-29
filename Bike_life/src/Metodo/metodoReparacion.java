@@ -212,7 +212,7 @@ public boolean finalizarVenta(JTable tablaProductos, int idCliente, int idUsuari
     Connection conexion = cx.conectar();
 
     // Consultas SQL para insertar en la tabla pedidos y detallepedidos, y actualizar el stock
-    String sqlInsertPedido = "INSERT INTO pedidos (id_cliente, id_usuario_FK, fecha_pedido, total, tipo_pedido, mano_obra, descripcion) VALUES (?, ?, CURRENT_DATE, ?, 'reparacion', ?, ?)";
+    String sqlInsertPedido = "INSERT INTO pedidos (id_cliente_FK, id_usuario_FK, fecha_pedido, total, tipo_pedido, mano_obra, descripcion) VALUES (?, ?, CURRENT_DATE, ?, 'reparacion', ?, ?)";
     String sqlLastPedidoId = "SELECT LAST_INSERT_ID() AS lastId"; // Cambiado a LAST_INSERT_ID() para obtener el último id insertado
     String sqlInsertDetallePedido = "INSERT INTO detallepedidos (id_pedido_FK, id_producto_FK, cantidad, precio_sin_iva, precio_con_iva, precio_iva, porcentaje_IVA) VALUES (?, ?, ?, ?, ?, ?, ?)";
     String sqlStock = "SELECT stock FROM productos WHERE id_producto_PK = ?";
@@ -348,29 +348,41 @@ public String[][] listarReparaciones() {
     // Establecer una conexión a la base de datos
     Connection conexion = cx.conectar();
 
-    // Consulta SQL para obtener los datos de ventas
-    String sql = "SELECT p.fecha_pedido, p.id_cliente, p.id_usuario_FK, (p.total + p.mano_obra) AS total, p.fecha_entrega_pedido FROM pedidos as p WHERE p.tipo_pedido = \"reparacion\"";
+    // Consulta SQL para obtener los datos de reparaciones
+    String sql = "SELECT "
+               + "p.fecha_pedido, "
+               + "CONCAT(c.nombre, ' ', c.apellido) AS cliente_nombre, "
+               + "CONCAT(u.nombre, ' ', u.apellido) AS usuario_nombre, "
+               + "(p.total + p.mano_obra) AS total, "
+               + "p.fecha_entrega_pedido "
+               + "FROM pedidos AS p "
+               + "INNER JOIN clientes AS c ON p.id_cliente_FK = c.documento "
+               + "INNER JOIN usuarios AS u ON p.id_usuario_FK = u.identificacion_PK "
+               + "WHERE p.tipo_pedido = 'reparacion'";
 
-    Statement st;
-    // Lista para almacenar los datos de las ventas
+    // Lista para almacenar los datos de las reparaciones
     List<String[]> datosLista = new ArrayList<>();
+
+    // Declarar Statement y ResultSet
+    Statement st = null;
+    ResultSet res = null;
 
     try {
         // Crear un objeto Statement para ejecutar la consulta SQL
         st = conexion.createStatement();
         // Ejecutar la consulta y obtener el conjunto de resultados
-        ResultSet res = st.executeQuery(sql);
+        res = st.executeQuery(sql);
 
         // Recorrer el conjunto de resultados
         while (res.next()) {
-            // Crear un array de Strings para almacenar los datos de cada venta
+            // Crear un array de Strings para almacenar los datos de cada reparación
             String[] datos = new String[5];
             // Obtener y almacenar cada campo de datos en el array
             datos[0] = res.getString("fecha_pedido"); // Fecha del pedido
-            datos[1] = res.getString("id_cliente"); // ID del cliente
-            datos[2] = res.getString("id_usuario_FK"); // ID del usuario (vendedor)
-            datos[3] = res.getString("total"); // Total de la venta
-            datos[4] = res.getString("fecha_entrega_pedido"); // Total de la venta
+            datos[1] = res.getString("cliente_nombre"); // Nombre del cliente
+            datos[2] = res.getString("usuario_nombre"); // Nombre del usuario (vendedor)
+            datos[3] = res.getString("total"); // Total de la reparación (total + mano de obra)
+            datos[4] = res.getString("fecha_entrega_pedido"); // Fecha de entrega
 
             // Agregar el array de datos a la lista
             datosLista.add(datos);
@@ -379,22 +391,30 @@ public String[][] listarReparaciones() {
         // Manejar cualquier excepción SQL imprimiendo el rastreo de la pila
         e.printStackTrace();
     } finally {
+        // Asegurarse de cerrar ResultSet y Statement
+        try {
+            if (res != null) res.close();
+            if (st != null) st.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         // Asegurarse de desconectar la conexión a la base de datos
         cx.desconectar();
     }
 
-    // Crear una matriz bidimensional de Strings para almacenar los datos de ventas
-    String[][] datosMatriz = new String[datosLista.size()][4];
+    // Crear una matriz bidimensional de Strings para almacenar los datos de reparaciones
+    String[][] datosMatriz = new String[datosLista.size()][5];
 
     // Recorrer la lista de datos obtenida
     for (int i = 0; i < datosLista.size(); i++) {
-        // Obtener cada array de datos de venta de la lista y asignarlo a la matriz de datos
+        // Obtener cada array de datos de reparación de la lista y asignarlo a la matriz de datos
         datosMatriz[i] = datosLista.get(i);
     }
 
-    // Devolver la matriz de datos que contiene la información de las ventas
+    // Devolver la matriz de datos que contiene la información de las reparaciones
     return datosMatriz;
 }
+
 
 public String[][] listarReparacionesSinTerminar() {
     // Crear una instancia de conexión a la base de datos
@@ -403,8 +423,15 @@ public String[][] listarReparacionesSinTerminar() {
     Connection conexion = cx.conectar();
 
     // Consulta SQL para obtener los datos de pedidos sin terminar
-    String sql = "SELECT p.id_pedido_PK, p.id_usuario_FK, p.id_cliente, p.fecha_pedido, p.total " +
-                 "FROM pedidos AS p WHERE p.tipo_pedido = 'reparacion' AND p.fecha_entrega_pedido IS NULL";
+    String sql = "SELECT p.id_pedido_PK, " +
+                          "CONCAT(c.nombre, ' ', c.apellido) AS nombreCliente, " +
+                          "CONCAT(u.nombre, ' ', u.apellido) AS nombreUsuario, " +
+                          "p.fecha_pedido, " +
+                          "p.total " +
+                          "FROM pedidos AS p " +
+                          "INNER JOIN clientes AS c ON p.id_cliente_FK = c.documento " +
+                          "INNER JOIN usuarios AS u ON p.id_usuario_FK = u.identificacion_PK " +
+                          "WHERE p.tipo_pedido = 'reparacion' AND p.fecha_entrega_pedido IS NULL;";
 
     Statement st = null;
     ResultSet res = null;
@@ -423,8 +450,8 @@ public String[][] listarReparacionesSinTerminar() {
             String[] datos = new String[5];
             // Obtener y almacenar cada campo de datos en el array
             datos[0] = res.getString("id_pedido_PK"); // ID del pedido
-            datos[1] = res.getString("id_usuario_FK"); // ID del usuario
-            datos[2] = res.getString("id_cliente"); // ID del cliente
+            datos[1] = res.getString("nombreUsuario"); // Nombre del usuario
+            datos[2] = res.getString("nombreCliente"); // Nombre del cliente
             datos[3] = res.getString("fecha_pedido"); // Fecha del pedido
             datos[4] = res.getString("total"); // Total de la reparación
 
@@ -512,8 +539,7 @@ public String[][] obtenerPedidosReparacionMatriz() {
     Connection conexion = cx.conectar();
 
     // Consulta SQL para obtener los datos de pedidos de reparación
-    String sql = "SELECT p.id_pedido_PK, p.id_usuario_FK, p.id_cliente, p.fecha_pedido, (p.total + p.mano_obra) AS total_final " +
-                 "FROM pedidos AS p WHERE p.tipo_pedido = 'REPARACION'";
+    String sql = "SELECT p.id_pedido_PK, c.nombre, p.fecha_pedido, (p.total + p.mano_obra) AS total_final FROM pedidos AS p INNER JOIN clientes as c on p.id_cliente_FK = c.documento WHERE p.tipo_pedido = 'reparacion'";
 
     Statement st;
     // Lista para almacenar los datos de los pedidos de reparación

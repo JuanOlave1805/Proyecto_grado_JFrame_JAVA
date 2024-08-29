@@ -7,7 +7,6 @@ package VistaReparaciones;
 import VistaIngreso.*;
 import VistaUsuarios.UsuariosAdmin;
 import Metodo.metodoReparacion;
-import Objetos.Cliente;
 import VistaVenta.VentaAdmin;
 import java.awt.Image;
 import static java.lang.Integer.parseInt;
@@ -498,7 +497,7 @@ public class ReparacionFinalizarAdmin extends javax.swing.JFrame {
          metodoReparacion  metodo= new metodoReparacion();
 
         // Definir nombres de columnas
-        String[] nombresColumnas = {"ID Pedido","Identificación Usuario", "Identificación Cliente", "Fecha Pedido", "Total"};
+        String[] nombresColumnas = {"ID Pedido","Nombre Usuario", "Nombre Cliente", "Fecha Pedido", "Total"};
 
         // Crear el modelo de la tabla
         DefaultTableModel model = new DefaultTableModel(metodo.listarReparacionesSinTerminar() , nombresColumnas);

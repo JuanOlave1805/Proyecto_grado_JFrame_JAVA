@@ -5,6 +5,7 @@ import VistaUsuarios.UsuariosAdmin;
 import VistaVenta.VentaAgregarAdmin;
 import VistaVenta.VentaAdmin;
 import Metodo.Facturacion;
+import Metodo.metodoCliente;
 import Metodo.metodoProducto;
 import Metodo.metodoReparacion;
 import Metodo.metodoUsuario;
@@ -446,11 +447,12 @@ public class ReparacionAgregarVendedor extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel9)
-                            .addComponent(textTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel10)
-                            .addComponent(textManoObra))))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(textManoObra, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel9)
+                                .addComponent(textTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel10)))))
                 .addGap(8, 8, 8))
         );
 
@@ -550,8 +552,12 @@ public class ReparacionAgregarVendedor extends javax.swing.JFrame {
     }//GEN-LAST:event_Boton_agregar2ActionPerformed
 
     private void Boton_agregar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_agregar3ActionPerformed
-        // TODO add your handling code here:
-        this.facturar();
+        try {
+            // TODO add your handling code here:
+            this.facturar();
+        } catch (SQLException ex) {
+            Logger.getLogger(ReparacionAgregarVendedor.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_Boton_agregar3ActionPerformed
 
     private void textIdProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textIdProductoActionPerformed
@@ -896,9 +902,11 @@ public class ReparacionAgregarVendedor extends javax.swing.JFrame {
         System.out.println("Método llamado " + contadorMetodos + " veces.");
 
         // Verificar si el ID del cliente está vacío
-        boolean cliente = !textCliente.getText().isEmpty();
+        metodoCliente  mCliente= new metodoCliente();
         
-        if (cliente) {
+        if (textCliente.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Por favor ingresa el número de identidad del cliente");
+        }else{
             metodoVenta metodo = new metodoVenta();
             Producto objeto = new Producto();
         
@@ -907,16 +915,14 @@ public class ReparacionAgregarVendedor extends javax.swing.JFrame {
             String cantidadString = cantidad.getText();
             int cantidad = Integer.parseInt(cantidadString);
         
-            metodo.agregarProductoPedido(tablaPedido, objeto, cantidad);
+            metodo.agregarProductoPedido(tablaPedido, objeto, cantidad, textTotal);
         
             // Bloquear el campo textIdCliente para que no se pueda modificar
             textCliente.setEditable(false);
-        } else {
-            System.err.println("ID de cliente no proporcionado.");
         }
     }
 
-    private void facturar() {
+    private void facturar() throws SQLException {
     // Inicializamos el total a cero
     float total = 0;
     int columnIndex = 8; // Índice de la columna con los valores que queremos sumar
@@ -1001,7 +1007,7 @@ public class ReparacionAgregarVendedor extends javax.swing.JFrame {
     if(metodo.finalizarVenta(tablaPedido, idCliente, idUsuario, valorManoObra, descripcion)){
         // Calculamos el total final y generamos la factura en PDF
         Facturacion facturaPDF = new Facturacion();
-        String rutaArchivo = "C:/Users/JUAN DAVID/Documents/PDF facturas/Facturas Reparaciones";
+        String rutaArchivo = "C:/Users/Juan/Documents/PDF facturas/Facturas Reparaciones";
         float totalCompra = total;
         float totalFin = totalCompra + valorManoObra;
 
@@ -1027,7 +1033,7 @@ public class ReparacionAgregarVendedor extends javax.swing.JFrame {
 
     private void removerProductoTabla() {
         metodoVenta metodo = new metodoVenta();
-        metodo.eliminarProductoPedido(tablaPedido);
+        metodo.eliminarProductoPedido(tablaPedido, textTotal);
         
     }  
 }

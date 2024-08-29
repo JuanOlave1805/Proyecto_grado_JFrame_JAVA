@@ -200,11 +200,11 @@ public class ProveedorAdmin extends javax.swing.JFrame {
         fondo.add(jLabel1);
         jLabel1.setBounds(200, 10, 317, 72);
 
-        jLabel8.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 36)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 1, 36)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("ID Usuario");
         fondo.add(jLabel8);
-        jLabel8.setBounds(941, 30, 150, 40);
+        jLabel8.setBounds(911, 30, 180, 47);
 
         textIdUsuario.setBackground(new java.awt.Color(0, 0, 0));
         textIdUsuario.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -286,10 +286,6 @@ public class ProveedorAdmin extends javax.swing.JFrame {
         this.metodoBotonEditar();
     }//GEN-LAST:event_Boton_editarActionPerformed
 
-    private void tabla_usuariosComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_tabla_usuariosComponentAdded
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tabla_usuariosComponentAdded
-
     private void Boton_agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_agregarActionPerformed
         // TODO add your handling code here:
         this.metodoAgregar();
@@ -328,6 +324,10 @@ public class ProveedorAdmin extends javax.swing.JFrame {
         //Llamando al metodo
         this.metodo_boton_usuario();
     }//GEN-LAST:event_Boton_usuariosActionPerformed
+
+    private void tabla_usuariosComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_tabla_usuariosComponentAdded
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tabla_usuariosComponentAdded
 
     /**
      * @param args the command line arguments

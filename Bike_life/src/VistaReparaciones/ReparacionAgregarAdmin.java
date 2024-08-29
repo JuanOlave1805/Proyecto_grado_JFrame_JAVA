@@ -5,6 +5,7 @@ import VistaUsuarios.UsuariosAdmin;
 import VistaVenta.VentaAgregarAdmin;
 import VistaVenta.VentaAdmin;
 import Metodo.Facturacion;
+import Metodo.metodoCliente;
 import Metodo.metodoProducto;
 import Metodo.metodoReparacion;
 import Metodo.metodoUsuario;
@@ -492,7 +493,6 @@ public class ReparacionAgregarAdmin extends javax.swing.JFrame {
         textIdUsuario.setBackground(new java.awt.Color(0, 0, 0));
         textIdUsuario.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         textIdUsuario.setForeground(new java.awt.Color(255, 255, 255));
-        textIdUsuario.setEnabled(false);
         fondo.add(textIdUsuario);
         textIdUsuario.setBounds(1130, 30, 117, 41);
 
@@ -582,8 +582,12 @@ public class ReparacionAgregarAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_Boton_agregar2ActionPerformed
 
     private void Boton_agregar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_agregar3ActionPerformed
-        // TODO add your handling code here:
-        this.facturar();
+        try {
+            // TODO add your handling code here:
+            this.facturar();
+        } catch (SQLException ex) {
+            Logger.getLogger(ReparacionAgregarAdmin.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_Boton_agregar3ActionPerformed
 
     private void textIdProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textIdProductoActionPerformed
@@ -927,9 +931,11 @@ public class ReparacionAgregarAdmin extends javax.swing.JFrame {
         System.out.println("Método llamado " + contadorMetodos + " veces.");
 
         // Verificar si el ID del cliente está vacío
-        boolean cliente = !textCliente.getText().isEmpty();
+        metodoCliente  mCliente= new metodoCliente();
         
-        if (cliente) {
+        if (textCliente.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Por favor ingresa el número de identidad del cliente");
+        }else{
             metodoVenta metodo = new metodoVenta();
             Producto objeto = new Producto();
         
@@ -938,16 +944,14 @@ public class ReparacionAgregarAdmin extends javax.swing.JFrame {
             String cantidadString = cantidad.getText();
             int cantidad = Integer.parseInt(cantidadString);
         
-            metodo.agregarProductoPedido(tablaPedido, objeto, cantidad);
+            metodo.agregarProductoPedido(tablaPedido, objeto, cantidad, textTotal);
         
             // Bloquear el campo textIdCliente para que no se pueda modificar
             textCliente.setEditable(false);
-        } else {
-            System.err.println("ID de cliente no proporcionado.");
         }
     }
 
-    private void facturar() {
+    private void facturar() throws SQLException {
     // Inicializamos el total a cero
     float total = 0;
     int columnIndex = 8; // Índice de la columna con los valores que queremos sumar
@@ -1032,7 +1036,7 @@ public class ReparacionAgregarAdmin extends javax.swing.JFrame {
     if(metodo.finalizarVenta(tablaPedido, idCliente, idUsuario, valorManoObra, descripcion)){
         // Calculamos el total final y generamos la factura en PDF
         Facturacion facturaPDF = new Facturacion();
-        String rutaArchivo = "C:/Users/JUAN DAVID/Documents/PDF facturas/Facturas Reparaciones";
+        String rutaArchivo = "C:/Users/Juan/Documents/PDF facturas/Facturas Reparaciones";
         float totalCompra = total;
         float totalFin = totalCompra + valorManoObra;
 
@@ -1058,7 +1062,7 @@ public class ReparacionAgregarAdmin extends javax.swing.JFrame {
 
     private void removerProductoTabla() {
         metodoVenta metodo = new metodoVenta();
-        metodo.eliminarProductoPedido(tablaPedido);
+        metodo.eliminarProductoPedido(tablaPedido, textTotal);
         
     }  
 

@@ -216,11 +216,11 @@ public class VentaAdmin extends javax.swing.JFrame {
         fondo.add(Boton_inventario);
         Boton_inventario.setBounds(30, 260, 130, 45);
 
-        jLabel4.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 36)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 1, 36)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("ID Usuario");
         fondo.add(jLabel4);
-        jLabel4.setBounds(941, 30, 150, 40);
+        jLabel4.setBounds(911, 30, 180, 47);
 
         textIdUsuario.setBackground(new java.awt.Color(0, 0, 0));
         textIdUsuario.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -394,7 +394,7 @@ public class VentaAdmin extends javax.swing.JFrame {
          metodoVenta  metodo= new metodoVenta();
 
         // Definir nombres de columnas
-        String[] nombresColumnas = {"Fecha Venta", "Identificacion Cliente", "Identificacion Usuario", "Total venta"};
+        String[] nombresColumnas = {"Fecha Venta", "Nombre Cliente", "Nombre Usuario", "Total venta"};
 
         // Crear el modelo de la tabla
         DefaultTableModel model = new DefaultTableModel(metodo.listarVentas() , nombresColumnas);

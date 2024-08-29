@@ -3,6 +3,7 @@ package VistaUsuarios;
 import VistaUsuarios.UsuariosAgregarAdmin;
 import VistaVenta.VentaAdmin;
 import Metodo.metodoUsuario;
+import VistaCliente.Clientes;
 import VistaIngreso.PerfilAdmin;
 import VistaProductos.ProductosAdmin;
 import VistaProveedor.ProveedorAdmin;
@@ -64,6 +65,7 @@ public class UsuariosAdmin extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla_usuarios = new javax.swing.JTable();
         Boton_agregar = new javax.swing.JButton();
+        Boton_agregar1 = new javax.swing.JButton();
         Boton_producto = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -171,6 +173,15 @@ public class UsuariosAdmin extends javax.swing.JFrame {
             }
         });
 
+        Boton_agregar1.setBackground(new java.awt.Color(153, 153, 255));
+        Boton_agregar1.setText("Clientes");
+        Boton_agregar1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Boton_agregar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Boton_agregar1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -182,6 +193,8 @@ public class UsuariosAdmin extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Boton_agregar1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(Boton_agregar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(Boton_editar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -194,7 +207,8 @@ public class UsuariosAdmin extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Boton_editar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Boton_agregar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(Boton_agregar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Boton_agregar1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 447, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(16, Short.MAX_VALUE))
@@ -310,6 +324,11 @@ public class UsuariosAdmin extends javax.swing.JFrame {
         this.metodoProveedor();
     }//GEN-LAST:event_Boton_proveedoresActionPerformed
 
+    private void Boton_agregar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_agregar1ActionPerformed
+        // TODO add your handling code here:
+        this.btnCliente();
+    }//GEN-LAST:event_Boton_agregar1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -352,6 +371,7 @@ public class UsuariosAdmin extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Boton_agregar;
+    private javax.swing.JButton Boton_agregar1;
     private javax.swing.JButton Boton_editar;
     private javax.swing.JButton Boton_producto;
     private javax.swing.JButton Boton_proveedores;
@@ -490,6 +510,17 @@ public class UsuariosAdmin extends javax.swing.JFrame {
         int idUsuario = parseInt(idUsuarioString);
         // Abrir la ventana de Usuario
         ProveedorAdmin ventana = new ProveedorAdmin();
+        ventana.setVisible(true);
+        // Rellenar el campo textIdUsuario con la identificación del usuario
+        ventana.rellenarIdUsuario(idUsuario);
+        this.setVisible(false);
+    }
+
+    private void btnCliente() {
+        String idUsuarioString = textIdUsuario.getText();
+        int idUsuario = parseInt(idUsuarioString);
+        // Abrir la ventana de Productos
+        Clientes ventana = new Clientes();
         ventana.setVisible(true);
         // Rellenar el campo textIdUsuario con la identificación del usuario
         ventana.rellenarIdUsuario(idUsuario);

@@ -1,8 +1,11 @@
 package VistaVenta;
 import VistaVenta.VentaAdmin;
 import Metodo.Facturacion;
+import Metodo.metodoCliente;
 import Metodo.metodoVenta;
 import Objetos.Producto;
+import VistaCliente.ClientesAgVenta;
+import VistaCliente.ClientesAgregar;
 import VistaIngreso.PerfilAdmin;
 import VistaProductos.ProductosAdmin;
 import VistaProveedor.ProveedorAdmin;
@@ -75,12 +78,12 @@ public class VentaAgregarAdmin extends javax.swing.JFrame {
         Boton_remover = new javax.swing.JButton();
         textTotal = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
         textIdUsuario = new javax.swing.JTextField();
         Boton_reparaciones = new javax.swing.JButton();
         Boton_inventario = new javax.swing.JButton();
         Boton_usuarios = new javax.swing.JButton();
         Boton_proveedores = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -380,28 +383,22 @@ public class VentaAgregarAdmin extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Boton_agregar3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Boton_agregar4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(textTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel10)))
+                        .addComponent(jLabel10))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(Boton_agregar3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Boton_agregar4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
         fondo.add(jPanel1);
         jPanel1.setBounds(201, 101, 1050, 540);
 
-        jLabel8.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 36)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("ID Usuario");
-        fondo.add(jLabel8);
-        jLabel8.setBounds(941, 30, 150, 40);
-
         textIdUsuario.setBackground(new java.awt.Color(0, 0, 0));
         textIdUsuario.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         textIdUsuario.setForeground(new java.awt.Color(255, 255, 255));
-        textIdUsuario.setEnabled(false);
         fondo.add(textIdUsuario);
         textIdUsuario.setBounds(1130, 30, 117, 41);
 
@@ -448,6 +445,12 @@ public class VentaAgregarAdmin extends javax.swing.JFrame {
         });
         fondo.add(Boton_proveedores);
         Boton_proveedores.setBounds(30, 380, 130, 45);
+
+        jLabel9.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 1, 36)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setText("ID Usuario");
+        fondo.add(jLabel9);
+        jLabel9.setBounds(911, 30, 180, 47);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -500,8 +503,12 @@ public class VentaAgregarAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_Boton_agregar2ActionPerformed
 
     private void Boton_agregar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_agregar3ActionPerformed
-        // TODO add your handling code here:
-        this.facturar();
+        try {
+            // TODO add your handling code here:
+            this.facturar();
+        } catch (SQLException ex) {
+            Logger.getLogger(VentaAgregarAdmin.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_Boton_agregar3ActionPerformed
 
     private void textIdProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textIdProductoActionPerformed
@@ -682,7 +689,7 @@ public class VentaAgregarAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -801,27 +808,42 @@ public class VentaAgregarAdmin extends javax.swing.JFrame {
         System.out.println("Método llamado " + contadorMetodos + " veces.");
 
         // Verificar si el ID del cliente está vacío
-        boolean cliente = !textCliente.getText().isEmpty();
+        metodoCliente  mCliente= new metodoCliente();
         
-        if (cliente) {
-            metodoVenta metodo = new metodoVenta();
-            Producto objeto = new Producto();
-        
-            String id = textIdProducto.getText();
-            objeto.setId(Integer.parseInt(id));
-            String cantidadString = cantidad.getText();
-            int cantidad = Integer.parseInt(cantidadString);
-        
-            metodo.agregarProductoPedido(tablaPedido, objeto, cantidad);
-        
-            // Bloquear el campo textIdCliente para que no se pueda modificar
-            textCliente.setEditable(false);
-        } else {
-            System.err.println("ID de cliente no proporcionado.");
+        if (textCliente.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Por favor ingresa el número de identidad del cliente");
+        }else{
+            
+            int text = parseInt(textCliente.getText());
+            boolean cliente = mCliente.validarCliente(text);
+            if (cliente) {
+                metodoVenta metodo = new metodoVenta();
+                Producto objeto = new Producto();
+
+                String id = textIdProducto.getText();
+                objeto.setId(Integer.parseInt(id));
+                String cantidadString = cantidad.getText();
+                int cantidad = Integer.parseInt(cantidadString);
+
+                metodo.agregarProductoPedido(tablaPedido, objeto, cantidad, textTotal);
+
+                // Bloquear el campo textIdCliente para que no se pueda modificar
+                textCliente.setEditable(false);
+            } else {
+                String idUsuarioString = textIdUsuario.getText();
+                // Convertir el ID del usuario a entero
+                int idUsuario = Integer.parseInt(idUsuarioString);
+
+                ClientesAgVenta ventana = new ClientesAgVenta();
+                ventana.setVisible(true);
+                // Rellenar el campo textIdUsuario con la identificación del usuario
+                ventana.rellenarIdUsuario(idUsuario);
+            } 
         }
+        
     }
 
-    private void facturar() {
+    private void facturar() throws SQLException {
         // Calcular la suma de la columna de valores
         float total = 0;
         int columnIndex = 8; // Índice de la columna con los valores a sumar
@@ -879,7 +901,7 @@ public class VentaAgregarAdmin extends javax.swing.JFrame {
         
         if(metodo.finalizarVenta(tablaPedido, idCliente, idUsuario)){
             Facturacion facturaPDF = new Facturacion();
-            String rutaArchivo = "C:/Users/JUAN DAVID/Documents/PDF facturas/Facturas Ventas";
+            String rutaArchivo = "C:/Users/Juan/Documents/PDF facturas/Facturas Ventas";
             float totalCompra = total; 
 
             facturaPDF.generarFacturaPDFVenta(tablaPedido, rutaArchivo, totalCompra, idCliente, idUsuario);
@@ -901,8 +923,7 @@ public class VentaAgregarAdmin extends javax.swing.JFrame {
     
     private void removerProductoTabla() {
         metodoVenta metodo = new metodoVenta();
-        metodo.eliminarProductoPedido(tablaPedido);
-        
+        metodo.eliminarProductoPedido(tablaPedido, textTotal);
     }
 
     private void metodoProveedor() {

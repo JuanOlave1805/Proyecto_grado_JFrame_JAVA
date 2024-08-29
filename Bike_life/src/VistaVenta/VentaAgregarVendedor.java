@@ -1,8 +1,10 @@
 package VistaVenta;
 import VistaVenta.VentaAdmin;
 import Metodo.Facturacion;
+import Metodo.metodoCliente;
 import Metodo.metodoVenta;
 import Objetos.Producto;
+import VistaCliente.ClientesAgVenta;
 import VistaIngreso.PerfilAdmin;
 import VistaIngreso.PerfilVendedor;
 import VistaProductos.ProductosAdmin;
@@ -478,8 +480,12 @@ public class VentaAgregarVendedor extends javax.swing.JFrame {
     }//GEN-LAST:event_Boton_agregar2ActionPerformed
 
     private void Boton_agregar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_agregar3ActionPerformed
-        // TODO add your handling code here:
-        this.facturar();
+        try {
+            // TODO add your handling code here:
+            this.facturar();
+        } catch (SQLException ex) {
+            Logger.getLogger(VentaAgregarVendedor.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_Boton_agregar3ActionPerformed
 
     private void textIdProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textIdProductoActionPerformed
@@ -771,28 +777,42 @@ public class VentaAgregarVendedor extends javax.swing.JFrame {
         System.out.println("Método llamado " + contadorMetodos + " veces.");
 
         // Verificar si el ID del cliente está vacío
-        boolean cliente = !textCliente.getText().isEmpty();
+        metodoCliente  mCliente= new metodoCliente();
         
-        if (cliente) {
-            metodoVenta metodo = new metodoVenta();
-            Producto objeto = new Producto();
-        
-            String id = textIdProducto.getText();
-            objeto.setId(Integer.parseInt(id));
-            String cantidadString = cantidad.getText();
-            int cantidad = Integer.parseInt(cantidadString);
-        
-            metodo.agregarProductoPedido(tablaPedido, objeto, cantidad);
-        
-            // Bloquear el campo textIdCliente para que no se pueda modificar
-            textCliente.setEditable(false);
-        } else {
-            System.err.println("ID de cliente no proporcionado.");
-            JOptionPane.showMessageDialog(null, "Identificacion de cliente no proporcionada, Por favor rellena el campo de id cliente");
+        if (textCliente.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Por favor ingresa el número de identidad del cliente");
+        }else{
+            
+            int text = parseInt(textCliente.getText());
+            boolean cliente = mCliente.validarCliente(text);
+            if (cliente) {
+                metodoVenta metodo = new metodoVenta();
+                Producto objeto = new Producto();
+
+                String id = textIdProducto.getText();
+                objeto.setId(Integer.parseInt(id));
+                String cantidadString = cantidad.getText();
+                int cantidad = Integer.parseInt(cantidadString);
+
+                metodo.agregarProductoPedido(tablaPedido, objeto, cantidad, textTotal);
+
+                // Bloquear el campo textIdCliente para que no se pueda modificar
+                textCliente.setEditable(false);
+            } else {
+                String idUsuarioString = textIdUsuario.getText();
+                // Convertir el ID del usuario a entero
+                int idUsuario = Integer.parseInt(idUsuarioString);
+
+                ClientesAgVenta ventana = new ClientesAgVenta();
+                ventana.setVisible(true);
+                // Rellenar el campo textIdUsuario con la identificación del usuario
+                ventana.rellenarIdUsuario(idUsuario);
+            } 
         }
+        
     }
 
-    private void facturar() {
+    private void facturar() throws SQLException {
         // Calcular la suma de la columna de valores
         float total = 0;
         int columnIndex = 8; // Índice de la columna con los valores a sumar
@@ -871,17 +891,10 @@ public class VentaAgregarVendedor extends javax.swing.JFrame {
        
         // Imprimir el total
         //System.out.println("El total es: " + total);
-        
-        
-        
-        
-        
     }
     
     private void removerProductoTabla() {
         metodoVenta metodo = new metodoVenta();
-        metodo.eliminarProductoPedido(tablaPedido);
-        
     }
     
     private void BtnPerfil() throws SQLException {

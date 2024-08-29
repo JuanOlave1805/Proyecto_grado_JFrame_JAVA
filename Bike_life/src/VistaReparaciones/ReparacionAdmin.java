@@ -407,7 +407,7 @@ public class ReparacionAdmin extends javax.swing.JFrame {
          metodoReparacion  metodo= new metodoReparacion();
 
         // Definir nombres de columnas
-        String[] nombresColumnas = {"Fecha Venta", "Identificacion Cliente", "Identificacion Usuario", "Total venta", "Fecha Entrega"};
+        String[] nombresColumnas = {"Fecha Venta", "Nombre Cliente", "Nombre Usuario", "Total venta", "Fecha Entrega"};
 
         // Crear el modelo de la tabla
         DefaultTableModel model = new DefaultTableModel(metodo.listarReparaciones() , nombresColumnas);

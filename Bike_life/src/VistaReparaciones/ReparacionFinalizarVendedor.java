@@ -7,7 +7,6 @@ package VistaReparaciones;
 import VistaIngreso.*;
 import VistaUsuarios.UsuariosAdmin;
 import Metodo.metodoReparacion;
-import Objetos.Cliente;
 import VistaVenta.VentaAdmin;
 import java.awt.Image;
 import static java.lang.Integer.parseInt;

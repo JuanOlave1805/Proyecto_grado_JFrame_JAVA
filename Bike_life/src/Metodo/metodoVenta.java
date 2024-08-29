@@ -55,60 +55,60 @@ public void seleccionar(JTable tabla, JTextField textIdProducto, JTextField text
 
 
 
-public void busqueda(String query, JTable tablaProducto) {
-    // Crear una instancia de conexión a la base de datos
-    conexionBD cx = new conexionBD();
-    // Establecer una conexión a la base de datos
-    Connection conexion = cx.conectar();
+    public void busqueda(String query, JTable tablaProducto) {
+        // Crear una instancia de conexión a la base de datos
+        conexionBD cx = new conexionBD();
+        // Establecer una conexión a la base de datos
+        Connection conexion = cx.conectar();
 
-    String sql = "SELECT " +
-        "p.id_producto_PK AS id, " +
-        "p.nombre AS nombre, " +
-        "p.precioVenta AS precio, " +
-        "p.stock AS cantidad, " +
-        "c.nombre AS categoria, " +
-        "pr.nombre AS proveedor " +
-        "FROM " +
-        "productos p " +
-        "LEFT JOIN " +
-        "categorias c ON p.Categoria_FK = c.id_categoria_PK " +
-        "LEFT JOIN " +
-        "proveedores pr ON p.Proveedor_FK = pr.id_proveedor_PK " +
-        "WHERE " +
-        "c.nombre LIKE ?";
+        String sql = "SELECT " +
+            "p.id_producto_PK AS id, " +
+            "p.nombre AS nombre, " +
+            "p.precioVenta AS precio, " +
+            "p.stock AS cantidad, " +
+            "c.nombre AS categoria, " +
+            "pr.nombre AS proveedor " +
+            "FROM " +
+            "productos p " +
+            "LEFT JOIN " +
+            "categorias c ON p.Categoria_FK = c.id_categoria_PK " +
+            "LEFT JOIN " +
+            "proveedores pr ON p.Proveedor_FK = pr.id_proveedor_PK " +
+            "WHERE " +
+            "c.nombre LIKE ?";
 
-    try (var preparedStatement = conexion.prepareStatement(sql)) {
-        preparedStatement.setString(1, "%" + query + "%");
+        try (var preparedStatement = conexion.prepareStatement(sql)) {
+            preparedStatement.setString(1, "%" + query + "%");
 
-        try (ResultSet resultSet = preparedStatement.executeQuery()) {
-            DefaultTableModel tableModel = (DefaultTableModel) tablaProducto.getModel();
-            tableModel.setRowCount(0); // Limpiar filas existentes
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                DefaultTableModel tableModel = (DefaultTableModel) tablaProducto.getModel();
+                tableModel.setRowCount(0); // Limpiar filas existentes
 
-            while (resultSet.next()) {
-                Object[] row = {
-                        resultSet.getInt("id"),
-                        resultSet.getString("nombre"),
-                        resultSet.getDouble("precio"),
-                        resultSet.getInt("cantidad"),
-                        resultSet.getString("categoria"),
-                        resultSet.getString("proveedor")
-                };
-                tableModel.addRow(row);
+                while (resultSet.next()) {
+                    Object[] row = {
+                            resultSet.getInt("id"),
+                            resultSet.getString("nombre"),
+                            resultSet.getDouble("precio"),
+                            resultSet.getInt("cantidad"),
+                            resultSet.getString("categoria"),
+                            resultSet.getString("proveedor")
+                    };
+                    tableModel.addRow(row);
+                }
+
+                tablaProducto.setModel(tableModel);
             }
-
-            tablaProducto.setModel(tableModel);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            cx.desconectar();
         }
-    } catch (SQLException e) {
-        e.printStackTrace();
-    } finally {
-        cx.desconectar();
     }
-}
 
 
 
 
-    public void agregarProductoPedido(JTable tabla, Producto objeto, int cantidad) {
+    public void agregarProductoPedido(JTable tabla, Producto objeto, int cantidad, JTextField total) {
         // Crear una instancia de conexión a la base de datos
         conexionBD cx = new conexionBD();
         // Establecer una conexión a la base de datos
@@ -167,11 +167,12 @@ public void busqueda(String query, JTable tablaProducto) {
                 datos[7] = String.valueOf(operacionIva); // Precio del IVA
                 datos[8] = String.valueOf(totalPrecioConIva); // Precio total con IVA
 
+                
                 datosLista.add(datos);
-//                String totalText = total.getText();
-//                float totalFloat = parseFloat(totalText); 
-//                totalFloat=+ totalPrecioConIva;
-//                System.out.println(totalFloat);
+                
+                float totalFloat = Float.parseFloat(total.getText().isEmpty() ? "0" : total.getText());
+                totalFloat += totalPrecioConIva;
+                total.setText(String.valueOf(totalFloat));
             }
         } catch (SQLException e) {
             // Manejar cualquier excepción SQL imprimiendo el rastreo de la pila
@@ -211,6 +212,7 @@ public void busqueda(String query, JTable tablaProducto) {
             model.setValueAt(String.valueOf(totalPrecio), rowIndex, 6);
             model.setValueAt(String.valueOf(operacionIva), rowIndex, 7);
             model.setValueAt(String.valueOf(totalPrecioConIva), rowIndex, 8);
+            
         } else {
             // Si el producto no existe, agregar una nueva fila
             for (String[] datos : datosLista) {
@@ -220,7 +222,7 @@ public void busqueda(String query, JTable tablaProducto) {
     }
 
 
-public void eliminarProductoPedido(JTable tabla) {
+public void eliminarProductoPedido(JTable tabla, JTextField total) {
     // Obtener el modelo de la tabla
     DefaultTableModel model = (DefaultTableModel) tabla.getModel();
     
@@ -229,8 +231,20 @@ public void eliminarProductoPedido(JTable tabla) {
     
     // Verificar si se ha seleccionado una fila
     if (filaSeleccionada != -1) {
+        // Obtener el valor de la columna del total de la fila seleccionada
+        float precioFila = Float.parseFloat(model.getValueAt(filaSeleccionada, 8).toString());
+        
         // Eliminar la fila seleccionada del modelo de la tabla
         model.removeRow(filaSeleccionada);
+        
+        // Calcular el nuevo total
+        float totalFloat = Float.parseFloat(total.getText().isEmpty() ? "0" : total.getText());
+        totalFloat -= precioFila;
+        
+        // Actualizar el campo de texto del total
+        total.setText(String.valueOf(totalFloat));
+        
+        // Mostrar mensaje de éxito
         JOptionPane.showMessageDialog(null, "Producto eliminado del pedido");
     } else {
         // Mostrar un mensaje de error si no se ha seleccionado ninguna fila
@@ -244,7 +258,7 @@ public boolean finalizarVenta(JTable tablaProductos, int idCliente, int idUsuari
     Connection conexion = cx.conectar();
 
     // Consultas SQL para insertar en la tabla pedidos y detallepedidos, y actualizar el stock
-    String sqlInsertPedido = "INSERT INTO pedidos (id_cliente, id_usuario_FK, fecha_pedido, total, tipo_pedido) VALUES (?, ?, CURRENT_DATE, ?, 'venta')";
+    String sqlInsertPedido = "INSERT INTO pedidos (id_cliente_FK, id_usuario_FK, fecha_pedido, total, tipo_pedido) VALUES (?, ?, CURRENT_DATE, ?, 'venta')";
     String sqlLastPedidoId = "SELECT LAST_INSERT_ID() AS lastId"; // Cambiado a LAST_INSERT_ID() para obtener el último id insertado
     String sqlInsertDetallePedido = "INSERT INTO detallepedidos (id_pedido_FK, id_producto_FK, cantidad, precio_sin_iva, precio_con_iva, precio_iva, porcentaje_IVA) VALUES (?, ?, ?, ?, ?, ?, ?)";
     String sqlStock = "SELECT stock FROM productos WHERE id_producto_PK = ?";
@@ -372,48 +386,66 @@ public boolean finalizarVenta(JTable tablaProductos, int idCliente, int idUsuari
 }
 
 
-public String[][] listarVentas() {
-    // Crear una instancia de conexión a la base de datos
-    conexionBD cx = new conexionBD();
-    // Establecer una conexión a la base de datos
-    Connection conexion = cx.conectar();
+    public String[][] listarVentas() {
+        // Crear una instancia de conexión a la base de datos
+        conexionBD cx = new conexionBD();
+        // Establecer una conexión a la base de datos
+        Connection conexion = cx.conectar();
 
-    // Consulta SQL para obtener los datos de ventas
-    String sql = "SELECT p.fecha_pedido, p.id_cliente, p.id_usuario_FK, p.total FROM pedidos as p WHERE p.tipo_pedido = \"Venta\"";
+        // Consulta SQL para obtener los datos de ventas
+        String sql = "SELECT "
+               + "p.fecha_pedido, "
+               + "CONCAT(c.nombre, ' ', c.apellido) AS cliente_nombre, "
+               + "CONCAT(u.nombre, ' ', u.apellido) AS usuario_nombre, "
+               + "p.total "
+               + "FROM pedidos AS p "
+               + "INNER JOIN clientes AS c ON p.id_cliente_FK = c.documento "
+               + "INNER JOIN usuarios AS u ON p.id_usuario_FK = u.identificacion_PK "
+               + "WHERE p.tipo_pedido = 'Venta'";
 
-    Statement st;
-    // Lista para almacenar los datos de las ventas
-    List<String[]> datosLista = new ArrayList<>();
+        // Lista para almacenar los datos de las ventas
+        List<String[]> datosLista = new ArrayList<>();
 
-    try {
-        // Crear un objeto Statement para ejecutar la consulta SQL
-        st = conexion.createStatement();
-        // Ejecutar la consulta y obtener el conjunto de resultados
-        ResultSet res = st.executeQuery(sql);
+        // Declarar Statement y ResultSet
+        Statement st = null;
+        ResultSet res = null;
 
-        // Recorrer el conjunto de resultados
-        while (res.next()) {
-            // Crear un array de Strings para almacenar los datos de cada venta
-            String[] datos = new String[4];
-            // Obtener y almacenar cada campo de datos en el array
-            datos[0] = res.getString("fecha_pedido"); // Fecha del pedido
-            datos[1] = res.getString("id_cliente"); // ID del cliente
-            datos[2] = res.getString("id_usuario_FK"); // ID del usuario (vendedor)
-            datos[3] = res.getString("total"); // Total de la venta
+        try {
+            // Crear un objeto Statement para ejecutar la consulta SQL
+            st = conexion.createStatement();
+            // Ejecutar la consulta y obtener el conjunto de resultados
+            res = st.executeQuery(sql);
 
-            // Agregar el array de datos a la lista
-            datosLista.add(datos);
-        }
-    } catch (SQLException e) {
-        // Manejar cualquier excepción SQL imprimiendo el rastreo de la pila
-        e.printStackTrace();
-    } finally {
-        // Asegurarse de desconectar la conexión a la base de datos
-        cx.desconectar();
+            // Recorrer el conjunto de resultados
+            while (res.next()) {
+                // Crear un array de Strings para almacenar los datos de cada venta
+                String[] datos = new String[4];
+                // Obtener y almacenar cada campo de datos en el array
+                datos[0] = res.getString("fecha_pedido"); // Fecha del pedido
+                datos[1] = res.getString("cliente_nombre"); // Nombre del cliente
+                datos[2] = res.getString("usuario_nombre"); // Nombre del usuario (vendedor)
+                datos[3] = res.getString("total"); // Total de la venta
+
+                // Agregar el array de datos a la lista
+                datosLista.add(datos);
+            }
+        } catch (SQLException e) {
+            // Manejar cualquier excepción SQL imprimiendo el rastreo de la pila
+            e.printStackTrace();
+        } finally {
+            // Asegurarse de cerrar ResultSet y Statement
+            try {
+                if (res != null) res.close();
+                if (st != null) st.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            // Asegurarse de desconectar la conexión a la base de datos
+            cx.desconectar();
     }
 
     // Crear una matriz bidimensional de Strings para almacenar los datos de ventas
-    String[][] datosMatriz = new String[datosLista.size()][4];
+    String[][] datosMatriz = new String[datosLista.size()][3];
 
     // Recorrer la lista de datos obtenida
     for (int i = 0; i < datosLista.size(); i++) {
@@ -423,7 +455,7 @@ public String[][] listarVentas() {
 
     // Devolver la matriz de datos que contiene la información de las ventas
     return datosMatriz;
-}
+    }
 
 
 
