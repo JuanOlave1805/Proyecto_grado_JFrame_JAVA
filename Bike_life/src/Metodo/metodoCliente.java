@@ -7,7 +7,6 @@ package Metodo;
 import Objetos.Usuario;
 import VistaVenta.VentaAdmin;
 import VistaVenta.VentaVendedor;
-import com.mysql.cj.xdevapi.Statement;
 import static java.lang.Integer.parseInt;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
