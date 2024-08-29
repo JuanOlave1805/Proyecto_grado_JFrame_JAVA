@@ -4,7 +4,7 @@ Bienvenido a este repositorio, el cual contiene el proyecto de grado desarrollad
 
 ## Descripción del Proyecto
 
-Este proyecto ha sido implementado utilizando el lenguaje de programación **Java** con la interfaz gráfica **JFrame** y el gestor de base de datos **MySQL**. El objetivo es demostrar las competencias adquiridas durante el tecnologo realizado, aplicando técnicas de programación y desarrollo de software en un entorno real.
+Este proyecto está desarrollado en **Java** utilizando la interfaz gráfica **JFrame** y el sistema de gestión de base de datos **MySQL**. Su propósito es poner en práctica las habilidades adquiridas durante el programa tecnológico, a través de la creación de una aplicación integral para la gestión de ventas e inventario en una tienda de bicicletas local. La aplicación permite llevar un control eficiente de las operaciones comerciales y de inventario, aplicando técnicas avanzadas de programación y desarrollo de software en un contexto real..
 
 ## Tecnologías Utilizadas
 
@@ -43,7 +43,7 @@ Si deseas contribuir a este proyecto, por favor sigue estos pasos:
 
 ## Contacto
 
-Para cualquier pregunta o comentario, puedes ponerte en contacto con [Juan David Olave] en [olavejuan1805@gmail.com] o a través de GitHub.
+Para cualquier pregunta o comentario, puedes ponerte en contacto con Juan David Olave en olavejuan1805@gmail.com o a través de GitHub.
 
 - `JuanOlave1805/Proyecto_grado_JFrame_JAVA`
 - `Juan David Olave`
