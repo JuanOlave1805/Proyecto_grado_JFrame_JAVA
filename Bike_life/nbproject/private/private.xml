@@ -3,35 +3,32 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Juan/Documents/gitLocal/Proyecto_grado_JFrame_JAVA/Bike_life/src/VistaCategoria/CategoriaProductoEliminarAdmin.java</file>
-            <file>file:/C:/Users/Juan/Documents/gitLocal/Proyecto_grado_JFrame_JAVA/Bike_life/src/VistaUsuarios/UsuariosActualizarAdmin.java</file>
-            <file>file:/C:/Users/Juan/Documents/gitLocal/Proyecto_grado_JFrame_JAVA/Bike_life/src/VistaReparaciones/ReparacionAdmin.java</file>
-            <file>file:/C:/Users/Juan/Documents/gitLocal/Proyecto_grado_JFrame_JAVA/Bike_life/src/VistaReparaciones/ReparacionFinalizarAdmin.java</file>
-            <file>file:/C:/Users/Juan/Documents/gitLocal/Proyecto_grado_JFrame_JAVA/Bike_life/src/VistaProductos/ProductoActualizarVendedor.java</file>
-            <file>file:/C:/Users/Juan/Documents/gitLocal/Proyecto_grado_JFrame_JAVA/Bike_life/src/VistaCategoria/CategoriaProductoAgregarAdmin.java</file>
-            <file>file:/C:/Users/Juan/Documents/gitLocal/Proyecto_grado_JFrame_JAVA/Bike_life/src/VistaProductos/ProductoAgregarAdmin.java</file>
-            <file>file:/C:/Users/Juan/Documents/gitLocal/Proyecto_grado_JFrame_JAVA/Bike_life/src/VistaProveedor/ProveedorAgregarAdmin.java</file>
-            <file>file:/C:/Users/Juan/Documents/gitLocal/Proyecto_grado_JFrame_JAVA/Bike_life/src/VistaPerfil/PerfilAdmin.java</file>
-            <file>file:/C:/Users/Juan/Documents/gitLocal/Proyecto_grado_JFrame_JAVA/Bike_life/src/VistaProveedor/ProveedorActualizarAdmin.java</file>
-            <file>file:/C:/Users/Juan/Documents/gitLocal/Proyecto_grado_JFrame_JAVA/Bike_life/src/VistaProductos/ProductosVendedor.java</file>
-            <file>file:/C:/Users/Juan/Documents/gitLocal/Proyecto_grado_JFrame_JAVA/Bike_life/src/VistaProductos/ProductosAdmin.java</file>
-            <file>file:/C:/Users/Juan/Documents/gitLocal/Proyecto_grado_JFrame_JAVA/Bike_life/src/VistaUsuarios/UsuariosAgregarAdmin.java</file>
-            <file>file:/C:/Users/Juan/Documents/gitLocal/Proyecto_grado_JFrame_JAVA/Bike_life/src/VistaPerfil/PerfilActualizarAdmin.java</file>
-            <file>file:/C:/Users/Juan/Documents/gitLocal/Proyecto_grado_JFrame_JAVA/Bike_life/src/VistaReparaciones/ReparacionAgregarAdmin.java</file>
-            <file>file:/C:/Users/Juan/Documents/gitLocal/Proyecto_grado_JFrame_JAVA/Bike_life/src/VistaVenta/VentaAgregarAdmin.java</file>
-            <file>file:/C:/Users/Juan/Documents/gitLocal/Proyecto_grado_JFrame_JAVA/Bike_life/src/VistaUsuarios/UsuariosAdmin.java</file>
-            <file>file:/C:/Users/Juan/Documents/gitLocal/Proyecto_grado_JFrame_JAVA/Bike_life/src/VistaCategoria/CategoriaProductoActualizarAdmin.java</file>
-            <file>file:/C:/Users/Juan/Documents/gitLocal/Proyecto_grado_JFrame_JAVA/Bike_life/src/VistaPerfil/PerfilActualizarVendedor.java</file>
-            <file>file:/C:/Users/Juan/Documents/gitLocal/Proyecto_grado_JFrame_JAVA/Bike_life/src/VistaCategoria/CategoriaProductosAdmin.java</file>
-            <file>file:/C:/Users/Juan/Documents/gitLocal/Proyecto_grado_JFrame_JAVA/Bike_life/src/VistaVenta/VentaAgregarVendedor.java</file>
-            <file>file:/C:/Users/Juan/Documents/gitLocal/Proyecto_grado_JFrame_JAVA/Bike_life/src/VistaVenta/VentaVendedor.java</file>
-            <file>file:/C:/Users/Juan/Documents/gitLocal/Proyecto_grado_JFrame_JAVA/Bike_life/src/VistaPerfil/PerfilVendedor.java</file>
-            <file>file:/C:/Users/Juan/Documents/gitLocal/Proyecto_grado_JFrame_JAVA/Bike_life/src/VistaVenta/VentaAdmin.java</file>
-            <file>file:/C:/Users/Juan/Documents/gitLocal/Proyecto_grado_JFrame_JAVA/Bike_life/src/VistaVenta/VentaReporteAdmin.java</file>
-            <file>file:/C:/Users/Juan/Documents/gitLocal/Proyecto_grado_JFrame_JAVA/Bike_life/src/VistaReparaciones/ReparacionReporteAdmin.java</file>
-            <file>file:/C:/Users/Juan/Documents/gitLocal/Proyecto_grado_JFrame_JAVA/Bike_life/src/VistaProveedor/ProveedorEliminarAdmin.java</file>
-            <file>file:/C:/Users/Juan/Documents/gitLocal/Proyecto_grado_JFrame_JAVA/Bike_life/src/VistaReparaciones/ReparacionFinalizarVendedor.java</file>
-            <file>file:/C:/Users/Juan/Documents/gitLocal/Proyecto_grado_JFrame_JAVA/Bike_life/src/VistaProveedor/ProveedorAdmin.java</file>
+            <file>file:/C:/Users/Juan/Documents/NetBeansProjects/Bike_life_prueba/src/VistaCliente/ClientesAgregar.java</file>
+            <file>file:/C:/Users/Juan/Documents/NetBeansProjects/Bike_life_prueba/src/Objetos/Usuario.java</file>
+            <file>file:/C:/Users/Juan/Documents/NetBeansProjects/Bike_life_prueba/src/VistaVenta/VentaAgregarAdmin.java</file>
+            <file>file:/C:/Users/Juan/Documents/NetBeansProjects/Bike_life_prueba/src/VistaReparaciones/ReparacionFinalizarVendedor.java</file>
+            <file>file:/C:/Users/Juan/Documents/NetBeansProjects/Bike_life_prueba/src/Metodo/validacionUsuario.java</file>
+            <file>file:/C:/Users/Juan/Documents/NetBeansProjects/Bike_life_prueba/src/VistaReparaciones/ReparacionFinalizarAdmin.java</file>
+            <file>file:/C:/Users/Juan/Documents/NetBeansProjects/Bike_life_prueba/src/VistaCategoria/CategoriaProductoAgregarAdmin.java</file>
+            <file>file:/C:/Users/Juan/Documents/NetBeansProjects/Bike_life_prueba/src/VistaCliente/ClientesActualizar.java</file>
+            <file>file:/C:/Users/Juan/Documents/NetBeansProjects/Bike_life_prueba/src/VistaUsuarios/UsuariosAgregarAdmin.java</file>
+            <file>file:/C:/Users/Juan/Documents/NetBeansProjects/Bike_life_prueba/src/VistaVenta/VentaAgregarVendedor.java</file>
+            <file>file:/C:/Users/Juan/Documents/NetBeansProjects/Bike_life_prueba/src/VistaCliente/ClientesAgVenta.java</file>
+            <file>file:/C:/Users/Juan/Documents/NetBeansProjects/Bike_life_prueba/src/Metodo/metodoCliente.java</file>
+            <file>file:/C:/Users/Juan/Documents/NetBeansProjects/Bike_life_prueba/src/VistaReparaciones/ReparacionAgregarAdmin.java</file>
+            <file>file:/C:/Users/Juan/Documents/NetBeansProjects/Bike_life_prueba/src/Metodo/metodoUsuario.java</file>
+            <file>file:/C:/Users/Juan/Documents/NetBeansProjects/Bike_life_prueba/src/VistaReparaciones/ReparacionAdmin.java</file>
+            <file>file:/C:/Users/Juan/Documents/NetBeansProjects/Bike_life_prueba/src/Metodo/Facturacion.java</file>
+            <file>file:/C:/Users/Juan/Documents/NetBeansProjects/Bike_life_prueba/src/Metodo/metodoVenta.java</file>
+            <file>file:/C:/Users/Juan/Documents/NetBeansProjects/Bike_life_prueba/src/Metodo/metodoCategoria.java</file>
+            <file>file:/C:/Users/Juan/Documents/NetBeansProjects/Bike_life_prueba/src/VistaUsuarios/UsuariosAdmin.java</file>
+            <file>file:/C:/Users/Juan/Documents/NetBeansProjects/Bike_life_prueba/src/Metodo/metodoReparacion.java</file>
+            <file>file:/C:/Users/Juan/Documents/NetBeansProjects/Bike_life_prueba/src/VistaProductos/ProductosAdmin.java</file>
+            <file>file:/C:/Users/Juan/Documents/NetBeansProjects/Bike_life_prueba/src/VistaCliente/Clientes.java</file>
+            <file>file:/C:/Users/Juan/Documents/NetBeansProjects/Bike_life_prueba/src/VistaVenta/VentaAdmin.java</file>
+            <file>file:/C:/Users/Juan/Documents/NetBeansProjects/Bike_life_prueba/src/Metodo/conexionBD.java</file>
+            <file>file:/C:/Users/Juan/Documents/NetBeansProjects/Bike_life_prueba/src/Metodo/metodoReporte.java</file>
+            <file>file:/C:/Users/Juan/Documents/NetBeansProjects/Bike_life_prueba/src/VistaReparaciones/ReparacionAgregarVendedor.java</file>
         </group>
     </open-files>
 </project-private>
